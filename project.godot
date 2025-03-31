@@ -12,8 +12,7 @@ config_version=5
 
 config/name="TinyConflict2D"
 run/main_scene="uid://jjnx386iyt3f"
-config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 
 [dotnet]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=4 uid="uid://jjnx386iyt3f"]
 
 [ext_resource type="Texture2D" uid="uid://38qqb54syyeg" path="res://resources/kenney_tiny-battle/Tilemap/tilemap.png" id="1_3mqji"]
-[ext_resource type="Script" uid="uid://b2hgja0cevhsk" path="res://CursorController.cs" id="2_x4av3"]
+[ext_resource type="Script" uid="uid://b2hgja0cevhsk" path="res://UI/CursorController.cs" id="2_x4av3"]
 [ext_resource type="Texture2D" uid="uid://yfwko2t1ltvb" path="res://resources/kenney_tiny-battle/Tiles/tile_0061.png" id="3_uxrcv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g4qto"]
