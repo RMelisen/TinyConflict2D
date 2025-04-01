@@ -9,6 +9,8 @@ public partial class Unit : CharacterBody2D
 	[Export]
 	public int MovementRange { get; set; } = 3;
 
+	public Color PlayerColor { get; set; } = Colors.Gray;
+
 	public virtual void Move(Vector2 direction)
 	{
 		

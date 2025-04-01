@@ -25,8 +25,18 @@ public partial class UnitManager : Node
 				{
 					GD.Print("In Position assignation");
 					unitNode2D.GlobalPosition = unitsLayer.MapToLocal(selectedFactoryPosition) + unitsLayer.Position;
+					unit.PlayerColor = playerManager.CurrentPlayer.PlayerColor;
+					
 					unitList.Add(unitNode2D); 
 					playerManager.CurrentPlayer.AddUnit(unit);
+					
+					// Change the sprite of the unit according to its color
+					Sprite2D unitSprite = unitInstance.GetNode<Sprite2D>(unitType + "Sprite");
+					if (unitSprite != null)
+					{
+						GD.Print("res://resources/TinyConflict/Tiles/Units/" + unitType + GetColorName(unit.PlayerColor) + ".png");
+						unitSprite.Texture = GD.Load<Texture2D>("res://resources/TinyConflict/Tiles/Units/" + unitType + GetColorName(unit.PlayerColor) + ".png");
+					}
 				}
 			}
 			else
@@ -41,5 +51,27 @@ public partial class UnitManager : Node
 		unitList.Remove(unit);
 		unitsLayer.RemoveChild(unit);
 		unit.QueueFree();
-	}	
+	}
+	
+	// Godot Color strangely doesn't have a .Name property ...
+	private string GetColorName(Color color)	
+	{
+		if (color == Colors.Red)
+		{
+			return "Red";
+		}
+		else if(color == Colors.Blue){
+			return "Blue";
+		}
+		else if (color == Colors.Green){
+			return "Green";
+		}
+		else if (color == Colors.Orange){
+			return "Orange";
+		}
+		else
+		{
+			return "Gray";
+		}
+	}
 }
