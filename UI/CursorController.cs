@@ -12,6 +12,9 @@ public partial class CursorController : Sprite2D
 	[Export]
 	public TileMapLayer terrainFeaturesLayer;
 	
+	[Export]
+	public UnitManager unitManager;
+	
 	private Vector2I gridPosition = Vector2I.Zero;	
 	private Vector2I mapSize;
 
@@ -95,10 +98,15 @@ public partial class CursorController : Sprite2D
 		if (featureTileData != null && featureTileData.HasCustomData("TerrainType"))
 		{
 			GD.Print("Feature Tile terrainType is : " + featureTileData.GetCustomData("TerrainType"));
+			
+			if (featureTileData.GetCustomData("TerrainType").AsString() == "factory") // Check if it's a factory
+			{
+				ShowUnitCreationMenu();
+			}
 			return;
 		}
 
-		//// If no relevant feature, check terrain layer
+		// If no relevant feature, check terrain layer
 		TileData terrainTileData = terrainLayer.GetCellTileData(gridPosition);
 
 		if (terrainTileData != null && terrainTileData.HasCustomData("TerrainType"))
@@ -106,6 +114,26 @@ public partial class CursorController : Sprite2D
 			GD.Print("Terrain Tile terrainType is : " + terrainTileData.GetCustomData("TerrainType"));
 			return;
 		}
+	}
+
+	#endregion
+	
+	#region Unit Creation
+
+	private void ShowUnitCreationMenu()
+	{
+		GD.Print("Show Unit Creation Menu");
+		Vector2I selectedFactoryPosition = new  Vector2I(-1, -1);
+		selectedFactoryPosition = terrainLayer.LocalToMap(Position);
+
+		string unitType = "Infantry";
+		unitManager.CreateUnit(unitType, selectedFactoryPosition);
+		HideUnitCreationMenu();
+	}
+
+	private void HideUnitCreationMenu()
+	{
+		GD.Print("Hide Unit Creation Menu");
 	}
 
 	#endregion
