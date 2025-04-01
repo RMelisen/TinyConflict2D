@@ -18,6 +18,10 @@ public partial class CursorController : Sprite2D
 	[Export]
 	public PlayerManager playerManager;
 	
+	[Export]
+	public PackedScene factoryMenuScene;
+	
+	private FactoryMenu FactoryMenuInstance;
 	private Vector2I gridPosition = Vector2I.Zero;	
 	private Vector2I mapSize;
 
@@ -32,6 +36,12 @@ public partial class CursorController : Sprite2D
 		{
 			GD.PrintErr("terrainLayer not assigned!");
 		}
+		
+		FactoryMenuInstance = factoryMenuScene.Instantiate<FactoryMenu>();
+		AddChild(FactoryMenuInstance);
+		FactoryMenuInstance.Hide();
+
+		// FactoryMenuInstance.UnitSelected += OnUnitSelected;
 	}
 
 	public override void _Process(double delta)
