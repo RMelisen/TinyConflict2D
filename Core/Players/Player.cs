@@ -9,7 +9,7 @@ public partial class Player : Node
 
 	public int PlayerNumber { get; set; }
 	public List<Unit> Units { get; private set; } = new List<Unit>();
-	public int Money { get; set; } = 1000;
+	public int Money { get; set; } = 0;
 
 	public Player(int playerNumber, Color color)
 	{
