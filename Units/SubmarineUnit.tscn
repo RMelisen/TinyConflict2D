@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cslfjj3dta1gh"]
+
+[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_44v8e"]
+[ext_resource type="Texture2D" uid="uid://bklm0ofmjpb3u" path="res://resources/TinyConflict/Tiles/Units/SubmarineGray.png" id="2_44v8e"]
+
+[node name="SubmarineUnit" type="CharacterBody2D"]
+script = ExtResource("1_44v8e")
+
+[node name="SubmarineSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_44v8e")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dawsoyb3rb6bb"]
+
+[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_11if3"]
+[ext_resource type="Texture2D" uid="uid://b86qoeh46nd0" path="res://resources/TinyConflict/Tiles/Units/BattleshipGray.png" id="2_11if3"]
+
+[node name="BattleshipUnit" type="CharacterBody2D"]
+script = ExtResource("1_11if3")
+
+[node name="BattleshipSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_11if3")

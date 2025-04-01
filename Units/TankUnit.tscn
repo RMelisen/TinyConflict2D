@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3b8pom3iif5y"]
+
+[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_wrlkr"]
+[ext_resource type="Texture2D" uid="uid://hl6s1rorsqol" path="res://resources/TinyConflict/Tiles/Units/TankGray.png" id="2_wrlkr"]
+
+[node name="TankUnit" type="CharacterBody2D"]
+script = ExtResource("1_wrlkr")
+
+[node name="TankSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_wrlkr")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://wh3seftmynpp"]
+
+[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_3i4r2"]
+[ext_resource type="Texture2D" uid="uid://3sehql1pha1q" path="res://resources/TinyConflict/Tiles/Units/LanderGray.png" id="2_3i4r2"]
+
+[node name="LanderUnit" type="CharacterBody2D"]
+script = ExtResource("1_3i4r2")
+
+[node name="LanderSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_3i4r2")

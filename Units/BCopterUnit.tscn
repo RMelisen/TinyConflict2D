@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmju1x2mnbxfv"]
+
+[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_kqiqp"]
+[ext_resource type="Texture2D" uid="uid://bbtr6kfecsupf" path="res://resources/TinyConflict/Tiles/Units/BCopterGray.png" id="2_kqiqp"]
+
+[node name="BCopterUnit" type="CharacterBody2D"]
+script = ExtResource("1_kqiqp")
+
+[node name="BCopterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_kqiqp")

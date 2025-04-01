@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjgx77gh6s06k"]
+
+[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_fekcy"]
+[ext_resource type="Texture2D" uid="uid://dd24qtyspllof" path="res://resources/TinyConflict/Tiles/Units/SupplyGray.png" id="2_wrfbd"]
+
+[node name="SupplyUnit" type="CharacterBody2D"]
+script = ExtResource("1_fekcy")
+
+[node name="SupplySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_wrfbd")

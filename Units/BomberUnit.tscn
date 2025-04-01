@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqd4bq0ho5gn7"]
+
+[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_m620p"]
+[ext_resource type="Texture2D" uid="uid://diq8dcbw8t1mu" path="res://resources/TinyConflict/Tiles/Units/BomberGray.png" id="2_m620p"]
+
+[node name="BomberUnit" type="CharacterBody2D"]
+script = ExtResource("1_m620p")
+
+[node name="BomberSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_m620p")
