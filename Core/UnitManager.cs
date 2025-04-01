@@ -30,5 +30,12 @@ public partial class UnitManager : Node
 				GD.PrintErr("Unit scene not found: " + "res://scenes/units/" + unitType + ".tscn");
 			}
 		}
-	}
+	}	
+	
+	public void RemoveUnit(Node2D unit)
+	{
+		unitList.Remove(unit);
+		unitsLayer.RemoveChild(unit);
+		unit.QueueFree();
+	}	
 }
