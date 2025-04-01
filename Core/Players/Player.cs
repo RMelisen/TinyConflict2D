@@ -7,12 +7,13 @@ public partial class Player : Node
 	[Export]
 	public Color PlayerColor { get; set; }
 
+	public int PlayerNumber { get; set; }
 	public List<Unit> Units { get; private set; } = new List<Unit>();
-
 	public int Money { get; set; } = 1000;
 
-	public Player(Color color)
+	public Player(int playerNumber, Color color)
 	{
+		PlayerNumber = playerNumber;
 		PlayerColor = color;
 	}
 

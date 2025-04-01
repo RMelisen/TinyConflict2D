@@ -26,7 +26,7 @@ public partial class UnitManager : Node
 					GD.Print("In Position assignation");
 					unitNode2D.GlobalPosition = unitsLayer.MapToLocal(selectedFactoryPosition) + unitsLayer.Position;
 					unit.PlayerColor = playerManager.CurrentPlayer.PlayerColor;
-					unit.Owner = playerManager.CurrentPlayer;
+					unit.UnitOwner = playerManager.CurrentPlayer;
 					
 					unitList.Add(unitNode2D); 
 					playerManager.CurrentPlayer.AddUnit(unit);

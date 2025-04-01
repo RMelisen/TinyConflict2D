@@ -11,10 +11,10 @@ public partial class PlayerManager : Node
 
 	public override void _Ready()
 	{
-		Players.Add(new Player(Colors.Red));
-		Players.Add(new Player(Colors.Blue));
-		//Players.Add(new Player(Colors.Green));
-		//Players.Add(new Player(Colors.Orange));
+		Players.Add(new Player(0, Colors.Red));
+		Players.Add(new Player(1, Colors.Blue));
+		//Players.Add(new Player(2, Colors.Green));
+		//Players.Add(new Player(3, Colors.Orange));
 		GD.Print("Players Created");
 	}
 

@@ -15,6 +15,9 @@ public partial class CursorController : Sprite2D
 	[Export]
 	public UnitManager unitManager;
 	
+	[Export]
+	public PlayerManager playerManager;
+	
 	private Vector2I gridPosition = Vector2I.Zero;	
 	private Vector2I mapSize;
 
@@ -99,10 +102,22 @@ public partial class CursorController : Sprite2D
 		{
 			GD.Print("Feature Tile terrainType is : " + featureTileData.GetCustomData("TerrainType"));
 			
-			if (featureTileData.GetCustomData("TerrainType").AsString() == "factory") // Check if it's a factory
+			// Check if it's a factory
+			if (featureTileData.GetCustomData("TerrainType").AsString() == "factory") 
 			{
-				ShowUnitCreationMenu();
+				// Check if factory is owned by current player
+				if(featureTileData.HasCustomData("PropertyOwner") && featureTileData.GetCustomData("PropertyOwner").AsInt32() == playerManager.CurrentPlayerIndex)
+				{
+					GD.Print("Factory is owned by current player");
+					ShowUnitCreationMenu();
+				}
+				else
+				{
+					GD.Print("Factory is not owned by current player");
+				}
 			}
+			
+			// If a terrain feature has been found, no need to look for terrain (for now) 
 			return;
 		}
 
@@ -125,8 +140,10 @@ public partial class CursorController : Sprite2D
 		GD.Print("Show Unit Creation Menu");
 		Vector2I selectedFactoryPosition = new  Vector2I(-1, -1);
 		selectedFactoryPosition = terrainLayer.LocalToMap(Position);
+		
+		// TODO : Show unit selection menu
 
-		string unitType = "Infantry";
+		string unitType = "Infantry";	// TODO: Replace with return value from the  unit selection menu
 		unitManager.CreateUnit(unitType, selectedFactoryPosition);
 		HideUnitCreationMenu();
 	}
