@@ -7,6 +7,9 @@ public partial class UnitManager : Node
 	[Export]
 	public TileMapLayer unitsLayer;
 	
+	[Export]
+	public PlayerManager playerManager;
+	
 	public List<Node2D> unitList = new List<Node2D>();
 	
 	public void CreateUnit(string unitType, Vector2I selectedFactoryPosition)
@@ -18,11 +21,12 @@ public partial class UnitManager : Node
 			{
 				var unitInstance = unitScene.Instantiate();
 				unitsLayer.AddChild(unitInstance);
-				if (unitInstance is Node2D unitNode2D) // Cast to Node2D
+				if (unitInstance is Node2D unitNode2D && unitInstance is Unit unit)
 				{
 					GD.Print("In Position assignation");
 					unitNode2D.GlobalPosition = unitsLayer.MapToLocal(selectedFactoryPosition) + unitsLayer.Position;
 					unitList.Add(unitNode2D); 
+					playerManager.CurrentPlayer.AddUnit(unit);
 				}
 			}
 			else

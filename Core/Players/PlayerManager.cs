@@ -1,0 +1,26 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+
+public partial class PlayerManager : Node
+{
+	public List<Player> Players { get; private set; } = new List<Player>();
+	public int CurrentPlayerIndex { get; private set; } = 0;
+
+	public Player CurrentPlayer => Players[CurrentPlayerIndex];
+
+	public override void _Ready()
+	{
+		Players.Add(new Player(Colors.Red));
+		Players.Add(new Player(Colors.Blue));
+		//Players.Add(new Player(Colors.Green));
+		//Players.Add(new Player(Colors.Orange));
+		GD.Print("Players Created");
+	}
+
+	public void NextTurn()
+	{
+		CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
+		GD.Print($"Tour du joueur {CurrentPlayerIndex + 1} ({CurrentPlayer.PlayerColor})");
+	}
+}
