@@ -41,3 +41,5 @@ text = "3000"
 label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[connection signal="pressed" from="FactoryMenuPanel/InfantryButton" to="." method="OnInfantryButtonPressed"]

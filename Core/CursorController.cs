@@ -41,7 +41,7 @@ public partial class CursorController : Sprite2D
 		AddChild(FactoryMenuInstance);
 		FactoryMenuInstance.Hide();
 
-		// FactoryMenuInstance.UnitSelected += OnUnitSelected;
+		FactoryMenuInstance.UnitSelected += OnUnitSelected;
 	}
 
 	public override void _Process(double delta)
@@ -141,27 +141,35 @@ public partial class CursorController : Sprite2D
 		}
 	}
 
-	#endregion
-	
-	#region Unit Creation
+    private void OnUnitSelected(string unitType)
+    {
+        GD.Print("In OnUnitSelected()");
 
-	private void ShowUnitCreationMenu()
+        Vector2I selectedFactoryPosition = new Vector2I(-1, -1);
+        selectedFactoryPosition = terrainLayer.LocalToMap(Position);
+
+        unitManager.CreateUnit(unitType, selectedFactoryPosition);
+    }
+
+    #endregion
+
+    #region Unit Creation
+
+    private void ShowUnitCreationMenu()
 	{
 		GD.Print("Show Unit Creation Menu");
-		Vector2I selectedFactoryPosition = new  Vector2I(-1, -1);
-		selectedFactoryPosition = terrainLayer.LocalToMap(Position);
-		
-		// TODO : Show unit selection menu
 
-		string unitType = "Infantry";	// TODO: Replace with return value from the  unit selection menu
-		unitManager.CreateUnit(unitType, selectedFactoryPosition);
+        FactoryMenuInstance.ShowMenu(Position);
+
 		HideUnitCreationMenu();
 	}
 
 	private void HideUnitCreationMenu()
-	{
-		GD.Print("Hide Unit Creation Menu");
-	}
+    {
+        GD.Print("Hide Unit Creation Menu");
+        FactoryMenuInstance.Hide();
+
+    }
 
 	#endregion
 }

@@ -17,7 +17,8 @@ public partial class FactoryMenu : CanvasLayer
 
 	public void OnInfantryButtonPressed()
 	{
-		EmitSignal(nameof(UnitSelected), "Infantry");
+		GD.Print("Infantry button pressed");
+        EmitSignal(nameof(UnitSelected), "Infantry");
 		Hide();
 	}
 
