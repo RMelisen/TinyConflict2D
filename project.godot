@@ -14,6 +14,11 @@ config/name="TinyConflict2D"
 run/main_scene="uid://jjnx386iyt3f"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=504
+
 [dotnet]
 
 project/assembly_name="TinyConflict2D"
