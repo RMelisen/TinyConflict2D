@@ -44,12 +44,11 @@ public partial class CursorController : Sprite2D
 		FactoryMenuInstance.UnitSelected += OnUnitSelected;
 	}
 
-	public override void _Process(double delta)
+	public override void _Input(InputEvent @event)
 	{
 		if (Input.IsActionJustPressed("ui_right") || Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
 		{
 			MoveCursor();
-
 		}
 		else
 		{
