@@ -25,8 +25,11 @@ public partial class UnitManager : Node
 				{
 					GD.Print("In Position assignation");
 					unitNode2D.GlobalPosition = unitsLayer.MapToLocal(selectedFactoryPosition) + unitsLayer.Position;
+					
+					// Unit properties initialisation
 					unit.PlayerColor = playerManager.CurrentPlayer.PlayerColor;
 					unit.UnitOwner = playerManager.CurrentPlayer;
+					unit.TilePosition =  selectedFactoryPosition;
 					
 					unitList.Add(unitNode2D); 
 					playerManager.CurrentPlayer.AddUnit(unit);
@@ -52,6 +55,11 @@ public partial class UnitManager : Node
 		unitList.Remove(unit);
 		unitsLayer.RemoveChild(unit);
 		unit.QueueFree();
+	}
+	
+	public Unit? GetUnitAt(Vector2I tilePosition)
+	{
+		return playerManager.CurrentPlayer.Units.Find(u => u.TilePosition == tilePosition);
 	}
 	
 	// Godot Color strangely doesn't have a .Name property ...

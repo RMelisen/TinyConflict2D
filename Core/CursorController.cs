@@ -135,7 +135,14 @@ public partial class CursorController : Sprite2D
 		gridPosition = terrainLayer.LocalToMap(Position);
 		
 		// Check if a unit is found first
-
+		Unit selectedUnit = unitManager.GetUnitAt(gridPosition);
+		if (selectedUnit != null)
+		{	
+			// Unit found
+			GD.Print("Selected unit: " + selectedUnit.GetType());
+			return;
+		}
+		
 		// Check feature layer second
 		TileData featureTileData = terrainFeaturesLayer.GetCellTileData(gridPosition);
 

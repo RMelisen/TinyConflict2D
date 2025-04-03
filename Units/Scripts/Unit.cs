@@ -11,6 +11,7 @@ public partial class Unit : CharacterBody2D
 
 	public Color PlayerColor { get; set; } = Colors.Gray;
 	public Player UnitOwner { get; set; }
+	public Vector2I TilePosition { get; set; }
 
 	public virtual void Move(Vector2 direction)
 	{
