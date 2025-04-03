@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmdmv5p1vy02l"]
 
-[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_jpqxh"]
+[ext_resource type="Script" uid="uid://dgy8g0mbgimr" path="res://Units/Scripts/ReconUnit.cs" id="1_jpqxh"]
 [ext_resource type="Texture2D" uid="uid://cporbswisffun" path="res://resources/TinyConflict/Tiles/Units/ReconGray.png" id="2_jpqxh"]
 
 [node name="ReconUnit" type="CharacterBody2D"]

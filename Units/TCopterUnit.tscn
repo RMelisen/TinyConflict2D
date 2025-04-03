@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://r5qrnakooafm"]
 
-[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_oantr"]
+[ext_resource type="Script" uid="uid://thro6jlrykc6" path="res://Units/Scripts/TCopterUnit.cs" id="1_oantr"]
 [ext_resource type="Texture2D" uid="uid://15510780ovsw" path="res://resources/TinyConflict/Tiles/Units/TCopterGray.png" id="2_oantr"]
 
 [node name="TCopterUnit" type="CharacterBody2D"]

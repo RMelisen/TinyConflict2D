@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbujc60fgifof"]
 
-[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_g52x4"]
+[ext_resource type="Script" uid="uid://bsoqsxvm0eh6t" path="res://Units/Scripts/MechUnit.cs" id="1_g52x4"]
 [ext_resource type="Texture2D" uid="uid://422nujg00xhp" path="res://resources/TinyConflict/Tiles/Units/MechGray.png" id="2_g52x4"]
 
 [node name="MechUnit" type="CharacterBody2D"]

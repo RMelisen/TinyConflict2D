@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://blmh3x4xdiul0"]
 
-[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_4t5yd"]
+[ext_resource type="Script" uid="uid://cbl8uvh5dhedx" path="res://Units/Scripts/APCUnit.cs" id="1_4t5yd"]
 [ext_resource type="Texture2D" uid="uid://cy4apq2vt1tvj" path="res://resources/TinyConflict/Tiles/Units/APCGray.png" id="2_4t5yd"]
 
 [node name="APCUnit" type="CharacterBody2D"]

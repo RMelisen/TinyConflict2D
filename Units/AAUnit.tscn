@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0ondboesvxc5"]
 
-[ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_48atq"]
+[ext_resource type="Script" uid="uid://bp2774kkl47ug" path="res://Units/Scripts/AAUnit.cs" id="1_48atq"]
 [ext_resource type="Texture2D" uid="uid://bm620m7j7gjpg" path="res://resources/TinyConflict/Tiles/Units/AAGray.png" id="2_48atq"]
 
 [node name="AAUnit" type="CharacterBody2D"]
