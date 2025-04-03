@@ -18,8 +18,8 @@ public partial class FactoryMenu : CanvasLayer
 	public void OnInfantryButtonPressed()
 	{
 		GD.Print("Infantry button pressed");
-        EmitSignal(nameof(UnitSelected), "Infantry");
-		Hide();
+		EmitSignal(nameof(UnitSelected), "Infantry");
+		HideMenu();
 	}
 
 	public void ShowMenu(Vector2 position)
@@ -28,7 +28,7 @@ public partial class FactoryMenu : CanvasLayer
 		GetNode<Control>("FactoryMenuPanel").Position = position;
 	}
 
-	public void Hide()
+	public void HideMenu()
 	{
 		Visible = false;
 	}
