@@ -156,7 +156,8 @@ public partial class CursorController : Sprite2D
 
 	private void ShowUnitCreationMenu()
 	{
-		FactoryMenuInstance.ShowMenu(Position);
+		Vector2 mapCenter = GetMapCenter();
+		FactoryMenuInstance.ShowMenu(new Vector2(mapCenter.X - 96, mapCenter.Y - 48));
 	}
 
 	private void HideUnitCreationMenu()
@@ -164,5 +165,16 @@ public partial class CursorController : Sprite2D
 		FactoryMenuInstance.HideMenu();
 	}
 
+	#endregion
+	
+	#region Utils
+	
+	
+	public Vector2 GetMapCenter()
+	{
+		Vector2 mapCenter = terrainLayer.GetUsedRect().Size * terrainLayer.TileSet.TileSize;;
+		return mapCenter / 2;
+	}
+	
 	#endregion
 }
