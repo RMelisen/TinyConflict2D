@@ -3,6 +3,8 @@ using System;
 
 public partial class CursorController : Sprite2D
 {
+	#region Exports
+	
 	[Export]
 	public int tileSize = 16;
 	
@@ -27,6 +29,10 @@ public partial class CursorController : Sprite2D
 	[Export]
 	public PackedScene portMenuScene;
 	
+	#endregion
+	
+	#region Properties
+	
 	private FactoryMenu factoryMenuInstance;
 	private AirportMenu airportMenuInstance;
 	private PortMenu portMenuInstance;
@@ -34,6 +40,10 @@ public partial class CursorController : Sprite2D
 	private Vector2I gridPosition = Vector2I.Zero;	
 	private Vector2I mapSize;
 
+	#endregion
+	
+	#region Core
+	
 	public override void _Ready()
 	{
 		if (terrainLayer != null)
@@ -49,17 +59,17 @@ public partial class CursorController : Sprite2D
 		factoryMenuInstance = factoryMenuScene.Instantiate<FactoryMenu>();
 		AddChild(factoryMenuInstance);
 		factoryMenuInstance.HideMenu();
-		factoryMenuInstance.UnitSelected += OnUnitSelected;
+		factoryMenuInstance.UnitSelected += OnButtonUnitSelected;
 		
 		airportMenuInstance = airportMenuScene.Instantiate<AirportMenu>();
 		AddChild(airportMenuInstance);
 		airportMenuInstance.HideMenu();
-		airportMenuInstance.UnitSelected += OnUnitSelected;
+		airportMenuInstance.UnitSelected += OnButtonUnitSelected;
 		
 		portMenuInstance = portMenuScene.Instantiate<PortMenu>();
 		AddChild(portMenuInstance);
 		portMenuInstance.HideMenu();
-		portMenuInstance.UnitSelected += OnUnitSelected;
+		portMenuInstance.UnitSelected += OnButtonUnitSelected;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -76,6 +86,8 @@ public partial class CursorController : Sprite2D
 			}
 		}
 	}
+	
+	#endregion
 	
 	#region Movements
 	
@@ -121,8 +133,10 @@ public partial class CursorController : Sprite2D
 	private void OnCursorSelect()
 	{
 		gridPosition = terrainLayer.LocalToMap(Position);
+		
+		// Check if a unit is found first
 
-		// Check feature layer first
+		// Check feature layer second
 		TileData featureTileData = terrainFeaturesLayer.GetCellTileData(gridPosition);
 
 		if (featureTileData != null && featureTileData.HasCustomData("TerrainType"))
@@ -166,7 +180,7 @@ public partial class CursorController : Sprite2D
 		}
 	}
 
-	private void OnUnitSelected(string unitType)
+	private void OnButtonUnitSelected(string unitType)
 	{
 		GD.Print("In OnUnitSelected()");
 
