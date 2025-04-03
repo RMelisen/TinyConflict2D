@@ -9,35 +9,35 @@
 [node name="PortMenu" type="CanvasLayer"]
 script = ExtResource("1_4jjyo")
 
-[node name="PortPanel" type="Panel" parent="."]
+[node name="PortMenuPanel" type="Panel" parent="."]
 offset_right = 96.0
 offset_bottom = 72.0
 
-[node name="BattleshipButton" type="Button" parent="PortPanel"]
+[node name="BattleshipButton" type="Button" parent="PortMenuPanel"]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 96.0
 offset_bottom = 72.0
 
-[node name="BattleshipContainer" type="HBoxContainer" parent="PortPanel/BattleshipButton"]
+[node name="BattleshipContainer" type="HBoxContainer" parent="PortMenuPanel/BattleshipButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="BattleshipTexture" type="TextureRect" parent="PortPanel/BattleshipButton/BattleshipContainer"]
+[node name="BattleshipTexture" type="TextureRect" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("2_4jjyo")
 stretch_mode = 3
 
-[node name="BattleshipLabel" type="Label" parent="PortPanel/BattleshipButton/BattleshipContainer"]
+[node name="BattleshipLabel" type="Label" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
 layout_mode = 2
 text = "Destr."
 label_settings = ExtResource("3_ol5iw")
 vertical_alignment = 1
 
-[node name="BattleshipCost" type="Label" parent="PortPanel/BattleshipButton/BattleshipContainer"]
+[node name="BattleshipCost" type="Label" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "28000"
@@ -45,30 +45,30 @@ label_settings = ExtResource("3_ol5iw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="LanderButton" type="Button" parent="PortPanel"]
+[node name="LanderButton" type="Button" parent="PortMenuPanel"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="LanderContainer" type="HBoxContainer" parent="PortPanel/LanderButton"]
+[node name="LanderContainer" type="HBoxContainer" parent="PortMenuPanel/LanderButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="LanderTexture" type="TextureRect" parent="PortPanel/LanderButton/LanderContainer"]
+[node name="LanderTexture" type="TextureRect" parent="PortMenuPanel/LanderButton/LanderContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("4_tefoa")
 stretch_mode = 3
 
-[node name="LanderLabel" type="Label" parent="PortPanel/LanderButton/LanderContainer"]
+[node name="LanderLabel" type="Label" parent="PortMenuPanel/LanderButton/LanderContainer"]
 layout_mode = 2
 text = "Lander"
 label_settings = ExtResource("3_ol5iw")
 vertical_alignment = 1
 
-[node name="LanderCost" type="Label" parent="PortPanel/LanderButton/LanderContainer"]
+[node name="LanderCost" type="Label" parent="PortMenuPanel/LanderButton/LanderContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "12000"
@@ -76,31 +76,31 @@ label_settings = ExtResource("3_ol5iw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SubmarineButton" type="Button" parent="PortPanel"]
+[node name="SubmarineButton" type="Button" parent="PortMenuPanel"]
 layout_mode = 0
 offset_top = 24.0
 offset_right = 96.0
 offset_bottom = 48.0
 
-[node name="SubmarineContainer" type="HBoxContainer" parent="PortPanel/SubmarineButton"]
+[node name="SubmarineContainer" type="HBoxContainer" parent="PortMenuPanel/SubmarineButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="SubmarineTexture" type="TextureRect" parent="PortPanel/SubmarineButton/SubmarineContainer"]
+[node name="SubmarineTexture" type="TextureRect" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("5_wacng")
 stretch_mode = 3
 
-[node name="SubmarineLabel" type="Label" parent="PortPanel/SubmarineButton/SubmarineContainer"]
+[node name="SubmarineLabel" type="Label" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 text = "Sub."
 label_settings = ExtResource("3_ol5iw")
 vertical_alignment = 1
 
-[node name="SubmarineCost" type="Label" parent="PortPanel/SubmarineButton/SubmarineContainer"]
+[node name="SubmarineCost" type="Label" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "20000"
@@ -108,6 +108,6 @@ label_settings = ExtResource("3_ol5iw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="pressed" from="PortPanel/BattleshipButton" to="." method="OnInfantryButtonPressed"]
-[connection signal="pressed" from="PortPanel/LanderButton" to="." method="OnUnitButtonPressed" binds= ["Lander"]]
-[connection signal="pressed" from="PortPanel/SubmarineButton" to="." method="OnUnitButtonPressed" binds= ["Submarine"]]
+[connection signal="pressed" from="PortMenuPanel/BattleshipButton" to="." method="OnUnitButtonPressed" binds= ["Battleship"]]
+[connection signal="pressed" from="PortMenuPanel/LanderButton" to="." method="OnUnitButtonPressed" binds= ["Lander"]]
+[connection signal="pressed" from="PortMenuPanel/SubmarineButton" to="." method="OnUnitButtonPressed" binds= ["Submarine"]]

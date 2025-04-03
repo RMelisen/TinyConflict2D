@@ -21,7 +21,16 @@ public partial class CursorController : Sprite2D
 	[Export]
 	public PackedScene factoryMenuScene;
 	
-	private FactoryMenu FactoryMenuInstance;
+	[Export]
+	public PackedScene airportMenuScene;
+	
+	[Export]
+	public PackedScene portMenuScene;
+	
+	private FactoryMenu factoryMenuInstance;
+	private AirportMenu airportMenuInstance;
+	private PortMenu portMenuInstance;
+	
 	private Vector2I gridPosition = Vector2I.Zero;	
 	private Vector2I mapSize;
 
@@ -37,11 +46,20 @@ public partial class CursorController : Sprite2D
 			GD.PrintErr("terrainLayer not assigned!");
 		}
 		
-		FactoryMenuInstance = factoryMenuScene.Instantiate<FactoryMenu>();
-		AddChild(FactoryMenuInstance);
-		FactoryMenuInstance.HideMenu();
-
-		FactoryMenuInstance.UnitSelected += OnUnitSelected;
+		factoryMenuInstance = factoryMenuScene.Instantiate<FactoryMenu>();
+		AddChild(factoryMenuInstance);
+		factoryMenuInstance.HideMenu();
+		factoryMenuInstance.UnitSelected += OnUnitSelected;
+		
+		airportMenuInstance = airportMenuScene.Instantiate<AirportMenu>();
+		AddChild(airportMenuInstance);
+		airportMenuInstance.HideMenu();
+		airportMenuInstance.UnitSelected += OnUnitSelected;
+		
+		portMenuInstance = portMenuScene.Instantiate<PortMenu>();
+		AddChild(portMenuInstance);
+		portMenuInstance.HideMenu();
+		portMenuInstance.UnitSelected += OnUnitSelected;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -111,19 +129,27 @@ public partial class CursorController : Sprite2D
 		{
 			GD.Print("Feature Tile terrainType is : " + featureTileData.GetCustomData("TerrainType"));
 			
-			// Check if it's a factory
-			if (featureTileData.GetCustomData("TerrainType").AsString() == "factory") 
+			// Check feature type
+			switch (featureTileData.GetCustomData("TerrainType").AsString())
 			{
-				// Check if factory is owned by current player
-				if(featureTileData.HasCustomData("PropertyOwner") && featureTileData.GetCustomData("PropertyOwner").AsInt32() == playerManager.CurrentPlayerIndex)
-				{
-					GD.Print("Factory is owned by current player");
-					ShowUnitCreationMenu();
-				}
-				else
-				{
-					GD.Print("Factory is not owned by current player");
-				}
+				case "factory":
+					if (CheckIfIsOwner(featureTileData))
+					{
+						ShowFactoryMenu();
+					}
+					break;
+				case "airport":
+					if (CheckIfIsOwner(featureTileData))
+					{
+						ShowAirportMenu();
+					}
+					break;
+				case "port":
+					if (CheckIfIsOwner(featureTileData))
+					{
+						ShowPortMenu();
+					}
+					break;
 			}
 			
 			// If a terrain feature has been found, no need to look for terrain (for now) 
@@ -154,21 +180,41 @@ public partial class CursorController : Sprite2D
 
 	#region Unit Creation
 
-	private void ShowUnitCreationMenu()
+	private void ShowFactoryMenu()
 	{
 		Vector2 mapCenter = GetMapCenter();
-		FactoryMenuInstance.ShowMenu(new Vector2(mapCenter.X - 96, mapCenter.Y - 48));
+		factoryMenuInstance.ShowMenu(new Vector2(mapCenter.X - 96, mapCenter.Y - 48));
 	}
-
-	private void HideUnitCreationMenu()
+	
+	private void ShowAirportMenu()
 	{
-		FactoryMenuInstance.HideMenu();
+		Vector2 mapCenter = GetMapCenter();
+		airportMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 48));
+	}
+	
+	private void ShowPortMenu()
+	{
+		Vector2 mapCenter = GetMapCenter();
+		portMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
 	}
 
 	#endregion
 	
 	#region Utils
-	
+
+	public bool CheckIfIsOwner(TileData featureTileData)
+	{
+		if(featureTileData.HasCustomData("PropertyOwner") && featureTileData.GetCustomData("PropertyOwner").AsInt32() == playerManager.CurrentPlayerIndex)
+		{
+			GD.Print("Property is owned by current player");
+			return true;
+		}
+		else
+		{
+			GD.Print("Property is not owned by current player");
+			return false;
+		}
+	}
 	
 	public Vector2 GetMapCenter()
 	{
