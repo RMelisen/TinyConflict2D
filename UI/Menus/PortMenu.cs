@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class FactoryMenu : CanvasLayer
+public partial class PortMenu : CanvasLayer
 {
 	[Signal]
 	public delegate void UnitSelectedEventHandler(string unitType);
@@ -14,23 +14,15 @@ public partial class FactoryMenu : CanvasLayer
 		// Store buttons
 		buttons = new Control[]
 		{
-			GetNode<Button>("FactoryMenuPanel/InfantryButton"),
-			GetNode<Button>("FactoryMenuPanel/MechButton"),
-			GetNode<Button>("FactoryMenuPanel/ReconButton"),
-			GetNode<Button>("FactoryMenuPanel/AAButton"),
-			GetNode<Button>("FactoryMenuPanel/APCButton"),
-			GetNode<Button>("FactoryMenuPanel/SupplyButton"),
-			GetNode<Button>("FactoryMenuPanel/TankButton")
+			GetNode<Button>("PortMenuPanel/LanderButton"),
+			GetNode<Button>("PortMenuPanel/SubmarineButton"),
+			GetNode<Button>("PortMenuPanel/BattleshipButton")
 		};
 		
 		// Set unit prices in the buttons labels
-		GetNode<Label>("FactoryMenuPanel/InfantryButton/InfantryContainer/InfantryCost").Text = InfantryUnit.BasePrice.ToString();
-		GetNode<Label>("FactoryMenuPanel/MechButton/MechContainer/MechCost").Text = MechUnit.BasePrice.ToString();
-		GetNode<Label>("FactoryMenuPanel/ReconButton/ReconContainer/ReconCost").Text = ReconUnit.BasePrice.ToString();
-		GetNode<Label>("FactoryMenuPanel/AAButton/AAContainer/AACost").Text = AAUnit.BasePrice.ToString();
-		GetNode<Label>("FactoryMenuPanel/APCButton/APCContainer/APCCost").Text = APCUnit.BasePrice.ToString();
-		GetNode<Label>("FactoryMenuPanel/SupplyButton/SupplyContainer/SupplyCost").Text = SupplyUnit.BasePrice.ToString();
-		GetNode<Label>("FactoryMenuPanel/TankButton/TankContainer/TankCost").Text = TankUnit.BasePrice.ToString();
+		GetNode<Label>("PortMenuPanel/LanderButton/LanderContainer/LanderCost").Text = LanderUnit.BasePrice.ToString();
+		GetNode<Label>("PortMenuPanel/SubmarineButton/SubmarineContainer/SubmarineCost").Text = SubmarineUnit.BasePrice.ToString();
+		GetNode<Label>("PortMenuPanel/BattleshipButton/BattleshipContainer/BattleshipCost").Text = BattleshipUnit.BasePrice.ToString();
 
 		buttons[currentButtonIndex].GrabFocus();
 	}
@@ -95,7 +87,7 @@ public partial class FactoryMenu : CanvasLayer
 		Visible = true;
 		currentButtonIndex = 0;
 		buttons[currentButtonIndex].GrabFocus();
-		GetNode<Control>("FactoryMenuPanel").Position = position;
+		GetNode<Control>("PortMenuPanel").Position = position;
 	}
 
 	public void HideMenu()

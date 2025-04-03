@@ -242,10 +242,10 @@ label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="pressed" from="FactoryMenuPanel/AAButton" to="." method="OnAAButtonPressed"]
-[connection signal="pressed" from="FactoryMenuPanel/APCButton" to="." method="OnAPCButtonPressed"]
-[connection signal="pressed" from="FactoryMenuPanel/InfantryButton" to="." method="OnInfantryButtonPressed"]
-[connection signal="pressed" from="FactoryMenuPanel/MechButton" to="." method="OnMechButtonPressed"]
-[connection signal="pressed" from="FactoryMenuPanel/ReconButton" to="." method="OnReconButtonPressed"]
-[connection signal="pressed" from="FactoryMenuPanel/SupplyButton" to="." method="OnSupplyButtonPressed"]
-[connection signal="pressed" from="FactoryMenuPanel/TankButton" to="." method="OnTankButtonPressed"]
+[connection signal="pressed" from="FactoryMenuPanel/AAButton" to="." method="OnUnitButtonPressed" binds= ["AA"]]
+[connection signal="pressed" from="FactoryMenuPanel/APCButton" to="." method="OnUnitButtonPressed" binds= ["APC"]]
+[connection signal="pressed" from="FactoryMenuPanel/InfantryButton" to="." method="OnUnitButtonPressed" binds= ["Infantry"]]
+[connection signal="pressed" from="FactoryMenuPanel/MechButton" to="." method="OnUnitButtonPressed" binds= ["Mech"]]
+[connection signal="pressed" from="FactoryMenuPanel/ReconButton" to="." method="OnUnitButtonPressed" binds= ["Recon"]]
+[connection signal="pressed" from="FactoryMenuPanel/SupplyButton" to="." method="OnUnitButtonPressed" binds= ["Supply"]]
+[connection signal="pressed" from="FactoryMenuPanel/TankButton" to="." method="OnUnitButtonPressed" binds= ["Tank"]]
