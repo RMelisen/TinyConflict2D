@@ -16,8 +16,8 @@ config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 
 [display]
 
-window/size/viewport_width=600
-window/size/viewport_height=504
+window/size/viewport_width=400
+window/size/viewport_height=336
 
 [dotnet]
 
