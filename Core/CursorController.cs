@@ -3,45 +3,35 @@ using System;
 
 public partial class CursorController : Sprite2D
 {
-	#region Exports
+	#region Properties
 	
 	[Export]
-	public int tileSize = 16;
+	public int TileSize = 16;
 	
 	[Export]
-	public TileMapLayer terrainLayer;
+	public TileMapLayer TerrainLayer;
 	
 	[Export]
-	public TileMapLayer terrainFeaturesLayer;
+	public TileMapLayer TerrainFeaturesLayer;
 	
 	[Export]
-	public UnitManager unitManager;
+	public UnitManager UnitManagerInstance;
 	
 	[Export]
-	public PlayerManager playerManager;
+	public PlayerManager PlayerManagerInstance;
 	
 	[Export]
-	public PackedScene factoryMenuScene;
-	
-	[Export]
-	public PackedScene airportMenuScene;
-	
-	[Export]
-	public PackedScene portMenuScene;
+	public MenuManager MenuManagerInstance;
 	
 	#endregion
 	
-	#region Properties
+	#region Fields
 	
-	private FactoryMenu factoryMenuInstance;
-	private AirportMenu airportMenuInstance;
-	private PortMenu portMenuInstance;
-	
-	private Vector2I gridPosition = Vector2I.Zero;	
-	private Vector2I mapSize;
+	private Vector2I _GridPosition = Vector2I.Zero;	
+	private Vector2I _MapSize;
 		
-	private Unit selectedUnit = null;
-	private bool isUnitSelected = false;
+	private Unit _SelectedUnit = null;
+	private bool _IsUnitSelected = false;
 
 	#endregion
 	
@@ -49,35 +39,20 @@ public partial class CursorController : Sprite2D
 	
 	public override void _Ready()
 	{
-		if (terrainLayer != null)
+		if (TerrainLayer != null)
 		{
-			mapSize = terrainLayer.GetUsedRect().Size;
-			gridPosition = terrainLayer.LocalToMap(Position);
+			_MapSize = TerrainLayer.GetUsedRect().Size;
+			_GridPosition = TerrainLayer.LocalToMap(Position);
 		}
 		else
 		{
 			GD.PrintErr("terrainLayer not assigned!");
 		}
-		
-		factoryMenuInstance = factoryMenuScene.Instantiate<FactoryMenu>();
-		AddChild(factoryMenuInstance);
-		factoryMenuInstance.HideMenu();
-		factoryMenuInstance.UnitSelected += OnButtonUnitSelected;
-		
-		airportMenuInstance = airportMenuScene.Instantiate<AirportMenu>();
-		AddChild(airportMenuInstance);
-		airportMenuInstance.HideMenu();
-		airportMenuInstance.UnitSelected += OnButtonUnitSelected;
-		
-		portMenuInstance = portMenuScene.Instantiate<PortMenu>();
-		AddChild(portMenuInstance);
-		portMenuInstance.HideMenu();
-		portMenuInstance.UnitSelected += OnButtonUnitSelected;
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (!isUnitSelected)
+		if (!_IsUnitSelected)
 		{
 			if (Input.IsActionJustPressed("ui_right") || Input.IsActionJustPressed("ui_left") ||
 				Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
@@ -108,7 +83,7 @@ public partial class CursorController : Sprite2D
 	
 	private void MoveCursor()
 	{
-		Vector2I newGridPosition = gridPosition;
+		Vector2I newGridPosition = _GridPosition;
 			
 		if (Input.IsActionJustPressed("ui_right"))
 		{
@@ -130,15 +105,15 @@ public partial class CursorController : Sprite2D
 		// Check if the new position is within the map bounds
 		if (IsWithinBounds(newGridPosition))
 		{
-			gridPosition = newGridPosition;
+			_GridPosition = newGridPosition;
 		}
 
-		Position = gridPosition * tileSize;
+		Position = _GridPosition * TileSize;
 	}
 	
 	private bool IsWithinBounds(Vector2I position)
 	{
-		return position.X >= 0 && position.X < mapSize.X && position.Y >= 0 && position.Y < mapSize.Y;
+		return position.X >= 0 && position.X < _MapSize.X && position.Y >= 0 && position.Y < _MapSize.Y;
 	}
 
 	#endregion
@@ -147,12 +122,12 @@ public partial class CursorController : Sprite2D
 
 	private void OnCursorSelect()
 	{
-		gridPosition = terrainLayer.LocalToMap(Position);
+		_GridPosition = TerrainLayer.LocalToMap(Position);
 		
-		if (!isUnitSelected)
+		if (!_IsUnitSelected)
 		{
 			// Check if a unit is found first
-			Unit unitFound = unitManager.GetUnitAt(gridPosition);
+			Unit unitFound = UnitManagerInstance.GetUnitAt(_GridPosition);
 			if (unitFound != null)
 			{
 				// Unit found
@@ -168,7 +143,7 @@ public partial class CursorController : Sprite2D
 		}
 
 		// Check feature layer second
-		TileData featureTileData = terrainFeaturesLayer.GetCellTileData(gridPosition);
+		TileData featureTileData = TerrainFeaturesLayer.GetCellTileData(_GridPosition);
 
 		if (featureTileData != null && featureTileData.HasCustomData("TerrainType"))
 		{
@@ -178,21 +153,11 @@ public partial class CursorController : Sprite2D
 			switch (featureTileData.GetCustomData("TerrainType").AsString())
 			{
 				case "factory":
-					if (CheckIfIsOwner(featureTileData))
-					{
-						ShowFactoryMenu();
-					}
-					break;
+				case "port":
 				case "airport":
 					if (CheckIfIsOwner(featureTileData))
 					{
-						ShowAirportMenu();
-					}
-					break;
-				case "port":
-					if (CheckIfIsOwner(featureTileData))
-					{
-						ShowPortMenu();
+						MenuManagerInstance.ShowUnitCreationMenu(_GridPosition, featureTileData.GetCustomData("TerrainType").AsString());
 					}
 					break;
 			}
@@ -202,7 +167,7 @@ public partial class CursorController : Sprite2D
 		}
 
 		// If no relevant feature, check terrain layer
-		TileData terrainTileData = terrainLayer.GetCellTileData(gridPosition);
+		TileData terrainTileData = TerrainLayer.GetCellTileData(_GridPosition);
 
 		if (terrainTileData != null && terrainTileData.HasCustomData("TerrainType"))
 		{
@@ -215,69 +180,33 @@ public partial class CursorController : Sprite2D
 	
 	public void SelectUnit(Unit unit)
 	{
-		selectedUnit = unit;
-		isUnitSelected = true;
+		_SelectedUnit = unit;
+		_IsUnitSelected = true;
 		ApplySelectionEffects();
 	}
 
 	public void DeselectUnit()
 	{
-		isUnitSelected = false;
+		_IsUnitSelected = false;
 		ApplySelectionEffects();
-		selectedUnit = null;
+		_SelectedUnit = null;
 	}
 	
 	private void ApplySelectionEffects()
 	{
-		if (isUnitSelected)
+		if (_IsUnitSelected)
 		{
-			selectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
+			_SelectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
 			Visible = false;
 		}
 		else
 		{
-			selectedUnit.Scale = Vector2.One;
+			_SelectedUnit.Scale = Vector2.One;
 			Visible = true;
 		}
 	}
 	
 	#endregion
-	
-	#region Button Selection
-	
-	private void OnButtonUnitSelected(string unitType)
-	{
-		GD.Print("In OnUnitSelected()");
-
-		Vector2I selectedFactoryPosition = new Vector2I(-1, -1);
-		selectedFactoryPosition = terrainLayer.LocalToMap(Position);
-
-		unitManager.CreateUnit(unitType, selectedFactoryPosition);
-	}
-	
-	#endregion
-
-	#endregion
-
-	#region Unit Creation
-
-	private void ShowFactoryMenu()
-	{
-		Vector2 mapCenter = GetMapCenter();
-		factoryMenuInstance.ShowMenu(new Vector2(mapCenter.X - 96, mapCenter.Y - 48));
-	}
-	
-	private void ShowAirportMenu()
-	{
-		Vector2 mapCenter = GetMapCenter();
-		airportMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 48));
-	}
-	
-	private void ShowPortMenu()
-	{
-		Vector2 mapCenter = GetMapCenter();
-		portMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
-	}
 
 	#endregion
 	
@@ -285,7 +214,7 @@ public partial class CursorController : Sprite2D
 
 	public bool CheckIfIsOwner(TileData featureTileData)
 	{
-		if(featureTileData.HasCustomData("PropertyOwner") && featureTileData.GetCustomData("PropertyOwner").AsInt32() == playerManager.CurrentPlayerIndex)
+		if(featureTileData.HasCustomData("PropertyOwner") && featureTileData.GetCustomData("PropertyOwner").AsInt32() == PlayerManagerInstance.CurrentPlayerIndex)
 		{
 			GD.Print("Property is owned by current player");
 			return true;
@@ -295,12 +224,6 @@ public partial class CursorController : Sprite2D
 			GD.Print("Property is not owned by current player");
 			return false;
 		}
-	}
-	
-	public Vector2 GetMapCenter()
-	{
-		Vector2 mapCenter = terrainLayer.GetUsedRect().Size * terrainLayer.TileSet.TileSize;;
-		return mapCenter / 2;
 	}
 	
 	#endregion
