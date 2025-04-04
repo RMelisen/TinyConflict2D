@@ -1,18 +1,20 @@
 using Godot;
-using System;
+using TinyConflict2D.Units.Scripts;
+
+namespace TinyConflict2D.UI.Menus;
 
 public partial class FactoryMenu : CanvasLayer
 {
 	[Signal]
 	public delegate void UnitSelectedEventHandler(string unitType);
 
-	private Control[] buttons;
-	private int currentButtonIndex = 0;
+	private Control[] _buttons;
+	private int _currentButtonIndex = 0;
 	
 	public override void _Ready()
 	{
 		// Store buttons
-		buttons = new Control[]
+		_buttons = new Control[]
 		{
 			GetNode<Button>("FactoryMenuPanel/InfantryButton"),
 			GetNode<Button>("FactoryMenuPanel/MechButton"),
@@ -32,7 +34,7 @@ public partial class FactoryMenu : CanvasLayer
 		GetNode<Label>("FactoryMenuPanel/SupplyButton/SupplyContainer/SupplyCost").Text = SupplyUnit.BasePrice.ToString();
 		GetNode<Label>("FactoryMenuPanel/TankButton/TankContainer/TankCost").Text = TankUnit.BasePrice.ToString();
 
-		buttons[currentButtonIndex].GrabFocus();
+		_buttons[_currentButtonIndex].GrabFocus();
 	}
 
 	public override void _Input(InputEvent @event)
@@ -45,33 +47,33 @@ public partial class FactoryMenu : CanvasLayer
 			}
 			else if (@event.IsActionPressed("ui_down"))
 			{
-				currentButtonIndex = (currentButtonIndex + 1) % buttons.Length;
-				buttons[currentButtonIndex].GrabFocus();
+				_currentButtonIndex = (_currentButtonIndex + 1) % _buttons.Length;
+				_buttons[_currentButtonIndex].GrabFocus();
 			}
 			else if (@event.IsActionPressed("ui_up"))
 			{
-				currentButtonIndex = (currentButtonIndex - 1 + buttons.Length) % buttons.Length;
-				buttons[currentButtonIndex].GrabFocus();
+				_currentButtonIndex = (_currentButtonIndex - 1 + _buttons.Length) % _buttons.Length;
+				_buttons[_currentButtonIndex].GrabFocus();
 			}
 			else if (@event.IsActionPressed("ui_left"))
 			{
-				if (currentButtonIndex - 4 >= 0)
+				if (_currentButtonIndex - 4 >= 0)
 				{
-					currentButtonIndex = (currentButtonIndex - 4 + buttons.Length) % buttons.Length;
-					buttons[currentButtonIndex].GrabFocus();
+					_currentButtonIndex = (_currentButtonIndex - 4 + _buttons.Length) % _buttons.Length;
+					_buttons[_currentButtonIndex].GrabFocus();
 				}
 			}
 			else if (@event.IsActionPressed("ui_right"))
 			{
-				if (currentButtonIndex + 4 < buttons.Length)
+				if (_currentButtonIndex + 4 < _buttons.Length)
 				{
-					currentButtonIndex = (currentButtonIndex + 4) % buttons.Length;
-					buttons[currentButtonIndex].GrabFocus();
+					_currentButtonIndex = (_currentButtonIndex + 4) % _buttons.Length;
+					_buttons[_currentButtonIndex].GrabFocus();
 				}
 			}
 			else if (@event.IsActionPressed("ui_accept"))
 			{
-				buttons[currentButtonIndex].EmitSignal("pressed");
+				_buttons[_currentButtonIndex].EmitSignal("pressed");
 			}
 			GetViewport().SetInputAsHandled();
 		}
@@ -93,8 +95,8 @@ public partial class FactoryMenu : CanvasLayer
 	public void ShowMenu(Vector2 position)
 	{
 		Visible = true;
-		currentButtonIndex = 0;
-		buttons[currentButtonIndex].GrabFocus();
+		_currentButtonIndex = 0;
+		_buttons[_currentButtonIndex].GrabFocus();
 		GetNode<Control>("FactoryMenuPanel").Position = position;
 	}
 

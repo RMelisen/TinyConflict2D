@@ -1,5 +1,7 @@
 using Godot;
-using System;
+using TinyConflict2D.UI.Menus;
+
+namespace TinyConflict2D.Core;
 
 public partial class MenuManager : Node
 {

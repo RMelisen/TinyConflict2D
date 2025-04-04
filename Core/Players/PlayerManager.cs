@@ -1,6 +1,7 @@
 using Godot;
-using System;
 using System.Collections.Generic;
+
+namespace TinyConflict2D.Core.Players;
 
 public partial class PlayerManager : Node
 {

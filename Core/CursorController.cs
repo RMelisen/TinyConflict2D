@@ -1,5 +1,7 @@
 using Godot;
-using System;
+using TinyConflict2D.Units.Scripts;
+
+namespace TinyConflict2D.Core;
 
 public partial class CursorController : Sprite2D
 {
@@ -18,7 +20,7 @@ public partial class CursorController : Sprite2D
 	public UnitManager UnitManagerInstance;
 	
 	[Export]
-	public PlayerManager PlayerManagerInstance;
+	public Players.PlayerManager PlayerManagerInstance;
 	
 	[Export]
 	public MenuManager MenuManagerInstance;

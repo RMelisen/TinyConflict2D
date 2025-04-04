@@ -1,5 +1,4 @@
-using Godot;
-using System;
+namespace TinyConflict2D.Units.Scripts;
 
 public partial class BomberUnit : Unit
 {

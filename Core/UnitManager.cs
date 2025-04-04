@@ -1,6 +1,8 @@
 using Godot;
-using System;
 using System.Collections.Generic;
+using TinyConflict2D.Units.Scripts;
+
+namespace TinyConflict2D.Core;
 
 public partial class UnitManager : Node
 {
@@ -8,7 +10,7 @@ public partial class UnitManager : Node
 	public TileMapLayer unitsLayer;
 	
 	[Export]
-	public PlayerManager playerManager;
+	public Players.PlayerManager playerManager;
 	
 	public List<Node2D> unitList = new List<Node2D>();
 	

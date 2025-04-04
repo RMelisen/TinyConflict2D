@@ -1,5 +1,7 @@
 using Godot;
-using System;
+using TinyConflict2D.Core.Players;
+
+namespace TinyConflict2D.Units.Scripts;
 
 public partial class Unit : CharacterBody2D
 {
