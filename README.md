@@ -9,3 +9,5 @@ How to play :
 - Resources are provided by cities.
 
 To win the game, capture the opposing HQ
+
+PS : This repo focus on game mechanics and bases with Godot development. Sprites and tiles animations will be implemented in the V2 Project.
