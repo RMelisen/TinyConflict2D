@@ -39,6 +39,9 @@ public partial class CursorController : Sprite2D
 	
 	private Vector2I gridPosition = Vector2I.Zero;	
 	private Vector2I mapSize;
+		
+	private Unit selectedUnit = null;
+	private bool isUnitSelected = false;
 
 	#endregion
 	
@@ -74,15 +77,27 @@ public partial class CursorController : Sprite2D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (Input.IsActionJustPressed("ui_right") || Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
+		if (!isUnitSelected)
 		{
-			MoveCursor();
+			if (Input.IsActionJustPressed("ui_right") || Input.IsActionJustPressed("ui_left") ||
+				Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
+			{
+				MoveCursor();
+			}
+			else
+			{
+				if (Input.IsActionJustPressed("ui_select"))
+				{
+					OnCursorSelect();
+				}
+			}
 		}
 		else
 		{
+			// If unit is selected, don't move cursor yet
 			if (Input.IsActionJustPressed("ui_select"))
 			{
-				OnCursorSelect();				
+				OnCursorSelect();
 			}
 		}
 	}
@@ -134,15 +149,24 @@ public partial class CursorController : Sprite2D
 	{
 		gridPosition = terrainLayer.LocalToMap(Position);
 		
-		// Check if a unit is found first
-		Unit selectedUnit = unitManager.GetUnitAt(gridPosition);
-		if (selectedUnit != null)
-		{	
-			// Unit found
-			GD.Print("Selected unit: " + selectedUnit.GetType());
+		if (!isUnitSelected)
+		{
+			// Check if a unit is found first
+			Unit unitFound = unitManager.GetUnitAt(gridPosition);
+			if (unitFound != null)
+			{
+				// Unit found
+				GD.Print("Selected unit: " + unitFound.GetType());
+				SelectUnit(unitFound);
+				return;
+			}
+		}
+		else
+		{
+			DeselectUnit();
 			return;
 		}
-		
+
 		// Check feature layer second
 		TileData featureTileData = terrainFeaturesLayer.GetCellTileData(gridPosition);
 
@@ -187,6 +211,40 @@ public partial class CursorController : Sprite2D
 		}
 	}
 
+	#region Unit Selection
+	
+	public void SelectUnit(Unit unit)
+	{
+		selectedUnit = unit;
+		isUnitSelected = true;
+		ApplySelectionEffects();
+	}
+
+	public void DeselectUnit()
+	{
+		isUnitSelected = false;
+		ApplySelectionEffects();
+		selectedUnit = null;
+	}
+	
+	private void ApplySelectionEffects()
+	{
+		if (isUnitSelected)
+		{
+			selectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
+			Visible = false;
+		}
+		else
+		{
+			selectedUnit.Scale = Vector2.One;
+			Visible = true;
+		}
+	}
+	
+	#endregion
+	
+	#region Button Selection
+	
 	private void OnButtonUnitSelected(string unitType)
 	{
 		GD.Print("In OnUnitSelected()");
@@ -196,6 +254,8 @@ public partial class CursorController : Sprite2D
 
 		unitManager.CreateUnit(unitType, selectedFactoryPosition);
 	}
+	
+	#endregion
 
 	#endregion
 
