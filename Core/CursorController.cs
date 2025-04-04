@@ -29,11 +29,11 @@ public partial class CursorController : Sprite2D
 	
 	#region Fields
 	
-	private Vector2I _GridPosition = Vector2I.Zero;	
-	private Vector2I _MapSize;
+	private Vector2I _gridPosition = Vector2I.Zero;	
+	private Vector2I _mapSize;
 		
-	private Unit _SelectedUnit = null;
-	private bool _IsUnitSelected = false;
+	private Unit _selectedUnit = null;
+	private bool _isUnitSelected = false;
 
 	#endregion
 	
@@ -43,8 +43,8 @@ public partial class CursorController : Sprite2D
 	{
 		if (TerrainLayer != null)
 		{
-			_MapSize = TerrainLayer.GetUsedRect().Size;
-			_GridPosition = TerrainLayer.LocalToMap(Position);
+			_mapSize = TerrainLayer.GetUsedRect().Size;
+			_gridPosition = TerrainLayer.LocalToMap(Position);
 		}
 		else
 		{
@@ -54,7 +54,7 @@ public partial class CursorController : Sprite2D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (!_IsUnitSelected)
+		if (!_isUnitSelected)
 		{
 			if (Input.IsActionJustPressed("ui_right") || Input.IsActionJustPressed("ui_left") ||
 				Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
@@ -85,7 +85,7 @@ public partial class CursorController : Sprite2D
 	
 	private void MoveCursor()
 	{
-		Vector2I newGridPosition = _GridPosition;
+		Vector2I newGridPosition = _gridPosition;
 			
 		if (Input.IsActionJustPressed("ui_right"))
 		{
@@ -107,15 +107,15 @@ public partial class CursorController : Sprite2D
 		// Check if the new position is within the map bounds
 		if (IsWithinBounds(newGridPosition))
 		{
-			_GridPosition = newGridPosition;
+			_gridPosition = newGridPosition;
 		}
 
-		Position = _GridPosition * TileSize;
+		Position = _gridPosition * TileSize;
 	}
 	
 	private bool IsWithinBounds(Vector2I position)
 	{
-		return position.X >= 0 && position.X < _MapSize.X && position.Y >= 0 && position.Y < _MapSize.Y;
+		return position.X >= 0 && position.X < _mapSize.X && position.Y >= 0 && position.Y < _mapSize.Y;
 	}
 
 	#endregion
@@ -124,12 +124,12 @@ public partial class CursorController : Sprite2D
 
 	private void OnCursorSelect()
 	{
-		_GridPosition = TerrainLayer.LocalToMap(Position);
+		_gridPosition = TerrainLayer.LocalToMap(Position);
 		
-		if (!_IsUnitSelected)
+		if (!_isUnitSelected)
 		{
 			// Check if a unit is found first
-			Unit unitFound = UnitManagerInstance.GetUnitAt(_GridPosition);
+			Unit unitFound = UnitManagerInstance.GetUnitAt(_gridPosition);
 			if (unitFound != null)
 			{
 				// Unit found
@@ -145,7 +145,7 @@ public partial class CursorController : Sprite2D
 		}
 
 		// Check feature layer second
-		TileData featureTileData = TerrainFeaturesLayer.GetCellTileData(_GridPosition);
+		TileData featureTileData = TerrainFeaturesLayer.GetCellTileData(_gridPosition);
 
 		if (featureTileData != null && featureTileData.HasCustomData("TerrainType"))
 		{
@@ -159,7 +159,7 @@ public partial class CursorController : Sprite2D
 				case "airport":
 					if (CheckIfIsOwner(featureTileData))
 					{
-						MenuManagerInstance.ShowUnitCreationMenu(_GridPosition, featureTileData.GetCustomData("TerrainType").AsString());
+						MenuManagerInstance.ShowUnitCreationMenu(_gridPosition, featureTileData.GetCustomData("TerrainType").AsString());
 					}
 					break;
 			}
@@ -169,7 +169,7 @@ public partial class CursorController : Sprite2D
 		}
 
 		// If no relevant feature, check terrain layer
-		TileData terrainTileData = TerrainLayer.GetCellTileData(_GridPosition);
+		TileData terrainTileData = TerrainLayer.GetCellTileData(_gridPosition);
 
 		if (terrainTileData != null && terrainTileData.HasCustomData("TerrainType"))
 		{
@@ -182,28 +182,28 @@ public partial class CursorController : Sprite2D
 	
 	public void SelectUnit(Unit unit)
 	{
-		_SelectedUnit = unit;
-		_IsUnitSelected = true;
+		_selectedUnit = unit;
+		_isUnitSelected = true;
 		ApplySelectionEffects();
 	}
 
 	public void DeselectUnit()
 	{
-		_IsUnitSelected = false;
+		_isUnitSelected = false;
 		ApplySelectionEffects();
-		_SelectedUnit = null;
+		_selectedUnit = null;
 	}
 	
 	private void ApplySelectionEffects()
 	{
-		if (_IsUnitSelected)
+		if (_isUnitSelected)
 		{
-			_SelectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
+			_selectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
 			Visible = false;
 		}
 		else
 		{
-			_SelectedUnit.Scale = Vector2.One;
+			_selectedUnit.Scale = Vector2.One;
 			Visible = true;
 		}
 	}

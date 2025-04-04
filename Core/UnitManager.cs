@@ -1,18 +1,44 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
 
 public partial class UnitManager : Node
 {
-	[Export]
-	public TileMapLayer unitsLayer;
+	#region Properties
 	
 	[Export]
-	public Players.PlayerManager playerManager;
+	public TileMapLayer UnitsLayer;
+	
+	[Export]
+	public TileMapLayer TerrainLayer;
+	
+	[Export]
+	public Players.PlayerManager PlayerManager;
+	
+	#endregion
+	
+	#region Fields
 	
 	public List<Node2D> unitList = new List<Node2D>();
+	private AStarGrid2D aStarGrid;
+
+	#endregion
+	
+	public override void _Ready()
+	{
+		aStarGrid = new AStarGrid2D();
+		aStarGrid.Region = TerrainLayer.GetUsedRect();
+		aStarGrid.CellSize = TerrainLayer.TileSet.TileSize;
+		aStarGrid.Update();
+		
+		// This line to set solid point (obstacle)
+		//aStarGrid.SetPointSolid(new Vector2I(5, 7));
+	}
+	
+	#region Unit Creation
 	
 	public void CreateUnit(string unitType, Vector2I selectedFactoryPosition)
 	{
@@ -22,19 +48,19 @@ public partial class UnitManager : Node
 			if (unitScene != null)
 			{
 				var unitInstance = unitScene.Instantiate();
-				unitsLayer.AddChild(unitInstance);
+				UnitsLayer.AddChild(unitInstance);
 				if (unitInstance is Node2D unitNode2D && unitInstance is Unit unit)
 				{
 					GD.Print("In Position assignation");
-					unitNode2D.GlobalPosition = unitsLayer.MapToLocal(selectedFactoryPosition) + unitsLayer.Position;
+					unitNode2D.GlobalPosition = UnitsLayer.MapToLocal(selectedFactoryPosition) + UnitsLayer.Position;
 					
 					// Unit properties initialisation
-					unit.PlayerColor = playerManager.CurrentPlayer.PlayerColor;
-					unit.UnitOwner = playerManager.CurrentPlayer;
+					unit.PlayerColor = PlayerManager.CurrentPlayer.PlayerColor;
+					unit.UnitOwner = PlayerManager.CurrentPlayer;
 					unit.TilePosition =  selectedFactoryPosition;
 					
 					unitList.Add(unitNode2D); 
-					playerManager.CurrentPlayer.AddUnit(unit);
+					PlayerManager.CurrentPlayer.AddUnit(unit);
 					
 					// Change the sprite of the unit according to its color
 					Sprite2D unitSprite = unitInstance.GetNode<Sprite2D>(unitType + "Sprite");
@@ -55,14 +81,31 @@ public partial class UnitManager : Node
 	public void RemoveUnit(Node2D unit)
 	{
 		unitList.Remove(unit);
-		unitsLayer.RemoveChild(unit);
+		UnitsLayer.RemoveChild(unit);
 		unit.QueueFree();
 	}
 	
-	public Unit? GetUnitAt(Vector2I tilePosition)
+	#endregion
+	
+	#region Unit Selection
+	
+	public Unit GetUnitAt(Vector2I tilePosition)
 	{
-		return playerManager.CurrentPlayer.Units.Find(u => u.TilePosition == tilePosition);
+		return PlayerManager.CurrentPlayer.Units.Find(u => u.TilePosition == tilePosition);
 	}
+	
+	#endregion
+	
+	#region Unit Movement
+	
+	public List<Vector2> GetPathBetween(Vector2I startPosition, Vector2I endPosition)
+	{
+		return aStarGrid.GetPointPath(startPosition, endPosition).ToList();
+	}
+	
+	#endregion
+	
+	#region Utils
 	
 	// Godot Color strangely doesn't have a .Name property ...
 	private string GetColorName(Color color)	
@@ -85,4 +128,6 @@ public partial class UnitManager : Node
 			return "Gray";
 		}
 	}
+	
+	#endregion
 }

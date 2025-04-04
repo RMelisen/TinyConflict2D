@@ -6,12 +6,16 @@ namespace TinyConflict2D.Core.Players;
 
 public partial class Player : Node
 {
+	#region Properties
+	
 	[Export]
 	public Color PlayerColor { get; set; }
 
 	public int PlayerNumber { get; set; }
 	public List<Unit> Units { get; private set; } = new List<Unit>();
 	public int Money { get; set; } = 0;
+	
+	#endregion
 
 	public Player(int playerNumber, Color color)
 	{
