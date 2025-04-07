@@ -84,7 +84,7 @@ public partial class MenuManager : Node
 	
 	public Vector2 GetMapCenter()
 	{
-		Vector2 mapCenter = TerrainLayer.GetUsedRect().Size * TerrainLayer.TileSet.TileSize;;
+		Vector2 mapCenter = TerrainLayer.GetUsedRect().Size * TerrainLayer.TileSet.TileSize;
 		return mapCenter / 2;
 	}
 	

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dq44yhk03vby2" path="res://Core/Players/PlayerManager.cs" id="5_ut7ly"]
 [ext_resource type="PackedScene" uid="uid://bpwtidxqgfb2p" path="res://UI/Menus/PortMenu.tscn" id="6_o4i80"]
 [ext_resource type="Script" uid="uid://oqtw1pwkrbqv" path="res://Core/MenuManager.cs" id="9_o4i80"]
-[ext_resource type="Script" uid="uid://drdculeyyo04j" path="res://Core/UiManager.cs" id="10_k4ymp"]
+[ext_resource type="Script" uid="uid://12pubqh5l1as" path="res://Core/UIManager.cs" id="10_k4ymp"]
 [ext_resource type="PackedScene" uid="uid://8bp7t0p1fe4r" path="res://UI/Movements/ArrowBodyStraight.tscn" id="11_f764b"]
 [ext_resource type="PackedScene" uid="uid://ctwhjxrr6i6k" path="res://UI/Movements/ArrowBodyCurvedLeft.tscn" id="12_augcv"]
 [ext_resource type="PackedScene" uid="uid://dj62ncgf4650c" path="res://UI/Movements/ArrowBodyCurvedRight.tscn" id="13_li6wg"]
@@ -419,7 +419,7 @@ tile_set = SubResource("TileSet_rpqi1")
 [node name="UILayer" type="TileMapLayer" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer"]
 tile_set = SubResource("TileSet_rf2cd")
 
-[node name="Cursor" type="Sprite2D" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer" node_paths=PackedStringArray("TerrainLayer", "TerrainFeaturesLayer", "UnitManagerInstance", "PlayerManagerInstance", "MenuManagerInstance")]
+[node name="Cursor" type="Sprite2D" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer" node_paths=PackedStringArray("TerrainLayer", "TerrainFeaturesLayer", "UnitManagerInstance", "PlayerManagerInstance", "MenuManagerInstance", "UIManagerInstance")]
 position = Vector2(192, 144)
 texture = ExtResource("3_uxrcv")
 centered = false
@@ -429,6 +429,7 @@ TerrainFeaturesLayer = NodePath("../../..")
 UnitManagerInstance = NodePath("../../../../../Core/UnitManagerCore")
 PlayerManagerInstance = NodePath("../../../../../Core/PlayerManagerCore")
 MenuManagerInstance = NodePath("../../../../../Core/MenuManager")
+UIManagerInstance = NodePath("../../../../../Core/UIManager")
 
 [node name="Core" type="Node" parent="."]
 

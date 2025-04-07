@@ -30,6 +30,7 @@ public partial class UnitManager : Node
 	public override void _Ready()
 	{
 		aStarGrid = new AStarGrid2D();
+		aStarGrid.SetDiagonalMode(AStarGrid2D.DiagonalModeEnum.Never);
 		aStarGrid.Region = TerrainLayer.GetUsedRect();
 		aStarGrid.CellSize = TerrainLayer.TileSet.TileSize;
 		aStarGrid.Update();
@@ -98,9 +99,9 @@ public partial class UnitManager : Node
 	
 	#region Unit Movement
 	
-	public List<Vector2> GetPathBetween(Vector2I startPosition, Vector2I endPosition)
+	public List<Vector2I> GetPathBetween(Vector2I startPosition, Vector2I endPosition)
 	{
-		return aStarGrid.GetPointPath(startPosition, endPosition).ToList();
+		return aStarGrid.GetIdPath(startPosition, endPosition).ToList();
 	}
 	
 	#endregion

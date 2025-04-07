@@ -5,5 +5,4 @@
 [node name="ArrowHead" type="Node2D"]
 
 [node name="ArrowSprite" type="Sprite2D" parent="."]
-position = Vector2(8, 8)
 texture = ExtResource("1_71yjj")

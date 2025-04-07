@@ -25,6 +25,9 @@ public partial class CursorController : Sprite2D
 	[Export]
 	public MenuManager MenuManagerInstance;
 	
+	[Export]
+	public UIManager UIManagerInstance;
+	
 	#endregion
 	
 	#region Fields
@@ -58,6 +61,12 @@ public partial class CursorController : Sprite2D
 			Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
 		{
 			MoveCursor();
+
+			if (_isUnitSelected)
+			{
+				GD.Print("Should show arrow path");
+				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
+			}
 		}
 		else
 		{

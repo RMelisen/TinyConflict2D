@@ -1,9 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://ctwhjxrr6i6k"]
 
-[ext_resource type="Texture2D" uid="uid://caocjclnfv8cc" path="res://resources/TinyConflict/Tiles/UI/tile_0078.png" id="1_4b0hf"]
+[ext_resource type="Texture2D" uid="uid://ca0c4pbr1utw1" path="res://resources/TinyConflict/Tiles/UI/tile_0059.png" id="1_4b0hf"]
 
 [node name="ArrowBodyCurvedLeft" type="Node2D"]
 
 [node name="ArrowSprite" type="Sprite2D" parent="."]
-position = Vector2(8, 8)
 texture = ExtResource("1_4b0hf")
