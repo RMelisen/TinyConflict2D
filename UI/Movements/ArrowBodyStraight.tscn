@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://8bp7t0p1fe4r"]
+
+[ext_resource type="Texture2D" uid="uid://dckoq2udg76cu" path="res://resources/TinyConflict/Tiles/UI/tile_0042.png" id="1_37sw5"]
+
+[node name="ArrowStraight" type="Node2D"]
+
+[node name="ArrowSprite" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+texture = ExtResource("1_37sw5")

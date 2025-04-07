@@ -54,24 +54,13 @@ public partial class CursorController : Sprite2D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (!_isUnitSelected)
+		if (Input.IsActionJustPressed("ui_right") || Input.IsActionJustPressed("ui_left") ||
+			Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
 		{
-			if (Input.IsActionJustPressed("ui_right") || Input.IsActionJustPressed("ui_left") ||
-				Input.IsActionJustPressed("ui_down") || Input.IsActionJustPressed("ui_up"))
-			{
-				MoveCursor();
-			}
-			else
-			{
-				if (Input.IsActionJustPressed("ui_select"))
-				{
-					OnCursorSelect();
-				}
-			}
+			MoveCursor();
 		}
 		else
 		{
-			// If unit is selected, don't move cursor yet
 			if (Input.IsActionJustPressed("ui_select"))
 			{
 				OnCursorSelect();
@@ -140,7 +129,11 @@ public partial class CursorController : Sprite2D
 		}
 		else
 		{
-			DeselectUnit();
+			if (_gridPosition == _selectedUnit.TilePosition)
+			{
+				// If selected unit is selected again
+				DeselectUnit();
+			}
 			return;
 		}
 
@@ -199,12 +192,10 @@ public partial class CursorController : Sprite2D
 		if (_isUnitSelected)
 		{
 			_selectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
-			Visible = false;
 		}
 		else
 		{
 			_selectedUnit.Scale = Vector2.One;
-			Visible = true;
 		}
 	}
 	
