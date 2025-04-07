@@ -73,6 +73,16 @@ public partial class CursorController : Sprite2D
 			{
 				OnCursorSelect();
 			}
+			else
+			{
+				if (Input.IsActionJustReleased("ui_cancel"))
+				{
+					if (_isUnitSelected)
+					{
+						DeselectUnit();
+					}
+				}
+			}
 		}
 	}
 	
@@ -145,7 +155,6 @@ public partial class CursorController : Sprite2D
 			else
 			{
 				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
-				UIManagerInstance.ClearArrowPath();
 				DeselectUnit();
 			}
 			return;
@@ -196,6 +205,7 @@ public partial class CursorController : Sprite2D
 
 	public void DeselectUnit()
 	{
+		UIManagerInstance.ClearArrowPath();
 		_isUnitSelected = false;
 		ApplySelectionEffects();
 		_selectedUnit = null;
