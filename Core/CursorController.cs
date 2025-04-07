@@ -64,7 +64,6 @@ public partial class CursorController : Sprite2D
 
 			if (_isUnitSelected)
 			{
-				GD.Print("Should show arrow path");
 				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
 			}
 		}
@@ -141,6 +140,12 @@ public partial class CursorController : Sprite2D
 			if (_gridPosition == _selectedUnit.TilePosition)
 			{
 				// If selected unit is selected again
+				DeselectUnit();
+			}
+			else
+			{
+				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
+				UIManagerInstance.ClearArrowPath();
 				DeselectUnit();
 			}
 			return;

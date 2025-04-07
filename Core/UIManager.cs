@@ -30,12 +30,9 @@ public partial class UIManager : Node
 
 	public void UpdatePathVisualization(List<Vector2I> path)
 	{
-		GD.Print("In UpdatePathVisualization()");
-		GD.Print($"Path : {path}");
-		
 		ClearArrowPath();
 		
-		if (path == null) return;
+		if (path.Count < 2 || path == null) return;
 
 		Vector2I previousTile;
 			
@@ -97,7 +94,7 @@ public partial class UIManager : Node
 		}
 	}
 	
-	private void ClearArrowPath()
+	public void ClearArrowPath()
 	{
 		foreach (Node2D segment in _displayedPath)
 		{
