@@ -1,6 +1,8 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 using TinyConflict2D.Core.Players;
+using TinyConflict2D.Commons.Enums;
 
 namespace TinyConflict2D.Units.Scripts;
 
@@ -8,18 +10,15 @@ public partial class Unit : CharacterBody2D
 {
 	#region Properties
 	
-	[Export]
-	public int Health { get; set; } = 100;
-
-	[Export]
-	public int MovementRange { get; set; } = 3;
-	
 	[Export] 
-	public float Speed = 100.0f; // Speed in units per second
+	public float Speed = 150.0f; // Speed in units per second
 	
 	[Export] 
 	public int TileSize = 16;
 	
+	public int Health { get; set; } = 100;
+	public int MovementRange { get; set; } = 3;
+	public UnitMovementType MovementType { get; set; }
 	public Color PlayerColor { get; set; } = Colors.Gray;
 	public Player UnitOwner { get; set; }
 	public Vector2I TilePosition { get; set; }
@@ -42,6 +41,7 @@ public partial class Unit : CharacterBody2D
 	{
 		_path = newPath;
 		_pathIndex = 0;
+		TilePosition = newPath.Last();
 	}
 	
 	public override void _Process(double delta)
@@ -62,8 +62,7 @@ public partial class Unit : CharacterBody2D
 				{
 					_path = null;
 					_pathIndex = 0;
-					GD.Print("Reached destination.");
-					GD.Print(Position);
+					GD.Print($"Reached destination : {Position}");
 				}
 			}
 		}
