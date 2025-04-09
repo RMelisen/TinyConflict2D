@@ -10,5 +10,11 @@ public partial class SupplyUnit : Unit
 	{
 		MovementType = UnitMovementType.TireA;
 		MovementRange = 6;
+		UnitType = "Supply";
+	}
+
+	public override string ToString()
+	{
+		return "Supply";
 	}
 }

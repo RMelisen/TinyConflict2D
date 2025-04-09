@@ -10,5 +10,11 @@ public partial class InfantryUnit : Unit
 	{
 		MovementType = UnitMovementType.Infantry;
 		MovementRange = 3;
+		UnitType = "Infantry";
+	}
+
+	public override string ToString()
+	{
+		return "Infantry";
 	}
 }

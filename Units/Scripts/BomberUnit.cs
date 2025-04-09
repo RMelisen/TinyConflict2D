@@ -10,5 +10,11 @@ public partial class BomberUnit : Unit
 	{
 		MovementType = UnitMovementType.Airborne;
 		MovementRange = 7;
+		UnitType = "Bomber";
+	}
+
+	public override string ToString()
+	{
+		return "Bomber";
 	}
 }

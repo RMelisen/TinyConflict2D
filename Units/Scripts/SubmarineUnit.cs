@@ -10,5 +10,11 @@ public partial class SubmarineUnit : Unit
 	{
 		MovementType = UnitMovementType.Naval;
 		MovementRange = 5;
+		UnitType = "Submarine";
+	}
+
+	public override string ToString()
+	{
+		return "Submarine";
 	}
 }

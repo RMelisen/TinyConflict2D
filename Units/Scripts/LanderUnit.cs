@@ -10,5 +10,11 @@ public partial class LanderUnit : Unit
 	{
 		MovementType = UnitMovementType.Lander;
 		MovementRange = 6;
+		UnitType = "Lander";
+	}
+
+	public override string ToString()
+	{
+		return "Lander";
 	}
 }

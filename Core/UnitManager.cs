@@ -16,6 +16,9 @@ public partial class UnitManager : Node
 	public TileMapLayer TerrainLayer;
 	
 	[Export]
+	public TileMapLayer TerrainFeaturesLayer;
+	
+	[Export]
 	public Players.PlayerManager PlayerManager;
 	
 	#endregion
@@ -23,21 +26,74 @@ public partial class UnitManager : Node
 	#region Fields
 	
 	public List<Node2D> unitList = new List<Node2D>();
-	private AStarGrid2D aStarGrid;
+	private AStarGrid2D _aStarGrid;
+	private Rect2I _gridRect;
 
 	#endregion
 	
+	#region Initialization
+	
 	public override void _Ready()
 	{
-		aStarGrid = new AStarGrid2D();
-		aStarGrid.SetDiagonalMode(AStarGrid2D.DiagonalModeEnum.Never);
-		aStarGrid.Region = TerrainLayer.GetUsedRect();
-		aStarGrid.CellSize = TerrainLayer.TileSet.TileSize;
-		aStarGrid.Update();
-		
-		// This line to set solid point (obstacle)
-		//aStarGrid.SetPointSolid(new Vector2I(5, 7));
+		InitializeAStarGrid();
 	}
+
+	private void InitializeAStarGrid()
+	{
+		_aStarGrid = new AStarGrid2D();
+		_aStarGrid.SetDiagonalMode(AStarGrid2D.DiagonalModeEnum.Never);
+		_aStarGrid.Region = _gridRect = TerrainLayer.GetUsedRect();
+		_aStarGrid.CellSize = TerrainLayer.TileSet.TileSize;
+		
+		// Initialize all points with a default weight (1)
+		for (int y = 0; y < _gridRect.Size.Y; y++)
+		{
+			for (int x = 0; x < _gridRect.Size.X; x++)
+			{
+				_aStarGrid.SetPointWeightScale(new Vector2I(x, y), 1);
+			}
+		}
+		
+		// Apply terrain-specific weights
+		UpdateTerrainWeights();
+		_aStarGrid.Update();
+	}
+	
+	private void UpdateTerrainWeights()
+	{
+		Vector2I cellPosition;
+		TileData featureTileData;
+		TileData terrainTileData;
+			
+		if (TerrainLayer == null) return;
+		
+		for (int y = 0; y < _gridRect.Size.Y; y++)
+		{
+			for (int x = 0; x < _gridRect.Size.X; x++)
+			{
+				cellPosition = new Vector2I(x, y);
+				featureTileData = TerrainFeaturesLayer.GetCellTileData(cellPosition);
+
+				if (featureTileData != null && featureTileData.HasCustomData("MovementCost"))
+				{
+					var cost = (int)featureTileData.GetCustomData("MovementCost");
+					_aStarGrid.SetPointWeightScale(cellPosition, cost);
+				}
+				else	// No features, look for the terrain tile movement cost
+				{
+					terrainTileData = TerrainLayer.GetCellTileData(cellPosition);
+					
+					if (terrainTileData != null && terrainTileData.HasCustomData("MovementCost"))
+					{
+						var cost = (int)terrainTileData.GetCustomData("MovementCost");
+						_aStarGrid.SetPointWeightScale(cellPosition, cost);
+					}
+				}
+			}
+		}
+	}
+	
+	#endregion
 	
 	#region Unit Creation
 	
@@ -99,9 +155,9 @@ public partial class UnitManager : Node
 	
 	#region Unit Movement
 	
-	public List<Vector2I> GetPathBetween(Vector2I startPosition, Vector2I endPosition)
+	public List<Vector2I> GetPathBetween(string unitType, Vector2I startPosition, Vector2I endPosition)
 	{
-		return aStarGrid.GetIdPath(startPosition, endPosition).ToList();
+		return _aStarGrid.GetIdPath(startPosition, endPosition).ToList();
 	}
 	
 	#endregion
