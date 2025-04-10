@@ -57,6 +57,7 @@ public class Config
 
     public const string UIMANAGER_NODE_PATH = "Node2D/Core/UnitManagerCore";
     public const string UNIT_SPRITES_PATH = "res://resources/TinyConflict/Tiles/Units/";
+    public const string GRAYED_OUT_SHADER_PATH = "res://UI/Shaders/GrayedOut.gdshader";
 
     #endregion
 }

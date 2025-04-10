@@ -20,7 +20,7 @@ public partial class Unit : CharacterBody2D
 	
 	public int Health { get; set; } = 100;
 	public int MovementRange { get; set; } = 3;
-	public int MovementPointsLeft;
+	public int MovementPointsLeft { get; set; }
 	public UnitMovementType MovementType { get; set; }
 	public Color PlayerColor { get; set; } = Colors.Gray;
 	public Player UnitOwner { get; set; }
@@ -63,36 +63,34 @@ public partial class Unit : CharacterBody2D
 			Vector2 targetPosition = new Vector2(_path[_pathIndex].X * TileSize + TileSize / 2, _path[_pathIndex].Y * TileSize + TileSize / 2);
 			float distanceToTarget = Position.DistanceTo(targetPosition);
 
-			// I need to move the movement points left logic in the pathfinding methods => I should return only the path passable
-			
-			if (MovementPointsLeft > 0 /*&& _movementPointsLeft - GetTileWeightScale(_path[_pathIndex]) >= 0*/)
+			if (distanceToTarget > 0)
 			{
-				if (distanceToTarget > 0)
-				{
-					Position = Position.MoveToward(targetPosition, Speed * (float)delta);
-				}
-				else
-				{
-					MovementPointsLeft -= GetTileWeightScale(_path[_pathIndex]);
-					_pathIndex++;
-					if (_pathIndex >= _path.Count)
-					{
-						_path = null;
-						_pathIndex = 0;
-						GD.Print($"Reached destination : {Position}");
-					}
-				}
+				Position = Position.MoveToward(targetPosition, Speed * (float)delta);
 			}
 			else
 			{
-				GD.Print("Out of movement points.");
-				_path = null;
-				_pathIndex = 1;
+				MovementPointsLeft -= GetTileWeightScale(_path[_pathIndex]);
+				_pathIndex++;
+				if (_pathIndex >= _path.Count)
+				{
+					if(MovementPointsLeft == 0)
+						Modulate = new Color(0.5f, 0.5f, 0.5f, 1f);	// Gray to make sprite dimmer.
+						
+					_path = null;
+					_pathIndex = 1;
+					GD.Print($"Reached destination : {Position}");
+				}
 			}
 		}
 	}
 	
 	#region Utils
+
+	public void ResetMovementPoints()
+	{
+		MovementPointsLeft = MovementRange;
+		Modulate = Colors.White;	// White to get original sprite color.
+	}
 	
 	public int GetTileWeightScale(Vector2I tilePosition)
 	{

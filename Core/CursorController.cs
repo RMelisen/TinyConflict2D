@@ -198,10 +198,13 @@ public partial class CursorController : Sprite2D
 	
 	public void SelectUnit(Unit unit)
 	{
-		_selectedUnit = unit;
-		_isUnitSelected = true;
-		UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
-		ApplySelectionEffects();
+		if (unit.MovementPointsLeft > 0)
+		{
+			_selectedUnit = unit;
+			_isUnitSelected = true;
+			UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
+			ApplySelectionEffects();
+		}
 	}
 
 	public void DeselectUnit()
