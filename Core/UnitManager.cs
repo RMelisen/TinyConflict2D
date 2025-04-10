@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using TinyConflict2D.Commons.Enums;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
@@ -44,6 +45,7 @@ public partial class UnitManager : Node
 		_aStarGrid.SetDiagonalMode(AStarGrid2D.DiagonalModeEnum.Never);
 		_aStarGrid.Region = _gridRect = TerrainLayer.GetUsedRect();
 		_aStarGrid.CellSize = TerrainLayer.TileSet.TileSize;
+		_aStarGrid.Update();
 		
 		// Initialize all points with a default weight (1)
 		for (int y = 0; y < _gridRect.Size.Y; y++)
@@ -65,8 +67,6 @@ public partial class UnitManager : Node
 		TileData featureTileData;
 		TileData terrainTileData;
 			
-		if (TerrainLayer == null) return;
-		
 		for (int y = 0; y < _gridRect.Size.Y; y++)
 		{
 			for (int x = 0; x < _gridRect.Size.X; x++)
@@ -154,8 +154,137 @@ public partial class UnitManager : Node
 	#endregion
 	
 	#region Unit Movement
+
+	public void UpdateTerrainWeightsByMovementType(UnitMovementType  movementType)
+	{
+		// Default values are : Plains 1, Forests 2, Mountains 999 (impassable)
+		int plainCost = 1;
+		int forestCost = 2;
+		int mountainCost = 999;
+		int roadCost = 1;
+		int waterCost = 999;
+
+		switch (movementType)
+		{
+			case UnitMovementType.Infantry:
+				mountainCost = 2;
+				forestCost = 1;
+				break;
+			case UnitMovementType.Mech:
+				mountainCost = 1;
+				forestCost = 1;
+				break;
+			case UnitMovementType.TireA:
+				plainCost = 2;
+				forestCost = 3;
+				break;
+			case UnitMovementType.TireB:
+				plainCost = 1;
+				forestCost = 3;
+				break;
+			case UnitMovementType.Treads:
+				break;
+			case UnitMovementType.Airborne:
+				forestCost = 1;
+				mountainCost = 1;
+				waterCost = 1;
+				break;
+			case UnitMovementType.Naval:
+				plainCost = 999;
+				forestCost = 999;
+				roadCost = 999;
+				waterCost = 1;
+				break;
+			case UnitMovementType.Lander:
+				plainCost = 999;
+				forestCost = 999;
+				roadCost = 999;
+				waterCost = 1;
+				// beachCost = 1;	// Will be added in V2
+				break;
+		}
+
+		ApplyTerrainWeightsModifications(plainCost, forestCost, mountainCost, roadCost, waterCost);
+	}
+
+	public void ApplyTerrainWeightsModifications(int plainCost, int forestCost, int mountainCost, int roadCost, int waterCost)
+	{
+		Vector2I cellPosition;
+		TileData featureTileData;
+		TileData terrainTileData;
+		
+		for (int y = 0; y < _gridRect.Size.Y; y++)
+		{
+			for (int x = 0; x < _gridRect.Size.X; x++)
+			{
+				cellPosition = new Vector2I(x, y);
+				featureTileData = TerrainFeaturesLayer.GetCellTileData(cellPosition);
+
+				if (featureTileData != null && featureTileData.HasCustomData("TerrainType"))
+				{
+					string terrainType = (string)featureTileData.GetCustomData("TerrainType");
+					switch (terrainType)
+					{
+						case "road":
+						case "city":
+						case "headquarters":
+						case "factory":
+						case "port":
+						case "airport":
+						case "antenna":
+						case "silo":
+						case "bridge":
+							ApplyCost(roadCost, cellPosition);
+							break;
+						case "mountain":
+							ApplyCost(mountainCost, cellPosition);
+							break;
+						case "forest":
+							ApplyCost(forestCost, cellPosition);
+							break;
+						case "water":
+							ApplyCost(waterCost, cellPosition);
+							break;
+					}
+				}
+				else	// No features, look for the terrain tile movement cost
+				{
+					terrainTileData = TerrainLayer.GetCellTileData(cellPosition);
+					
+					if (terrainTileData != null && terrainTileData.HasCustomData("TerrainType"))
+					{
+						string terrainType = (string)terrainTileData.GetCustomData("TerrainType");
+						switch (terrainType)
+						{
+							case "plain":
+								ApplyCost(plainCost, cellPosition);
+								break;
+							case "water":
+								ApplyCost(waterCost, cellPosition);
+								break;
+						}
+					}
+				}
+			}
+		}
+		
+		_aStarGrid.Update();
+	}
+
+	public void ApplyCost(int cost, Vector2I cellPosition)
+	{
+		if (cost != 999)
+		{
+			_aStarGrid.SetPointSolid(cellPosition, false);
+			_aStarGrid.SetPointWeightScale(cellPosition, cost);
+		}
+		else
+		{
+			_aStarGrid.SetPointSolid(cellPosition, true);
+		}
+	}
 	
-	public List<Vector2I> GetPathBetween(string unitType, Vector2I startPosition, Vector2I endPosition)
+	public List<Vector2I> GetPathBetween(Vector2I startPosition, Vector2I endPosition)
 	{
 		return _aStarGrid.GetIdPath(startPosition, endPosition).ToList();
 	}

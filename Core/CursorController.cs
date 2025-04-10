@@ -65,7 +65,7 @@ public partial class CursorController : Sprite2D
 
 			if (_isUnitSelected)
 			{
-				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(_selectedUnitType, _selectedUnit.TilePosition, _gridPosition));
+				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
 			}
 		}
 		else
@@ -155,7 +155,7 @@ public partial class CursorController : Sprite2D
 			}
 			else
 			{
-				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnitType, _selectedUnit.TilePosition, _gridPosition));
+				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
 				DeselectUnit();
 			}
 			return;
@@ -202,6 +202,7 @@ public partial class CursorController : Sprite2D
 		_selectedUnit = unit;
 		_isUnitSelected = true;
 		_selectedUnitType = unit.UnitType;
+		UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
 		ApplySelectionEffects();
 	}
 
