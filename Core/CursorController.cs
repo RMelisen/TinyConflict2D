@@ -192,7 +192,7 @@ public partial class CursorController : Sprite2D
 		}
 		
 		// Open the game menu if no unit selected nor feature selected (when a empty tile is selected)
-		OpenGamemenu();
+		MenuManagerInstance.ShowGameMenu();
 	}
 
 	#region Unit Selection
@@ -230,15 +230,6 @@ public partial class CursorController : Sprite2D
 	
 	#endregion
 
-	#endregion
-	
-	#region Game Menu
-
-	private void OpenGamemenu()
-	{
-		MenuManagerInstance.ShowGameMenu();
-	}
-	
 	#endregion
 	
 	#region Utils
