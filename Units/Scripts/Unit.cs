@@ -30,17 +30,23 @@ public partial class Unit : CharacterBody2D
 	
 	private List<Vector2I> _path;
 	private int _pathIndex = 0;
+	private int _movementPointsLeft;
  
 	#endregion
-	
-	public virtual void Attack(Unit target)
+
+	public override void _Ready()
+	{
+		_movementPointsLeft = MovementRange + 1;	// +1 because AStar pathfinding also returns starting position
+	}
+
+	public void Attack(Unit target)
 	{
 		
 	}
 
-	public virtual void Move(List<Vector2I> newPath)
+	public void Move(List<Vector2I> newPath)
 	{
-		if (newPath != null && newPath.Count > 0)
+		if (newPath != null && newPath.Count > 0 && _movementPointsLeft > 0)
 		{
 			_path = newPath;
 			_pathIndex = 0;
@@ -54,20 +60,31 @@ public partial class Unit : CharacterBody2D
 		{
 			Vector2 targetPosition = new Vector2(_path[_pathIndex].X * TileSize + TileSize / 2, _path[_pathIndex].Y * TileSize + TileSize / 2);
 			float distanceToTarget = Position.DistanceTo(targetPosition);
-			
-			if (distanceToTarget > 0)
+
+			if (_movementPointsLeft > 0)
 			{
-				Position = Position.MoveToward(targetPosition, Speed * (float)delta);
+				if (distanceToTarget > 0)
+				{
+					Position = Position.MoveToward(targetPosition, Speed * (float)delta);
+				}
+				else
+				{
+					_movementPointsLeft--;
+					_pathIndex++;
+					if (_pathIndex >= _path.Count)
+					{
+						_path = null;
+						_pathIndex = 0;
+						GD.Print($"Reached destination : {Position}");
+					}
+				}
 			}
 			else
 			{
-				_pathIndex++;
-				if (_pathIndex >= _path.Count)
-				{
-					_path = null;
-					_pathIndex = 0;
-					GD.Print($"Reached destination : {Position}");
-				}
+				GD.Print("Out of movement points.");
+				_path = null;
+				_pathIndex = 0;
+				
 			}
 		}
 	}
