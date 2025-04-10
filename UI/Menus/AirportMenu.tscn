@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://4pui8xwypook"]
 
-[ext_resource type="Script" uid="uid://bqm4vlc2j4v41" path="res://UI/Menus/AirportMenu.cs" id="1_2ujxm"]
+[ext_resource type="Script" uid="uid://bqm4vlc2j4v41" path="res://UI/Menus/Scripts/AirportMenu.cs" id="1_2ujxm"]
 [ext_resource type="Texture2D" uid="uid://bbtr6kfecsupf" path="res://resources/TinyConflict/Tiles/Units/BCopterGray.png" id="2_3u1ed"]
 [ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="3_5o8tw"]
 [ext_resource type="Texture2D" uid="uid://diq8dcbw8t1mu" path="res://resources/TinyConflict/Tiles/Units/BomberGray.png" id="4_oodc0"]

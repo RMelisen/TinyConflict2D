@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bpwtidxqgfb2p"]
 
-[ext_resource type="Script" uid="uid://bya2b3bicy5j8" path="res://UI/Menus/PortMenu.cs" id="1_4jjyo"]
+[ext_resource type="Script" uid="uid://bya2b3bicy5j8" path="res://UI/Menus/Scripts/PortMenu.cs" id="1_4jjyo"]
 [ext_resource type="Texture2D" uid="uid://b86qoeh46nd0" path="res://resources/TinyConflict/Tiles/Units/BattleshipGray.png" id="2_4jjyo"]
 [ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="3_ol5iw"]
 [ext_resource type="Texture2D" uid="uid://3sehql1pha1q" path="res://resources/TinyConflict/Tiles/Units/LanderGray.png" id="4_tefoa"]

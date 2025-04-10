@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://jjnx386iyt3f"]
+[gd_scene load_steps=24 format=4 uid="uid://jjnx386iyt3f"]
 
 [ext_resource type="Texture2D" uid="uid://38qqb54syyeg" path="res://resources/TinyConflict/Tilemap/tilemap.png" id="1_3mqji"]
 [ext_resource type="Script" uid="uid://dxa523vi1cys" path="res://Core/UnitManager.cs" id="2_3owbp"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://4pui8xwypook" path="res://UI/Menus/AirportMenu.tscn" id="5_ppjb3"]
 [ext_resource type="Script" uid="uid://dq44yhk03vby2" path="res://Core/Players/PlayerManager.cs" id="5_ut7ly"]
 [ext_resource type="PackedScene" uid="uid://bpwtidxqgfb2p" path="res://UI/Menus/PortMenu.tscn" id="6_o4i80"]
+[ext_resource type="PackedScene" uid="uid://bwisk1s03kd53" path="res://UI/Menus/GameMenu.tscn" id="9_augcv"]
 [ext_resource type="Script" uid="uid://oqtw1pwkrbqv" path="res://Core/MenuManager.cs" id="9_o4i80"]
 [ext_resource type="Script" uid="uid://12pubqh5l1as" path="res://Core/UIManager.cs" id="10_k4ymp"]
 [ext_resource type="PackedScene" uid="uid://8bp7t0p1fe4r" path="res://UI/Movements/ArrowBodyStraight.tscn" id="11_f764b"]
@@ -541,6 +542,7 @@ TerrainLayer = NodePath("../../TerrainLayer")
 UnitManagerInstance = NodePath("../UnitManagerCore")
 FactoryMenuScene = ExtResource("4_c5mi1")
 AirportMenuScene = ExtResource("5_ppjb3")
+GameMenuScene = ExtResource("9_augcv")
 PortMenuScene = ExtResource("6_o4i80")
 
 [node name="UIManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UILayer")]

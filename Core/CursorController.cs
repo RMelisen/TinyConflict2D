@@ -177,11 +177,9 @@ public partial class CursorController : Sprite2D
 					{
 						MenuManagerInstance.ShowUnitCreationMenu(_gridPosition, featureTileData.GetCustomData("TerrainType").AsString());
 					}
-					break;
+					// If a terrain feature has been found, no need to look for terrain (for now) 
+					return;
 			}
-			
-			// If a terrain feature has been found, no need to look for terrain (for now) 
-			return;
 		}
 
 		// If no relevant feature, check terrain layer
@@ -190,8 +188,10 @@ public partial class CursorController : Sprite2D
 		if (terrainTileData != null && terrainTileData.HasCustomData("TerrainType"))
 		{
 			GD.Print("Terrain Tile terrainType is : " + terrainTileData.GetCustomData("TerrainType"));
-			return;
 		}
+		
+		// Open the game menu if no unit selected nor feature selected (when a empty tile is selected)
+		OpenGamemenu();
 	}
 
 	#region Unit Selection
@@ -229,6 +229,15 @@ public partial class CursorController : Sprite2D
 	
 	#endregion
 
+	#endregion
+	
+	#region Game Menu
+
+	private void OpenGamemenu()
+	{
+		MenuManagerInstance.ShowGameMenu();
+	}
+	
 	#endregion
 	
 	#region Utils

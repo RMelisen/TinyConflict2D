@@ -20,6 +20,9 @@ public partial class MenuManager : Node
 	public PackedScene AirportMenuScene;
 	
 	[Export]
+	public PackedScene GameMenuScene;
+	
+	[Export]
 	public PackedScene PortMenuScene;
 	
 	#endregion
@@ -29,6 +32,7 @@ public partial class MenuManager : Node
 	private FactoryMenu _factoryMenuInstance;
 	private AirportMenu _airportMenuInstance;
 	private PortMenu _portMenuInstance;
+	private GameMenu _gameMenuInstance;
 	private Vector2I _tilePosition;
 	
 	#endregion
@@ -49,6 +53,11 @@ public partial class MenuManager : Node
 		AddChild(_portMenuInstance);
 		_portMenuInstance.HideMenu();
 		_portMenuInstance.UnitSelected += OnButtonUnitSelected;
+		
+		_gameMenuInstance = GameMenuScene.Instantiate<GameMenu>();
+		AddChild(_gameMenuInstance);
+		_gameMenuInstance.HideMenu();
+		_gameMenuInstance.ButtonSelected += OnGameButtonSelected;
 	}
 	
 	#region Unit Creation
@@ -74,10 +83,32 @@ public partial class MenuManager : Node
 	
 	private void OnButtonUnitSelected(string unitType)
 	{
-		GD.Print("In OnUnitSelected()");
 		UnitManagerInstance.CreateUnit(unitType, _tilePosition);
 	}
 
+	#endregion
+	
+	#region Game Menu
+	
+	public void ShowGameMenu()
+	{
+		Vector2 mapCenter = GetMapCenter();
+		_gameMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
+	}
+	
+	private void OnGameButtonSelected(string selectedGameMenuButton)
+	{
+		switch (selectedGameMenuButton)
+		{
+			case "Information":
+				break;
+			case "Settings":
+				break;
+			case "EndTurn":
+				break;
+		}
+	}
+	
 	#endregion
 	
 	#region Utils

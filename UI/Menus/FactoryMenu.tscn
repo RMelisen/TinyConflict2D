@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dnyg366dssf5y"]
 
-[ext_resource type="Script" uid="uid://hlw24v5bghuj" path="res://UI/Menus/FactoryMenu.cs" id="1_fq012"]
+[ext_resource type="Script" uid="uid://hlw24v5bghuj" path="res://UI/Menus/Scripts/FactoryMenu.cs" id="1_fq012"]
 [ext_resource type="Texture2D" uid="uid://xb1b46fusykw" path="res://resources/TinyConflict/Tiles/Units/InfantryGray.png" id="1_p54xo"]
 [ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="2_fq012"]
 [ext_resource type="Texture2D" uid="uid://bm620m7j7gjpg" path="res://resources/TinyConflict/Tiles/Units/AAGray.png" id="4_1ty6w"]
