@@ -40,11 +40,14 @@ public partial class Unit : CharacterBody2D
 
 	public virtual void Move(List<Vector2I> newPath)
 	{
-		_path = newPath;
-		_pathIndex = 0;
-		TilePosition = newPath.Last();
+		if (newPath != null && newPath.Count > 0)
+		{
+			_path = newPath;
+			_pathIndex = 0;
+			TilePosition = newPath.Last();
+		}
 	}
-	
+
 	public override void _Process(double delta)
 	{
 		if (_path != null && _pathIndex < _path.Count)
