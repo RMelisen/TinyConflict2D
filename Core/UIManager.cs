@@ -32,12 +32,11 @@ public partial class UIManager : Node
 	{
 		ClearArrowPath();
 		
-		if (path.Count < 2 || path == null) return;
-
-		Vector2I previousTile;
+		if (path == null || path.Count < 2) return;
 			
 		for (int i = 0; i < path.Count; i++)
 		{
+			Vector2I previousTile;
 			Vector2I currentTile = path[i];
 			
 			// Convert tile coordinates to world positions

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TinyConflict2D.Core.Players;
 using TinyConflict2D.Commons.Enums;
+using TinyConflict2D.Commons.Config;
+using TinyConflict2D.Core;
 
 namespace TinyConflict2D.Units.Scripts;
 
@@ -18,6 +20,7 @@ public partial class Unit : CharacterBody2D
 	
 	public int Health { get; set; } = 100;
 	public int MovementRange { get; set; } = 3;
+	public int MovementPointsLeft;
 	public UnitMovementType MovementType { get; set; }
 	public Color PlayerColor { get; set; } = Colors.Gray;
 	public Player UnitOwner { get; set; }
@@ -29,14 +32,13 @@ public partial class Unit : CharacterBody2D
 	#region Fields
 	
 	private List<Vector2I> _path;
-	private int _pathIndex = 0;
-	private int _movementPointsLeft;
+	private int _pathIndex = 1;
  
 	#endregion
 
 	public override void _Ready()
 	{
-		_movementPointsLeft = MovementRange + 1;	// +1 because AStar pathfinding also returns starting position
+		MovementPointsLeft = MovementRange;
 	}
 
 	public void Attack(Unit target)
@@ -46,10 +48,10 @@ public partial class Unit : CharacterBody2D
 
 	public void Move(List<Vector2I> newPath)
 	{
-		if (newPath != null && newPath.Count > 0 && _movementPointsLeft > 0)
+		if (newPath != null && newPath.Count > 0 && MovementPointsLeft > 0)
 		{
 			_path = newPath;
-			_pathIndex = 0;
+			_pathIndex = 1;		// Start at 1 to skip starting tile at index 0 
 			TilePosition = newPath.Last();
 		}
 	}
@@ -61,7 +63,9 @@ public partial class Unit : CharacterBody2D
 			Vector2 targetPosition = new Vector2(_path[_pathIndex].X * TileSize + TileSize / 2, _path[_pathIndex].Y * TileSize + TileSize / 2);
 			float distanceToTarget = Position.DistanceTo(targetPosition);
 
-			if (_movementPointsLeft > 0)
+			// I need to move the movement points left logic in the pathfinding methods => I should return only the path passable
+			
+			if (MovementPointsLeft > 0 /*&& _movementPointsLeft - GetTileWeightScale(_path[_pathIndex]) >= 0*/)
 			{
 				if (distanceToTarget > 0)
 				{
@@ -69,7 +73,7 @@ public partial class Unit : CharacterBody2D
 				}
 				else
 				{
-					_movementPointsLeft--;
+					MovementPointsLeft -= GetTileWeightScale(_path[_pathIndex]);
 					_pathIndex++;
 					if (_pathIndex >= _path.Count)
 					{
@@ -83,9 +87,22 @@ public partial class Unit : CharacterBody2D
 			{
 				GD.Print("Out of movement points.");
 				_path = null;
-				_pathIndex = 0;
-				
+				_pathIndex = 1;
 			}
 		}
 	}
+	
+	#region Utils
+	
+	public int GetTileWeightScale(Vector2I tilePosition)
+	{
+		if (GetTree().Root.GetNode<Node>(Config.UIMANAGER_NODE_PATH) is UnitManager unitManager)
+		{
+			return unitManager.GetTileWeightScale(tilePosition);
+		}
+		GD.PrintErr($"UnitManager node not found !");
+		return 1;
+	}
+	
+	#endregion
 }

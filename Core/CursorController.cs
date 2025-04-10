@@ -36,7 +36,6 @@ public partial class CursorController : Sprite2D
 	private Vector2I _mapSize;
 		
 	private Unit _selectedUnit = null;
-	private string _selectedUnitType;
 	private bool _isUnitSelected = false;
 
 	#endregion
@@ -65,7 +64,7 @@ public partial class CursorController : Sprite2D
 
 			if (_isUnitSelected)
 			{
-				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
+				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition, _selectedUnit.MovementPointsLeft));
 			}
 		}
 		else
@@ -155,7 +154,7 @@ public partial class CursorController : Sprite2D
 			}
 			else
 			{
-				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition));
+				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition, _selectedUnit.MovementPointsLeft));
 				DeselectUnit();
 			}
 			return;
@@ -201,7 +200,6 @@ public partial class CursorController : Sprite2D
 	{
 		_selectedUnit = unit;
 		_isUnitSelected = true;
-		_selectedUnitType = unit.UnitType;
 		UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
 		ApplySelectionEffects();
 	}
@@ -212,7 +210,6 @@ public partial class CursorController : Sprite2D
 		_isUnitSelected = false;
 		ApplySelectionEffects();
 		_selectedUnit = null;
-		_selectedUnitType = null;
 	}
 	
 	private void ApplySelectionEffects()

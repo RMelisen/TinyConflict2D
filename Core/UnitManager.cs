@@ -2,6 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using TinyConflict2D.Commons.Enums;
+using TinyConflict2D.Commons.Config;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
@@ -63,7 +64,7 @@ public partial class UnitManager : Node
 	
 	private void UpdateTerrainWeights()
 	{
-		Vector2I cellPosition;
+		Vector2I tilePosition;
 		TileData featureTileData;
 		TileData terrainTileData;
 			
@@ -71,22 +72,22 @@ public partial class UnitManager : Node
 		{
 			for (int x = 0; x < _gridRect.Size.X; x++)
 			{
-				cellPosition = new Vector2I(x, y);
-				featureTileData = TerrainFeaturesLayer.GetCellTileData(cellPosition);
+				tilePosition = new Vector2I(x, y);
+				featureTileData = TerrainFeaturesLayer.GetCellTileData(tilePosition);
 
 				if (featureTileData != null && featureTileData.HasCustomData("MovementCost"))
 				{
 					var cost = (int)featureTileData.GetCustomData("MovementCost");
-					_aStarGrid.SetPointWeightScale(cellPosition, cost);
+					_aStarGrid.SetPointWeightScale(tilePosition, cost);
 				}
 				else	// No features, look for the terrain tile movement cost
 				{
-					terrainTileData = TerrainLayer.GetCellTileData(cellPosition);
+					terrainTileData = TerrainLayer.GetCellTileData(tilePosition);
 					
 					if (terrainTileData != null && terrainTileData.HasCustomData("MovementCost"))
 					{
 						var cost = (int)terrainTileData.GetCustomData("MovementCost");
-						_aStarGrid.SetPointWeightScale(cellPosition, cost);
+						_aStarGrid.SetPointWeightScale(tilePosition, cost);
 					}
 				}
 			}
@@ -123,8 +124,8 @@ public partial class UnitManager : Node
 					Sprite2D unitSprite = unitInstance.GetNode<Sprite2D>(unitType + "Sprite");
 					if (unitSprite != null)
 					{
-						GD.Print("res://resources/TinyConflict/Tiles/Units/" + unitType + GetColorName(unit.PlayerColor) + ".png");
-						unitSprite.Texture = GD.Load<Texture2D>("res://resources/TinyConflict/Tiles/Units/" + unitType + GetColorName(unit.PlayerColor) + ".png");
+						GD.Print(Config.UNIT_SPRITES_PATH + unitType + GetColorName(unit.PlayerColor) + ".png");
+						unitSprite.Texture = GD.Load<Texture2D>(Config.UNIT_SPRITES_PATH + unitType + GetColorName(unit.PlayerColor) + ".png");
 					}
 				}
 			}
@@ -167,39 +168,39 @@ public partial class UnitManager : Node
 		switch (movementType)
 		{
 			case UnitMovementType.Infantry:
-				mountainCost = 2;
-				forestCost = 1;
+				mountainCost = Config.INFANTRY_MOUNTAIN_COST;
+				forestCost = Config.INFANTRY_FOREST_COST;
 				break;
 			case UnitMovementType.Mech:
-				mountainCost = 1;
-				forestCost = 1;
+				mountainCost = Config.MECH_MOUNTAIN_COST;
+				forestCost = Config.MECH_FOREST_COST;
 				break;
 			case UnitMovementType.TireA:
-				plainCost = 2;
-				forestCost = 3;
+				plainCost = Config.TIREA_PLAIN_COST;
+				forestCost = Config.TIREA_FOREST_COST;
 				break;
 			case UnitMovementType.TireB:
-				plainCost = 1;
-				forestCost = 3;
+				plainCost = Config.TIREB_PLAIN_COST;
+				forestCost = Config.TIREB_FOREST_COST;
 				break;
 			case UnitMovementType.Treads:
 				break;
 			case UnitMovementType.Airborne:
-				forestCost = 1;
-				mountainCost = 1;
-				waterCost = 1;
+				forestCost = Config.AIRBORNE_FOREST_COST;
+				mountainCost = Config.AIRBORNE_MOUNTAIN_COST;
+				waterCost = Config.AIRBORNE_WATER_COST;
 				break;
 			case UnitMovementType.Naval:
-				plainCost = 999;
-				forestCost = 999;
-				roadCost = 999;
-				waterCost = 1;
+				plainCost = Config.NAVAL_PLAIN_COST;
+				forestCost = Config.NAVAL_FOREST_COST;
+				roadCost = Config.NAVAL_ROAD_COST;
+				waterCost = Config.NAVAL_WATER_COST;
 				break;
 			case UnitMovementType.Lander:
-				plainCost = 999;
-				forestCost = 999;
-				roadCost = 999;
-				waterCost = 1;
+				plainCost = Config.LANDER_PLAIN_COST;
+				forestCost = Config.LANDER_FOREST_COST;
+				roadCost = Config.LANDER_PLAIN_COST;
+				waterCost = Config.LANDER_WATER_COST;
 				// beachCost = 1;	// Will be added in V2
 				break;
 		}
@@ -284,9 +285,28 @@ public partial class UnitManager : Node
 		}
 	}
 	
-	public List<Vector2I> GetPathBetween(Vector2I startPosition, Vector2I endPosition)
+	public List<Vector2I> GetPathBetween(Vector2I startPosition, Vector2I endPosition, int maxMovementPoints)
 	{
-		return _aStarGrid.GetIdPath(startPosition, endPosition).ToList();
+		List<Vector2I> path = _aStarGrid.GetIdPath(startPosition, endPosition).ToList();
+		List<Vector2I> limitedPath = new List<Vector2I>();
+
+		if (path == null || path.Count < 2) return null;
+		
+		limitedPath.Add(path[0]);
+		
+		for (int i = 1; i < path.Count; i++)
+		{
+			maxMovementPoints -= GetTileWeightScale(path[i]);
+			if (maxMovementPoints >= 0)
+			{
+				limitedPath.Add(path[i]);
+			}
+			else
+			{
+				break;
+			}
+		}
+		return limitedPath;
 	}
 	
 	#endregion
@@ -313,6 +333,11 @@ public partial class UnitManager : Node
 		{
 			return "Gray";
 		}
+	}
+	
+	public int GetTileWeightScale(Vector2I tilePosition)
+	{
+		return (int)_aStarGrid.GetPointWeightScale(tilePosition);
 	}
 	
 	#endregion
