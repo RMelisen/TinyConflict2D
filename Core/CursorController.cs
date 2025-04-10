@@ -176,9 +176,10 @@ public partial class CursorController : Sprite2D
 					if (CheckIfIsOwner(featureTileData))
 					{
 						MenuManagerInstance.ShowUnitCreationMenu(_gridPosition, featureTileData.GetCustomData("TerrainType").AsString());
+						// If a terrain feature has been found, no need to look for terrain (for now) 
+						return;
 					}
-					// If a terrain feature has been found, no need to look for terrain (for now) 
-					return;
+					break;
 			}
 		}
 
