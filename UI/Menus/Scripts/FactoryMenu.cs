@@ -8,8 +8,14 @@ public partial class FactoryMenu : CanvasLayer
 	[Signal]
 	public delegate void UnitSelectedEventHandler(string unitType);
 
+	#region Fields
+	
 	private Control[] _buttons;
 	private int _currentButtonIndex = 0;
+	
+	#endregion
+	
+	#region Godot Methods
 	
 	public override void _Ready()
 	{
@@ -78,6 +84,8 @@ public partial class FactoryMenu : CanvasLayer
 			GetViewport().SetInputAsHandled();
 		}
 	}
+	
+	#endregion
 	
 	#region Button Events
 	

@@ -2,6 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using TinyConflict2D.Units.Scripts;
+using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.Core.Players;
 
@@ -9,20 +10,22 @@ public partial class Player : Node
 {
 	#region Properties
 	
-	[Export]
-	public Color PlayerColor { get; set; }
-
+	public Color PlayerColor { get; private set; }
 	public int PlayerNumber { get; private set; }
 	public List<Unit> Units { get; private set; } = new List<Unit>();
-	public int Money { get; set; } = 0;
+	public int Money { get; set; } = Config.STARTING_MONEY;
 	
 	#endregion
-
+	
+	#region Constructors
+	
 	public Player(int playerNumber, Color color)
 	{
 		PlayerNumber = playerNumber;
 		PlayerColor = color;
 	}
+	
+	#endregion
 	
 	#region Unit Management
 

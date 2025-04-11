@@ -8,8 +8,14 @@ public partial class GameMenu : CanvasLayer
 	[Signal]
 	public delegate void ButtonSelectedEventHandler(string unitType);
 
+	#region Fields
+	
 	private Control[] _buttons;
 	private int _currentButtonIndex = 0;
+	
+	#endregion
+	
+	#region Godot Methods
 	
 	public override void _Ready()
 	{
@@ -49,6 +55,8 @@ public partial class GameMenu : CanvasLayer
 			GetViewport().SetInputAsHandled();
 		}
 	}
+	
+	#endregion
 	
 	#region Button Events
 	

@@ -4,6 +4,34 @@ public class Config
 {
     #region CONSTS
     
+    #region Map
+    
+    public const int TILE_SIZE = 16;
+    public const string FACTORY_TERRAINTYPE = "factory";
+    public const string AIRPORT_TERRAINTYPE = "airport";
+    public const string PORT_TERRAINTYPE = "port";
+    public const string ROAD_TERRAINTYPE = "road";
+    public const string CITY_TERRAINTYPE = "city";
+    public const string HEADQUARTERS_TERRAINTYPE = "headquarters";
+    public const string ANTENNA_TERRAINTYPE = "antenna";
+    public const string SILO_TERRAINTYPE = "silo";
+    public const string BRIDGE_TERRAINTYPE = "bridge";
+    
+    public const string PLAIN_TERRAINTYPE = "plain";
+    public const string FOREST_TERRAINTYPE = "forest";
+    public const string MOUNTAIN_TERRAINTYPE = "mountain";
+    public const string WATER_TERRAINTYPE = "water";
+    
+    #endregion
+    
+    #region Game Menu Buttons
+    
+    public const string GAMEMENU_INFORMATION = "Information";
+    public const string GAMEMENU_SETTINGS = "Settings";
+    public const string GAMEMENU_ENDTURN = "EndTurn";
+    
+    #endregion
+    
     #region Terrain Costs
     
     // Defaults
@@ -50,6 +78,19 @@ public class Config
         
     #endregion
     
+    #region Players
+    
+    public const int STARTING_MONEY = 5000;
+    
+    #endregion
+    
+    #region Custom Data
+
+    public const string TERRAINTYPE_CUSTOMDATA = "TerrainType";
+    public const string PROPERTYOWNER_CUSTOMDATA = "PropertyOwner";
+    public const string MOVEMENTCOST_CUSTOMDATA = "MovementCost";
+    
+    #endregion
 
     #endregion
     
@@ -57,7 +98,6 @@ public class Config
 
     public const string UIMANAGER_NODE_PATH = "Node2D/Core/UnitManagerCore";
     public const string UNIT_SPRITES_PATH = "res://resources/TinyConflict/Tiles/Units/";
-    public const string GRAYED_OUT_SHADER_PATH = "res://UI/Shaders/GrayedOut.gdshader";
 
     #endregion
 }

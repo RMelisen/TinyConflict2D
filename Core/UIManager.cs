@@ -23,11 +23,17 @@ public partial class UIManager : Node
 
 	#endregion
 
+	#region Godot Methods
+	
 	public override void _Ready()
 	{
 		_cellSize = TerrainLayer.TileSet.TileSize;
 	}
+	
+	#endregion
 
+	#region Path Visualization
+	
 	public void UpdatePathVisualization(List<Vector2I> path)
 	{
 		ClearArrowPath();
@@ -101,4 +107,6 @@ public partial class UIManager : Node
 		}
 		_displayedPath.Clear();
 	}
+	
+	#endregion
 }

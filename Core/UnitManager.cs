@@ -75,18 +75,18 @@ public partial class UnitManager : Node
 				tilePosition = new Vector2I(x, y);
 				featureTileData = TerrainFeaturesLayer.GetCellTileData(tilePosition);
 
-				if (featureTileData != null && featureTileData.HasCustomData("MovementCost"))
+				if (featureTileData != null && featureTileData.HasCustomData(Config.MOVEMENTCOST_CUSTOMDATA))
 				{
-					var cost = (int)featureTileData.GetCustomData("MovementCost");
+					var cost = (int)featureTileData.GetCustomData(Config.MOVEMENTCOST_CUSTOMDATA);
 					_aStarGrid.SetPointWeightScale(tilePosition, cost);
 				}
 				else	// No features, look for the terrain tile movement cost
 				{
 					terrainTileData = TerrainLayer.GetCellTileData(tilePosition);
 					
-					if (terrainTileData != null && terrainTileData.HasCustomData("MovementCost"))
+					if (terrainTileData != null && terrainTileData.HasCustomData(Config.MOVEMENTCOST_CUSTOMDATA))
 					{
-						var cost = (int)terrainTileData.GetCustomData("MovementCost");
+						var cost = (int)terrainTileData.GetCustomData(Config.MOVEMENTCOST_CUSTOMDATA);
 						_aStarGrid.SetPointWeightScale(tilePosition, cost);
 					}
 				}
@@ -221,29 +221,29 @@ public partial class UnitManager : Node
 				cellPosition = new Vector2I(x, y);
 				featureTileData = TerrainFeaturesLayer.GetCellTileData(cellPosition);
 
-				if (featureTileData != null && featureTileData.HasCustomData("TerrainType"))
+				if (featureTileData != null && featureTileData.HasCustomData(Config.TERRAINTYPE_CUSTOMDATA))
 				{
-					string terrainType = (string)featureTileData.GetCustomData("TerrainType");
+					string terrainType = (string)featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA);
 					switch (terrainType)
 					{
-						case "road":
-						case "city":
-						case "headquarters":
-						case "factory":
-						case "port":
-						case "airport":
-						case "antenna":
-						case "silo":
-						case "bridge":
+						case Config.ROAD_TERRAINTYPE:
+						case Config.CITY_TERRAINTYPE:
+						case Config.HEADQUARTERS_TERRAINTYPE:
+						case Config.FACTORY_TERRAINTYPE:
+						case Config.PORT_TERRAINTYPE:
+						case Config.AIRPORT_TERRAINTYPE:
+						case Config.ANTENNA_TERRAINTYPE:
+						case Config.SILO_TERRAINTYPE:
+						case Config.BRIDGE_TERRAINTYPE:
 							ApplyCost(roadCost, cellPosition);
 							break;
-						case "mountain":
+						case Config.MOUNTAIN_TERRAINTYPE:
 							ApplyCost(mountainCost, cellPosition);
 							break;
-						case "forest":
+						case Config.FOREST_TERRAINTYPE:
 							ApplyCost(forestCost, cellPosition);
 							break;
-						case "water":
+						case Config.WATER_TERRAINTYPE:
 							ApplyCost(waterCost, cellPosition);
 							break;
 					}
@@ -252,15 +252,15 @@ public partial class UnitManager : Node
 				{
 					terrainTileData = TerrainLayer.GetCellTileData(cellPosition);
 					
-					if (terrainTileData != null && terrainTileData.HasCustomData("TerrainType"))
+					if (terrainTileData != null && terrainTileData.HasCustomData(Config.TERRAINTYPE_CUSTOMDATA))
 					{
-						string terrainType = (string)terrainTileData.GetCustomData("TerrainType");
+						string terrainType = (string)terrainTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA);
 						switch (terrainType)
 						{
-							case "plain":
+							case Config.PLAIN_TERRAINTYPE:
 								ApplyCost(plainCost, cellPosition);
 								break;
-							case "water":
+							case Config.WATER_TERRAINTYPE:
 								ApplyCost(waterCost, cellPosition);
 								break;
 						}

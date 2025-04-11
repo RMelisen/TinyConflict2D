@@ -15,9 +15,6 @@ public partial class Unit : CharacterBody2D
 	[Export] 
 	public float Speed = 150.0f; // Speed in units per second
 	
-	[Export] 
-	public int TileSize = 16;
-	
 	public int Health { get; set; } = 100;
 	public int MovementRange { get; set; } = 3;
 	public int MovementPointsLeft { get; set; }
@@ -36,31 +33,18 @@ public partial class Unit : CharacterBody2D
  
 	#endregion
 
+	#region Godot Methods
+	
 	public override void _Ready()
 	{
 		MovementPointsLeft = MovementRange;
 	}
-
-	public void Attack(Unit target)
-	{
-		
-	}
-
-	public void Move(List<Vector2I> newPath)
-	{
-		if (newPath != null && newPath.Count > 0 && MovementPointsLeft > 0)
-		{
-			_path = newPath;
-			_pathIndex = 1;		// Start at 1 to skip starting tile at index 0 
-			TilePosition = newPath.Last();
-		}
-	}
-
+	
 	public override void _Process(double delta)
 	{
 		if (_path != null && _pathIndex < _path.Count)
 		{
-			Vector2 targetPosition = new Vector2(_path[_pathIndex].X * TileSize + TileSize / 2, _path[_pathIndex].Y * TileSize + TileSize / 2);
+			Vector2 targetPosition = new Vector2(_path[_pathIndex].X * Config.TILE_SIZE + Config.TILE_SIZE / 2, _path[_pathIndex].Y * Config.TILE_SIZE + Config.TILE_SIZE / 2);
 			float distanceToTarget = Position.DistanceTo(targetPosition);
 
 			if (distanceToTarget > 0)
@@ -83,6 +67,27 @@ public partial class Unit : CharacterBody2D
 			}
 		}
 	}
+	
+	#endregion
+
+	#region Methods
+	
+	public void Attack(Unit target)
+	{
+		
+	}
+
+	public void Move(List<Vector2I> newPath)
+	{
+		if (newPath != null && newPath.Count > 0 && MovementPointsLeft > 0)
+		{
+			_path = newPath;
+			_pathIndex = 1;		// Start at 1 to skip starting tile at index 0 
+			TilePosition = newPath.Last();
+		}
+	}
+	
+	#endregion
 	
 	#region Utils
 

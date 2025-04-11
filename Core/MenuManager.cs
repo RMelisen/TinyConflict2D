@@ -1,5 +1,6 @@
 using Godot;
 using TinyConflict2D.UI.Menus;
+using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.Core;
 
@@ -36,6 +37,8 @@ public partial class MenuManager : Node
 	private Vector2I _tilePosition;
 	
 	#endregion
+	
+	#region Godot Methods
 
 	public override void _Ready()
 	{
@@ -60,6 +63,8 @@ public partial class MenuManager : Node
 		_gameMenuInstance.ButtonSelected += OnGameButtonSelected;
 	}
 	
+	#endregion
+	
 	#region Unit Creation
 
 	public void ShowUnitCreationMenu(Vector2I tilePosition, string buildingType)
@@ -69,13 +74,13 @@ public partial class MenuManager : Node
 
 		switch (buildingType)
 		{
-			case "factory":
+			case Config.FACTORY_TERRAINTYPE:
 				_factoryMenuInstance.ShowMenu(new Vector2(mapCenter.X - 96, mapCenter.Y - 48));
 				break;
-			case "port":    
+			case Config.PORT_TERRAINTYPE:    
 				_portMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
 				break;
-			case "airport":
+			case Config.AIRPORT_TERRAINTYPE:
 				_airportMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
 				break;
 		}
@@ -100,11 +105,11 @@ public partial class MenuManager : Node
 	{
 		switch (selectedGameMenuButton)
 		{
-			case "Information":
+			case Config.GAMEMENU_INFORMATION:
 				break;
-			case "Settings":
+			case Config.GAMEMENU_SETTINGS:
 				break;
-			case "EndTurn":
+			case Config.GAMEMENU_ENDTURN:
 				break;
 		}
 	}

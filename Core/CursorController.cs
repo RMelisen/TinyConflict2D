@@ -1,4 +1,6 @@
 using Godot;
+using TinyConflict2D.Commons.Config;
+using TinyConflict2D.UI.Menus;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
@@ -40,7 +42,7 @@ public partial class CursorController : Sprite2D
 
 	#endregion
 	
-	#region Core
+	#region Godot Methods
 	
 	public override void _Ready()
 	{
@@ -163,19 +165,19 @@ public partial class CursorController : Sprite2D
 		// Check feature layer second
 		TileData featureTileData = TerrainFeaturesLayer.GetCellTileData(_gridPosition);
 
-		if (featureTileData != null && featureTileData.HasCustomData("TerrainType"))
+		if (featureTileData != null && featureTileData.HasCustomData(Config.TERRAINTYPE_CUSTOMDATA))
 		{
-			GD.Print("Feature Tile terrainType is : " + featureTileData.GetCustomData("TerrainType"));
+			GD.Print("Feature Tile terrainType is : " + featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA));
 			
 			// Check feature type
-			switch (featureTileData.GetCustomData("TerrainType").AsString())
+			switch (featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA).AsString())
 			{
-				case "factory":
-				case "port":
-				case "airport":
+				case Config.FACTORY_TERRAINTYPE:
+				case Config.PORT_TERRAINTYPE:
+				case Config.AIRPORT_TERRAINTYPE:
 					if (CheckIfIsOwner(featureTileData))
 					{
-						MenuManagerInstance.ShowUnitCreationMenu(_gridPosition, featureTileData.GetCustomData("TerrainType").AsString());
+						MenuManagerInstance.ShowUnitCreationMenu(_gridPosition, featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA).AsString());
 						// If a terrain feature has been found, no need to look for terrain (for now) 
 						return;
 					}
@@ -186,9 +188,9 @@ public partial class CursorController : Sprite2D
 		// If no relevant feature, check terrain layer
 		TileData terrainTileData = TerrainLayer.GetCellTileData(_gridPosition);
 
-		if (terrainTileData != null && terrainTileData.HasCustomData("TerrainType"))
+		if (terrainTileData != null && terrainTileData.HasCustomData(Config.TERRAINTYPE_CUSTOMDATA))
 		{
-			GD.Print("Terrain Tile terrainType is : " + terrainTileData.GetCustomData("TerrainType"));
+			GD.Print("Terrain Tile terrainType is : " + terrainTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA));
 		}
 		
 		// Open the game menu if no unit selected nor feature selected (when a empty tile is selected)
@@ -236,7 +238,7 @@ public partial class CursorController : Sprite2D
 
 	public bool CheckIfIsOwner(TileData featureTileData)
 	{
-		if(featureTileData.HasCustomData("PropertyOwner") && featureTileData.GetCustomData("PropertyOwner").AsInt32() == PlayerManagerInstance.CurrentPlayerIndex)
+		if(featureTileData.HasCustomData(Config.PROPERTYOWNER_CUSTOMDATA) && featureTileData.GetCustomData(Config.PROPERTYOWNER_CUSTOMDATA).AsInt32() == PlayerManagerInstance.CurrentPlayerIndex)
 		{
 			GD.Print("Property is owned by current player");
 			return true;
