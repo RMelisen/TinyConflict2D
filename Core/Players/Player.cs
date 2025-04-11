@@ -22,6 +22,8 @@ public partial class Player : Node
 		PlayerNumber = playerNumber;
 		PlayerColor = color;
 	}
+	
+	#region Unit Management
 
 	public void AddUnit(Unit unit)
 	{
@@ -32,4 +34,6 @@ public partial class Player : Node
 	{
 		Units.Remove(unit);
 	}
+	
+	#endregion
 }
