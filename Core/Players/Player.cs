@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core.Players;
@@ -11,7 +12,7 @@ public partial class Player : Node
 	[Export]
 	public Color PlayerColor { get; set; }
 
-	public int PlayerNumber { get; set; }
+	public int PlayerNumber { get; private set; }
 	public List<Unit> Units { get; private set; } = new List<Unit>();
 	public int Money { get; set; } = 0;
 	
@@ -33,6 +34,11 @@ public partial class Player : Node
 	public void RemoveUnit(Unit unit)
 	{
 		Units.Remove(unit);
+	}
+	
+	public List<T> GetUnitsOfType<T>() where T : Unit
+	{
+		return Units.OfType<T>().ToList();
 	}
 	
 	#endregion
