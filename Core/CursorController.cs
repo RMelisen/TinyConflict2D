@@ -96,19 +96,19 @@ public partial class CursorController : Sprite2D
 	{
 		Vector2I newGridPosition = _gridPosition;
 			
-		if (Input.IsActionJustPressed("ui_right"))
+		if (Input.IsActionJustPressed(Config.INPUT_UI_RIGHT))
 		{
 			newGridPosition.X++;
 		}
-		if (Input.IsActionJustPressed("ui_left"))
+		if (Input.IsActionJustPressed(Config.INPUT_UI_LEFT))
 		{
 			newGridPosition.X--;
 		}
-		if (Input.IsActionJustPressed("ui_down"))
+		if (Input.IsActionJustPressed(Config.INPUT_UI_DOWN))
 		{
 			newGridPosition.Y++;
 		}
-		if (Input.IsActionJustPressed("ui_up"))
+		if (Input.IsActionJustPressed(Config.INPUT_UI_UP))
 		{
 			newGridPosition.Y--;
 		}
