@@ -89,11 +89,20 @@ public class Config
     public const string TERRAINTYPE_CUSTOMDATA = "TerrainType";
     public const string PROPERTYOWNER_CUSTOMDATA = "PropertyOwner";
     public const string MOVEMENTCOST_CUSTOMDATA = "MovementCost";
-    
+
+    #endregion
+
+    #region Inputs
+
+    public const string INPUT_UI_UP = "ui_up";
+    public const string INPUT_UI_RIGHT = "ui_right";
+    public const string INPUT_UI_DOWN = "ui_down";
+    public const string INPUT_UI_LEFT = "ui_left";
+
     #endregion
 
     #endregion
-    
+
     #region PATHS
 
     public const string UIMANAGER_NODE_PATH = "Node2D/Core/UnitManagerCore";
