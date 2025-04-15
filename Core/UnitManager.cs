@@ -331,7 +331,7 @@ public partial class UnitManager : Node
 
 			foreach (Vector2I neighbor in neighbors)
 			{
-				if (visited.Contains(neighbor))
+				if (!visited.Contains(neighbor))
 				{
 					float moveCost = GetTileWeightScale(neighbor);
 

@@ -119,14 +119,16 @@ public partial class UIManager : Node
 	public void HighlightReachableTiles(Unit selectedUnit)
 	{
 		HashSet<Vector2I> reachableTiles = UnitManagerInstance.GetReachableTiles(selectedUnit);
+		GD.Print($"There is  {reachableTiles.Count} reachable tiles");
 		foreach (Vector2I tile in reachableTiles)
 		{
+			GD.Print($"Tile: {tile}");
 			Vector2 tilePosition = TerrainLayer.MapToLocal(tile);
 			
 			PackedScene higlightedTileScene = HighlightedTile;
 			if (higlightedTileScene.Instantiate() is Node2D higlightedTileInstance)
 			{
-				higlightedTileInstance.Position = tile;
+				higlightedTileInstance.Position = tilePosition;
 				UILayer.AddChild(higlightedTileInstance);
 				_highlightedTiles.Add(higlightedTileInstance);
 			}
