@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://jjnx386iyt3f"]
+[gd_scene load_steps=25 format=4 uid="uid://jjnx386iyt3f"]
 
 [ext_resource type="Texture2D" uid="uid://38qqb54syyeg" path="res://resources/TinyConflict/Tilemap/tilemap.png" id="1_3mqji"]
 [ext_resource type="Script" uid="uid://dxa523vi1cys" path="res://Core/UnitManager.cs" id="2_3owbp"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ctwhjxrr6i6k" path="res://UI/Movements/ArrowBodyCurvedLeft.tscn" id="12_augcv"]
 [ext_resource type="PackedScene" uid="uid://dj62ncgf4650c" path="res://UI/Movements/ArrowBodyCurvedRight.tscn" id="13_li6wg"]
 [ext_resource type="PackedScene" uid="uid://cjpot8mtdhe03" path="res://UI/Movements/ArrowHead.tscn" id="14_wt235"]
+[ext_resource type="PackedScene" uid="uid://b6vwitgm7ova0" path="res://UI/Movements/HighlightedTile.tscn" id="16_li6wg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g4qto"]
 texture = ExtResource("1_3mqji")
@@ -545,11 +546,13 @@ AirportMenuScene = ExtResource("5_ppjb3")
 GameMenuScene = ExtResource("9_augcv")
 PortMenuScene = ExtResource("6_o4i80")
 
-[node name="UIManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UILayer")]
+[node name="UIManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UILayer", "UnitManagerInstance")]
 script = ExtResource("10_k4ymp")
 ArrowBody = ExtResource("11_f764b")
 ArrowCurveLeft = ExtResource("12_augcv")
 ArrowCurveRight = ExtResource("13_li6wg")
 ArrowHead = ExtResource("14_wt235")
+HighlightedTile = ExtResource("16_li6wg")
 TerrainLayer = NodePath("../../TerrainLayer")
 UILayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer")
+UnitManagerInstance = NodePath("../UnitManagerCore")

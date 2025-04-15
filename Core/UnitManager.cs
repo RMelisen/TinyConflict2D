@@ -309,6 +309,61 @@ public partial class UnitManager : Node
 		return limitedPath;
 	}
 	
+	#region Reachable Tiles Highlighting
+	
+	public HashSet<Vector2I> GetReachableTiles(Unit selectedUnit)
+	{
+		HashSet<Vector2I> reachableTiles = new HashSet<Vector2I>();
+		Queue<(Vector2I, int)> queue = new Queue<(Vector2I, int)>(); // (cell, cost)
+		HashSet<Vector2I> visited = new HashSet<Vector2I>();
+
+		Vector2I startCell = selectedUnit.TilePosition;
+
+		queue.Enqueue((startCell, 0));
+		visited.Add(startCell);
+		reachableTiles.Add(startCell);
+
+		while (queue.Count > 0)
+		{
+			(Vector2I currentCell, int currentCost) = queue.Dequeue();
+
+			Vector2I[] neighbors = GetNeighbors(currentCell);
+
+			foreach (Vector2I neighbor in neighbors)
+			{
+				if (visited.Contains(neighbor))
+				{
+					float moveCost = GetTileWeightScale(neighbor);
+
+					if (currentCost + moveCost <= selectedUnit.MovementPointsLeft)
+					{
+						visited.Add(neighbor);
+						reachableTiles.Add(neighbor);
+						queue.Enqueue((neighbor, currentCost + Mathf.CeilToInt(moveCost)));
+					}
+				}
+			}
+		}
+
+		return reachableTiles;
+	}
+	
+	private Vector2I[] GetNeighbors(Vector2I cell)
+	{
+		List<Vector2I> neighbors = new List<Vector2I>();
+		int x = cell.X;
+		int y = cell.Y;
+
+		neighbors.Add(new Vector2I(x + 1, y));
+		neighbors.Add(new Vector2I(x - 1, y));
+		neighbors.Add(new Vector2I(x, y + 1));
+		neighbors.Add(new Vector2I(x, y - 1));
+
+		return neighbors.Where(n => !_aStarGrid.IsPointSolid(n)).ToArray();
+	}
+	
+	#endregion
+	
 	#endregion
 	
 	#region Utils

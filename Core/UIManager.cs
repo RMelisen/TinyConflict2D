@@ -1,5 +1,7 @@
 using Godot;
 using System.Collections.Generic;
+using TinyConflict2D.Commons.Config;
+using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
 
@@ -11,15 +13,17 @@ public partial class UIManager : Node
 	[Export] public PackedScene ArrowCurveLeft;
 	[Export] public PackedScene ArrowCurveRight; 
 	[Export] public PackedScene ArrowHead;
+	[Export] public PackedScene HighlightedTile;
 	[Export] public TileMapLayer TerrainLayer;
 	[Export] public TileMapLayer UILayer;
+	[Export] public UnitManager UnitManagerInstance;
 	
 	#endregion
 	
 	#region Fields
 	
 	private List<Node2D> _displayedPath = new List<Node2D>();
-	private Vector2I _cellSize;
+	private List<Node2D> _highlightedTiles = new List<Node2D>();
 
 	#endregion
 
@@ -27,7 +31,7 @@ public partial class UIManager : Node
 	
 	public override void _Ready()
 	{
-		_cellSize = TerrainLayer.TileSet.TileSize;
+		
 	}
 	
 	#endregion
@@ -106,6 +110,36 @@ public partial class UIManager : Node
 			segment.QueueFree();
 		}
 		_displayedPath.Clear();
+	}
+	
+	#endregion
+	
+	#region Tile Highlighting
+	
+	public void HighlightReachableTiles(Unit selectedUnit)
+	{
+		HashSet<Vector2I> reachableTiles = UnitManagerInstance.GetReachableTiles(selectedUnit);
+		foreach (Vector2I tile in reachableTiles)
+		{
+			Vector2 tilePosition = TerrainLayer.MapToLocal(tile);
+			
+			PackedScene higlightedTileScene = HighlightedTile;
+			if (higlightedTileScene.Instantiate() is Node2D higlightedTileInstance)
+			{
+				higlightedTileInstance.Position = tile;
+				UILayer.AddChild(higlightedTileInstance);
+				_highlightedTiles.Add(higlightedTileInstance);
+			}
+		}
+	}
+
+	public void ClearHighlighting()
+	{
+		foreach (Node2D highlightedTile in _highlightedTiles)
+		{
+			highlightedTile.QueueFree();
+		}
+		_highlightedTiles.Clear();
 	}
 	
 	#endregion
