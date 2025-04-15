@@ -207,6 +207,7 @@ public partial class CursorController : Sprite2D
 			_isUnitSelected = true;
 			UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
 			ApplySelectionEffects();
+			UIManagerInstance.HighlightReachableTiles(_selectedUnit);
 		}
 	}
 
@@ -215,6 +216,7 @@ public partial class CursorController : Sprite2D
 		UIManagerInstance.ClearArrowPath();
 		_isUnitSelected = false;
 		ApplySelectionEffects();
+		UIManagerInstance.ClearHighlighting();
 		_selectedUnit = null;
 	}
 	
