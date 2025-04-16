@@ -156,6 +156,15 @@ public partial class CursorController : Sprite2D
 			}
 			else
 			{
+				// Check if a unit is found first
+				Unit unitFound = UnitManagerInstance.GetUnitAt(_gridPosition);
+				if (unitFound != null)
+				{
+					// TODO: Manage unit transportation (eg. land units in lander, infantry in TCopter/APC, etc...
+					return;
+				}
+				
+				// If no other unit on target tile, move selected unit 
 				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition, _selectedUnit.MovementPointsLeft));
 				DeselectUnit();
 			}

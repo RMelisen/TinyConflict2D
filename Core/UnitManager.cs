@@ -309,7 +309,12 @@ public partial class UnitManager : Node
 				break;
 			}
 		}
-		return limitedPath;
+
+		if (endPosition == limitedPath.Last())
+			return limitedPath;
+		
+		// Destination tile not reachable
+		return null;
 	}
 	
 	#region Reachable Tiles Highlighting

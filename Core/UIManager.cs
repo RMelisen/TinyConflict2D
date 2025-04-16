@@ -119,7 +119,6 @@ public partial class UIManager : Node
 	public void HighlightReachableTiles(Unit selectedUnit)
 	{
 		HashSet<Vector2I> reachableTiles = UnitManagerInstance.GetReachableTiles(selectedUnit);
-		GD.Print($"There is  {reachableTiles.Count} reachable tiles");
 		foreach (Vector2I tile in reachableTiles)
 		{
 			Vector2 tilePosition = TerrainLayer.MapToLocal(tile);
