@@ -30,6 +30,7 @@ public partial class UnitManager : Node
 	public List<Node2D> unitList = new List<Node2D>();
 	private AStarGrid2D _aStarGrid;
 	private Rect2I _gridRect;
+	private Vector2I _mapSize;
 
 	#endregion
 	
@@ -48,10 +49,12 @@ public partial class UnitManager : Node
 		_aStarGrid.CellSize = TerrainLayer.TileSet.TileSize;
 		_aStarGrid.Update();
 		
+		_mapSize = _gridRect.Size;
+		
 		// Initialize all points with a default weight (1)
-		for (int y = 0; y < _gridRect.Size.Y; y++)
+		for (int y = 0; y < _mapSize.Y; y++)
 		{
-			for (int x = 0; x < _gridRect.Size.X; x++)
+			for (int x = 0; x < _mapSize.X; x++)
 			{
 				_aStarGrid.SetPointWeightScale(new Vector2I(x, y), 1);
 			}
@@ -68,9 +71,9 @@ public partial class UnitManager : Node
 		TileData featureTileData;
 		TileData terrainTileData;
 			
-		for (int y = 0; y < _gridRect.Size.Y; y++)
+		for (int y = 0; y < _mapSize.Y; y++)
 		{
-			for (int x = 0; x < _gridRect.Size.X; x++)
+			for (int x = 0; x < _mapSize.X; x++)
 			{
 				tilePosition = new Vector2I(x, y);
 				featureTileData = TerrainFeaturesLayer.GetCellTileData(tilePosition);
@@ -214,9 +217,9 @@ public partial class UnitManager : Node
 		TileData featureTileData;
 		TileData terrainTileData;
 		
-		for (int y = 0; y < _gridRect.Size.Y; y++)
+		for (int y = 0; y < _mapSize.Y; y++)
 		{
-			for (int x = 0; x < _gridRect.Size.X; x++)
+			for (int x = 0; x < _mapSize.X; x++)
 			{
 				cellPosition = new Vector2I(x, y);
 				featureTileData = TerrainFeaturesLayer.GetCellTileData(cellPosition);
@@ -359,7 +362,7 @@ public partial class UnitManager : Node
 		neighbors.Add(new Vector2I(x, y + 1));
 		neighbors.Add(new Vector2I(x, y - 1));
 
-		return neighbors.Where(n => !_aStarGrid.IsPointSolid(n)).ToArray();
+		return neighbors.Where(n => IsWithinBounds(n) && !_aStarGrid.IsPointSolid(n)).ToArray();
 	}
 	
 	#endregion
@@ -393,6 +396,11 @@ public partial class UnitManager : Node
 	public int GetTileWeightScale(Vector2I tilePosition)
 	{
 		return (int)_aStarGrid.GetPointWeightScale(tilePosition);
+	}
+	
+	private bool IsWithinBounds(Vector2I position)
+	{
+		return position.X >= 0 && position.X < _mapSize.X && position.Y >= 0 && position.Y < _mapSize.Y;
 	}
 	
 	#endregion

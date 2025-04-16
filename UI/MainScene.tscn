@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bpwtidxqgfb2p" path="res://UI/Menus/PortMenu.tscn" id="6_o4i80"]
 [ext_resource type="PackedScene" uid="uid://bwisk1s03kd53" path="res://UI/Menus/GameMenu.tscn" id="9_augcv"]
 [ext_resource type="Script" uid="uid://oqtw1pwkrbqv" path="res://Core/MenuManager.cs" id="9_o4i80"]
-[ext_resource type="Script" uid="uid://12pubqh5l1as" path="res://Core/UIManager.cs" id="10_k4ymp"]
+[ext_resource type="Script" uid="uid://drdculeyyo04j" path="res://Core/UIManager.cs" id="10_k4ymp"]
 [ext_resource type="PackedScene" uid="uid://8bp7t0p1fe4r" path="res://UI/Movements/ArrowBodyStraight.tscn" id="11_f764b"]
 [ext_resource type="PackedScene" uid="uid://ctwhjxrr6i6k" path="res://UI/Movements/ArrowBodyCurvedLeft.tscn" id="12_augcv"]
 [ext_resource type="PackedScene" uid="uid://dj62ncgf4650c" path="res://UI/Movements/ArrowBodyCurvedRight.tscn" id="13_li6wg"]

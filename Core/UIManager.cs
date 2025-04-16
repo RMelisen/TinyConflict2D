@@ -122,7 +122,6 @@ public partial class UIManager : Node
 		GD.Print($"There is  {reachableTiles.Count} reachable tiles");
 		foreach (Vector2I tile in reachableTiles)
 		{
-			GD.Print($"Tile: {tile}");
 			Vector2 tilePosition = TerrainLayer.MapToLocal(tile);
 			
 			PackedScene higlightedTileScene = HighlightedTile;
