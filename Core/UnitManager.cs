@@ -27,7 +27,8 @@ public partial class UnitManager : Node
 	
 	#region Fields
 	
-	public List<Node2D> unitList = new List<Node2D>();
+	public List<Node2D> unitNodeList = new List<Node2D>();
+	public List<Unit> unitsList = new List<Unit>();
 	private AStarGrid2D _aStarGrid;
 	private Rect2I _gridRect;
 	private Vector2I _mapSize;
@@ -120,8 +121,9 @@ public partial class UnitManager : Node
 					unit.UnitOwner = PlayerManager.CurrentPlayer;
 					unit.TilePosition =  selectedFactoryPosition;
 					
-					unitList.Add(unitNode2D); 
+					unitNodeList.Add(unitNode2D); 
 					PlayerManager.CurrentPlayer.AddUnit(unit);
+					unitsList.Add(unit);
 					
 					// Change the sprite of the unit according to its color
 					Sprite2D unitSprite = unitInstance.GetNode<Sprite2D>(unitType + "Sprite");
@@ -141,7 +143,7 @@ public partial class UnitManager : Node
 	
 	public void RemoveUnit(Node2D unit)
 	{
-		unitList.Remove(unit);
+		unitNodeList.Remove(unit);
 		UnitsLayer.RemoveChild(unit);
 		unit.QueueFree();
 	}
@@ -153,6 +155,20 @@ public partial class UnitManager : Node
 	public Unit GetUnitAt(Vector2I tilePosition)
 	{
 		return PlayerManager.CurrentPlayer.Units.Find(u => u.TilePosition == tilePosition);
+	}
+
+	public Unit GetEnemyUnitAt(Vector2I tilePosition)
+	{
+		foreach (var player in PlayerManager.Players.Where(p => p != PlayerManager.CurrentPlayer))
+		{
+			Unit unitFound = player.Units.Find(u => u.TilePosition == tilePosition);
+			if (unitFound != null)
+			{
+				return unitFound;
+			}
+		}
+
+		return null;
 	}
 	
 	#endregion
@@ -319,41 +335,49 @@ public partial class UnitManager : Node
 	
 	#region Reachable Tiles Highlighting
 	
+	// I use Dijkstra algorithm to get all reachable tiles. (Better than Breadth-First search because tile cost is not always 1)
 	public HashSet<Vector2I> GetReachableTiles(Unit selectedUnit)
 	{
-		HashSet<Vector2I> reachableTiles = new HashSet<Vector2I>();
-		Queue<(Vector2I, int)> queue = new Queue<(Vector2I, int)>(); // (cell, cost)
-		HashSet<Vector2I> visited = new HashSet<Vector2I>();
-
+		// Stores the minimum cost found so far to reach each tile.
+		Dictionary<Vector2I, int> costSoFar = new Dictionary<Vector2I, int>();
+		PriorityQueue<Vector2I, int> queue = new PriorityQueue<Vector2I, int>(); // (cell, cost)
 		Vector2I startCell = selectedUnit.TilePosition;
 
-		queue.Enqueue((startCell, 0));
-		visited.Add(startCell);
-		reachableTiles.Add(startCell);
+		queue.Enqueue(startCell, 0);	// Because cost to reach the starting cell is 0
+		costSoFar[startCell] = 0;
 
-		while (queue.Count > 0)
+		while (queue.TryDequeue(out Vector2I currentCell, out int currentCost))
 		{
-			(Vector2I currentCell, int currentCost) = queue.Dequeue();
+			// If cell cost is higher than a cost I've already recorded, I can skip it
+			if (costSoFar.ContainsKey(currentCell) && currentCost > costSoFar[currentCell])
+			    continue; // Already found a cheaper path to this cell
 
 			Vector2I[] neighbors = GetNeighbors(currentCell);
 
 			foreach (Vector2I neighbor in neighbors)
 			{
-				if (!visited.Contains(neighbor))
+				Unit enemyUnitFound = GetEnemyUnitAt(neighbor);
+				if (enemyUnitFound != null)
+					continue; // Cannot move on a tile if an enemy occupy it
+				
+				int moveCost = GetTileWeightScale(neighbor);
+				int newCost = currentCost + moveCost;
+				
+				if (newCost <= selectedUnit.MovementPointsLeft)
 				{
-					float moveCost = GetTileWeightScale(neighbor);
-
-					if (currentCost + moveCost <= selectedUnit.MovementPointsLeft)
+					if (!costSoFar.ContainsKey(neighbor) || newCost < costSoFar[neighbor])
 					{
-						visited.Add(neighbor);
-						reachableTiles.Add(neighbor);
-						queue.Enqueue((neighbor, currentCost + Mathf.CeilToInt(moveCost)));
+						// Record the new or cheaper cost for this tile
+						costSoFar[neighbor] = newCost;
+						// Enqueue the tile to explore from it later
+						queue.Enqueue(neighbor, newCost);
 					}
 				}
 			}
 		}
-
-		return reachableTiles;
+		
+		// Keys are reachable tiles
+		return new HashSet<Vector2I>(costSoFar.Keys);
 	}
 	
 	#endregion
