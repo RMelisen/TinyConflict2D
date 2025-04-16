@@ -60,6 +60,7 @@ public partial class Unit : CharacterBody2D
 					if(MovementPointsLeft == 0)
 						Modulate = new Color(0.5f, 0.5f, 0.5f, 1f);	// Gray to make sprite dimmer.
 						
+					TilePosition = _path.Last();
 					_path = null;
 					_pathIndex = 1;
 					GD.Print($"Reached destination : {Position}");
@@ -83,7 +84,6 @@ public partial class Unit : CharacterBody2D
 		{
 			_path = newPath;
 			_pathIndex = 1;		// Start at 1 to skip starting tile at index 0 
-			TilePosition = newPath.Last();
 		}
 	}
 	
