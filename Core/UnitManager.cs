@@ -356,21 +356,28 @@ public partial class UnitManager : Node
 		return reachableTiles;
 	}
 	
-	private Vector2I[] GetNeighbors(Vector2I cell)
-	{
-		List<Vector2I> neighbors = new List<Vector2I>();
-		int x = cell.X;
-		int y = cell.Y;
-
-		neighbors.Add(new Vector2I(x + 1, y));
-		neighbors.Add(new Vector2I(x - 1, y));
-		neighbors.Add(new Vector2I(x, y + 1));
-		neighbors.Add(new Vector2I(x, y - 1));
-
-		return neighbors.Where(n => IsWithinBounds(n) && !_aStarGrid.IsPointSolid(n)).ToArray();
-	}
+	#endregion
 	
 	#endregion
+	
+	#region Unit Combat
+
+	public List<Unit> GetInRangeUnits(Unit selectedUnit)
+	{
+		List<Unit> inRangeUnitList = new List<Unit>();
+		Vector2I[] neighbors = GetNeighbors(selectedUnit.TilePosition);
+		foreach (Vector2I neighbor in neighbors)
+		{
+			Unit unitFound = GetUnitAt(neighbor);
+			if  (unitFound != null)
+				inRangeUnitList.Add(unitFound);
+		}
+
+		if (inRangeUnitList.Count > 0)
+			return inRangeUnitList;
+		
+		return null;
+	}
 	
 	#endregion
 	
@@ -396,6 +403,20 @@ public partial class UnitManager : Node
 		{
 			return "Gray";
 		}
+	}
+	
+	private Vector2I[] GetNeighbors(Vector2I cell)
+	{
+		List<Vector2I> neighbors = new List<Vector2I>();
+		int x = cell.X;
+		int y = cell.Y;
+
+		neighbors.Add(new Vector2I(x + 1, y));
+		neighbors.Add(new Vector2I(x - 1, y));
+		neighbors.Add(new Vector2I(x, y + 1));
+		neighbors.Add(new Vector2I(x, y - 1));
+
+		return neighbors.Where(n => IsWithinBounds(n) && !_aStarGrid.IsPointSolid(n)).ToArray();
 	}
 	
 	public int GetTileWeightScale(Vector2I tilePosition)
