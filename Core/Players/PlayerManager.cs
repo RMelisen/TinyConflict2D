@@ -30,7 +30,7 @@ public partial class PlayerManager : Node
 	public void NextTurn()
 	{
 		CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
-		GD.Print($"Tour du joueur {CurrentPlayerIndex + 1} ({CurrentPlayer.PlayerColor})");
+		GD.Print($"Player {CurrentPlayerIndex + 1} ({CurrentPlayer.PlayerColor}) turn");
 	}
 	
 	#endregion

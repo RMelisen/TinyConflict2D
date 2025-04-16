@@ -537,10 +537,11 @@ PlayerManager = NodePath("../PlayerManagerCore")
 [node name="PlayerManagerCore" type="Node" parent="Core"]
 script = ExtResource("5_ut7ly")
 
-[node name="MenuManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UnitManagerInstance")]
+[node name="MenuManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UnitManagerInstance", "PlayerManagerInstance")]
 script = ExtResource("9_o4i80")
 TerrainLayer = NodePath("../../TerrainLayer")
 UnitManagerInstance = NodePath("../UnitManagerCore")
+PlayerManagerInstance = NodePath("../PlayerManagerCore")
 FactoryMenuScene = ExtResource("4_c5mi1")
 AirportMenuScene = ExtResource("5_ppjb3")
 GameMenuScene = ExtResource("9_augcv")

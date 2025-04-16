@@ -381,6 +381,18 @@ public partial class UnitManager : Node
 	
 	#endregion
 	
+	#region Turn Management
+	
+	public void NextTurn()
+	{
+		foreach (Unit playerUnit in PlayerManager.CurrentPlayer.Units)
+		{
+			playerUnit.ResetMovementPoints();
+		}
+	}
+	
+	#endregion
+	
 	#region Utils
 	
 	// Godot Color strangely doesn't have a .Name property ...

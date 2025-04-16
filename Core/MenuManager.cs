@@ -1,6 +1,7 @@
 using Godot;
 using TinyConflict2D.UI.Menus;
 using TinyConflict2D.Commons.Config;
+using TinyConflict2D.Core.Players;
 
 namespace TinyConflict2D.Core;
 
@@ -13,6 +14,9 @@ public partial class MenuManager : Node
 	
 	[Export]
 	public UnitManager UnitManagerInstance;
+	
+	[Export]
+	public PlayerManager PlayerManagerInstance;
 	
 	[Export]
 	public PackedScene FactoryMenuScene;
@@ -110,6 +114,8 @@ public partial class MenuManager : Node
 			case Config.GAMEMENU_SETTINGS:
 				break;
 			case Config.GAMEMENU_ENDTURN:
+				UnitManagerInstance.NextTurn();
+				PlayerManagerInstance.NextTurn();
 				break;
 		}
 	}
