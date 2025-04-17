@@ -66,13 +66,13 @@ public partial class MenuManager : Node
 		switch (buildingType)
 		{
 			case Config.FACTORY_TERRAINTYPE:
-				_factoryMenuInstance.ShowMenu(new Vector2(mapCenter.X - 96, mapCenter.Y - 48));
+				_factoryMenuInstance.ShowMenu(new Vector2(mapCenter.X - 96, mapCenter.Y - 48), PlayerManagerInstance.CurrentPlayer.Money);
 				break;
 			case Config.PORT_TERRAINTYPE:    
-				_portMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
+				_portMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36), PlayerManagerInstance.CurrentPlayer.Money);
 				break;
 			case Config.AIRPORT_TERRAINTYPE:
-				_airportMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
+				_airportMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36), PlayerManagerInstance.CurrentPlayer.Money);
 				break;
 		}
 	}

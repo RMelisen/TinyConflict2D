@@ -32,10 +32,10 @@ public partial class PlayerManager : Node
 	
 	public void NextTurn()
 	{
+		CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
 		if (CurrentPlayerIndex == 0)
 			TurnNumber++;
 		
-		CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
 		GainMoney();
 		GD.Print($"Player {CurrentPlayerIndex + 1} ({CurrentPlayer.PlayerColor}) turn. Money = {CurrentPlayer.Money}");
 	}

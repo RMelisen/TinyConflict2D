@@ -1,17 +1,16 @@
+using System.Linq;
 using Godot;
+using TinyConflict2D.Commons.Config;
+using TinyConflict2D.Core.Players;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.UI.Menus;
 
-public partial class FactoryMenu : CanvasLayer
+public partial class FactoryMenu : ProductionBuildingMenu
 {
-	[Signal]
-	public delegate void UnitSelectedEventHandler(string unitType);
-
-	#region Fields
+	#region Properties
 	
-	private Control[] _buttons;
-	private int _currentButtonIndex = 0;
+	public override string MenuPanelType { get; } = Config.FACTORY_MENU_PANEL;
 	
 	#endregion
 	
@@ -20,7 +19,7 @@ public partial class FactoryMenu : CanvasLayer
 	public override void _Ready()
 	{
 		// Store buttons
-		_buttons = new Control[]
+		_buttons = new Button[]
 		{
 			GetNode<Button>("FactoryMenuPanel/InfantryButton"),
 			GetNode<Button>("FactoryMenuPanel/MechButton"),
@@ -31,6 +30,18 @@ public partial class FactoryMenu : CanvasLayer
 			GetNode<Button>("FactoryMenuPanel/TankButton")
 		};
 		
+		// Store unit prices
+		_unitPrices = new int[]
+		{
+			InfantryUnit.BASE_PRICE,
+			MechUnit.BASE_PRICE,
+			ReconUnit.BASE_PRICE,
+			AAUnit.BASE_PRICE,
+			APCUnit.BASE_PRICE,
+			SupplyUnit.BASE_PRICE,
+			TankUnit.BASE_PRICE
+		};
+		
 		// Set unit prices in the buttons labels
 		GetNode<Label>("FactoryMenuPanel/InfantryButton/InfantryContainer/InfantryCost").Text = InfantryUnit.BASE_PRICE.ToString();
 		GetNode<Label>("FactoryMenuPanel/MechButton/MechContainer/MechCost").Text = MechUnit.BASE_PRICE.ToString();
@@ -39,78 +50,8 @@ public partial class FactoryMenu : CanvasLayer
 		GetNode<Label>("FactoryMenuPanel/APCButton/APCContainer/APCCost").Text = APCUnit.BASE_PRICE.ToString();
 		GetNode<Label>("FactoryMenuPanel/SupplyButton/SupplyContainer/SupplyCost").Text = SupplyUnit.BASE_PRICE.ToString();
 		GetNode<Label>("FactoryMenuPanel/TankButton/TankContainer/TankCost").Text = TankUnit.BASE_PRICE.ToString();
-
+		
 		_buttons[_currentButtonIndex].GrabFocus();
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-		if (Visible)
-		{
-			if (@event.IsActionPressed("ui_cancel"))
-			{
-				HideMenu();
-			}
-			else if (@event.IsActionPressed("ui_down"))
-			{
-				_currentButtonIndex = (_currentButtonIndex + 1) % _buttons.Length;
-				_buttons[_currentButtonIndex].GrabFocus();
-			}
-			else if (@event.IsActionPressed("ui_up"))
-			{
-				_currentButtonIndex = (_currentButtonIndex - 1 + _buttons.Length) % _buttons.Length;
-				_buttons[_currentButtonIndex].GrabFocus();
-			}
-			else if (@event.IsActionPressed("ui_left"))
-			{
-				if (_currentButtonIndex - 4 >= 0)
-				{
-					_currentButtonIndex = (_currentButtonIndex - 4 + _buttons.Length) % _buttons.Length;
-					_buttons[_currentButtonIndex].GrabFocus();
-				}
-			}
-			else if (@event.IsActionPressed("ui_right"))
-			{
-				if (_currentButtonIndex + 4 < _buttons.Length)
-				{
-					_currentButtonIndex = (_currentButtonIndex + 4) % _buttons.Length;
-					_buttons[_currentButtonIndex].GrabFocus();
-				}
-			}
-			else if (@event.IsActionPressed("ui_accept"))
-			{
-				_buttons[_currentButtonIndex].EmitSignal("pressed");
-			}
-			GetViewport().SetInputAsHandled();
-		}
-	}
-	
-	#endregion
-	
-	#region Button Events
-	
-	public void OnUnitButtonPressed(string unitType)
-	{
-		GD.Print($"{unitType} button pressed");
-		EmitSignal(nameof(UnitSelected), unitType);
-		HideMenu();
-	}
-	
-	#endregion
-	
-	#region Visibility
-	
-	public void ShowMenu(Vector2 position)
-	{
-		Visible = true;
-		_currentButtonIndex = 0;
-		_buttons[_currentButtonIndex].GrabFocus();
-		GetNode<Control>("FactoryMenuPanel").Position = position;
-	}
-
-	public void HideMenu()
-	{
-		Visible = false;
 	}
 	
 	#endregion
