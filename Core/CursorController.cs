@@ -1,6 +1,5 @@
 using Godot;
 using TinyConflict2D.Commons.Config;
-using TinyConflict2D.UI.Menus;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
@@ -10,19 +9,10 @@ public partial class CursorController : Sprite2D
 	#region Properties
 	
 	[Export]
-	public int TileSize = 16;
-	
-	[Export]
-	public TileMapLayer TerrainLayer;
-	
-	[Export]
-	public TileMapLayer TerrainFeaturesLayer;
+	public CoreManager CoreManagerInstance;
 	
 	[Export]
 	public UnitManager UnitManagerInstance;
-	
-	[Export]
-	public Players.PlayerManager PlayerManagerInstance;
 	
 	[Export]
 	public MenuManager MenuManagerInstance;
@@ -35,10 +25,6 @@ public partial class CursorController : Sprite2D
 	#region Fields
 	
 	private Vector2I _gridPosition = Vector2I.Zero;	
-	private Vector2I _mapSize;
-		
-	private Unit _selectedUnit = null;
-	private bool _isUnitSelected = false;
 
 	#endregion
 	
@@ -46,15 +32,7 @@ public partial class CursorController : Sprite2D
 	
 	public override void _Ready()
 	{
-		if (TerrainLayer != null)
-		{
-			_mapSize = TerrainLayer.GetUsedRect().Size;
-			_gridPosition = TerrainLayer.LocalToMap(Position);
-		}
-		else
-		{
-			GD.PrintErr("terrainLayer not assigned!");
-		}
+		_gridPosition = CoreManagerInstance.LocalToMap(Position);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -64,9 +42,9 @@ public partial class CursorController : Sprite2D
 		{
 			MoveCursor();
 
-			if (_isUnitSelected)
+			if (CoreManagerInstance.IsUnitSelected)
 			{
-				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition, _selectedUnit.MovementPointsLeft));
+				UIManagerInstance.UpdatePathVisualization(UnitManagerInstance.GetPathBetween(CoreManagerInstance.SelectedUnit.TilePosition, _gridPosition, CoreManagerInstance.SelectedUnit.MovementPointsLeft));
 			}
 		}
 		else
@@ -79,9 +57,9 @@ public partial class CursorController : Sprite2D
 			{
 				if (Input.IsActionJustReleased("ui_cancel"))
 				{
-					if (_isUnitSelected)
+					if (CoreManagerInstance.IsUnitSelected)
 					{
-						DeselectUnit();
+						CoreManagerInstance.DeselectUnit();
 					}
 				}
 			}
@@ -114,18 +92,13 @@ public partial class CursorController : Sprite2D
 		}
 		
 		// Check if the new position is within the map bounds
-		if (IsWithinBounds(newGridPosition))
+		if (CoreManagerInstance.IsWithinBounds(newGridPosition))
 		{
 			_gridPosition = newGridPosition;
+			Position = _gridPosition * Config.TILE_SIZE;
 		}
-
-		Position = _gridPosition * TileSize;
 	}
 	
-	private bool IsWithinBounds(Vector2I position)
-	{
-		return position.X >= 0 && position.X < _mapSize.X && position.Y >= 0 && position.Y < _mapSize.Y;
-	}
 
 	#endregion
 
@@ -133,9 +106,7 @@ public partial class CursorController : Sprite2D
 
 	private void OnCursorSelect()
 	{
-		_gridPosition = TerrainLayer.LocalToMap(Position);
-		
-		if (!_isUnitSelected)
+		if (!CoreManagerInstance.IsUnitSelected)
 		{
 			// Check if a unit is found first
 			Unit unitFound = UnitManagerInstance.GetUnitAt(_gridPosition);
@@ -143,16 +114,16 @@ public partial class CursorController : Sprite2D
 			{
 				// Unit found
 				GD.Print("Selected unit: " + unitFound.GetType());
-				SelectUnit(unitFound);
+				CoreManagerInstance.SelectUnit(unitFound);
 				return;
 			}
 		}
 		else
 		{
-			if (_gridPosition == _selectedUnit.TilePosition)
+			if (_gridPosition == CoreManagerInstance.SelectedUnit.TilePosition)
 			{
 				// If selected unit is selected again
-				DeselectUnit();
+				CoreManagerInstance.DeselectUnit();
 			}
 			else
 			{
@@ -165,28 +136,25 @@ public partial class CursorController : Sprite2D
 				}
 				
 				// If no other unit on target tile, move selected unit 
-				_selectedUnit.Move(UnitManagerInstance.GetPathBetween(_selectedUnit.TilePosition, _gridPosition, _selectedUnit.MovementPointsLeft));
-				DeselectUnit();
+				CoreManagerInstance.SelectedUnit.Move(UnitManagerInstance.GetPathBetween(CoreManagerInstance.SelectedUnit.TilePosition, _gridPosition, CoreManagerInstance.SelectedUnit.MovementPointsLeft));
+				CoreManagerInstance.DeselectUnit();
 			}
 			return;
 		}
 
 		// Check feature layer second
-		TileData featureTileData = TerrainFeaturesLayer.GetCellTileData(_gridPosition);
-
-		if (featureTileData != null && featureTileData.HasCustomData(Config.TERRAINTYPE_CUSTOMDATA))
+		Variant? featureTerrainType = CoreManagerInstance.GetFeatureByCustomData(Config.TERRAINTYPE_CUSTOMDATA, _gridPosition);
+		if (featureTerrainType.HasValue)
 		{
-			GD.Print("Feature Tile terrainType is : " + featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA));
-			
 			// Check feature type
-			switch (featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA).AsString())
+			switch (featureTerrainType.Value.ToString())
 			{
 				case Config.FACTORY_TERRAINTYPE:
 				case Config.PORT_TERRAINTYPE:
 				case Config.AIRPORT_TERRAINTYPE:
-					if (CheckIfIsOwner(featureTileData))
+					if (CoreManagerInstance.CheckIfIsOwner(_gridPosition))
 					{
-						MenuManagerInstance.ShowUnitCreationMenu(_gridPosition, featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA).AsString());
+						MenuManagerInstance.ShowUnitCreationMenu(_gridPosition, featureTerrainType.Value.ToString());
 						// If a terrain feature has been found, no need to look for terrain (for now) 
 						return;
 					}
@@ -195,70 +163,14 @@ public partial class CursorController : Sprite2D
 		}
 
 		// If no relevant feature, check terrain layer
-		TileData terrainTileData = TerrainLayer.GetCellTileData(_gridPosition);
-
-		if (terrainTileData != null && terrainTileData.HasCustomData(Config.TERRAINTYPE_CUSTOMDATA))
+		Variant? tileTerrainType = CoreManagerInstance.GetTerrainByCustomData(Config.TERRAINTYPE_CUSTOMDATA, _gridPosition);
+		if (tileTerrainType.HasValue)
 		{
-			GD.Print("Terrain Tile terrainType is : " + terrainTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA));
+			// TODO: Show terrain information (defense level, cost, etc...)
 		}
 		
 		// Open the game menu if no unit selected nor feature selected (when a empty tile is selected)
 		MenuManagerInstance.ShowGameMenu();
-	}
-
-	#region Unit Selection
-	
-	public void SelectUnit(Unit unit)
-	{
-		if (unit.MovementPointsLeft > 0)
-		{
-			_selectedUnit = unit;
-			_isUnitSelected = true;
-			UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
-			ApplySelectionEffects();
-			UIManagerInstance.HighlightReachableTiles(_selectedUnit);
-		}
-	}
-
-	public void DeselectUnit()
-	{
-		UIManagerInstance.ClearArrowPath();
-		_isUnitSelected = false;
-		ApplySelectionEffects();
-		UIManagerInstance.ClearHighlighting();
-		_selectedUnit = null;
-	}
-	
-	private void ApplySelectionEffects()
-	{
-		if (_isUnitSelected)
-		{
-			_selectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
-		}
-		else
-		{
-			_selectedUnit.Scale = Vector2.One;
-		}
-	}
-	
-	#endregion
-
-	#endregion
-	
-	#region Utils
-
-	public bool CheckIfIsOwner(TileData featureTileData)
-	{
-		if(featureTileData.HasCustomData(Config.PROPERTYOWNER_CUSTOMDATA) && featureTileData.GetCustomData(Config.PROPERTYOWNER_CUSTOMDATA).AsInt32() == PlayerManagerInstance.CurrentPlayerIndex)
-		{
-			GD.Print("Property is owned by current player");
-			return true;
-		}
-		else
-		{
-			GD.Print("Property is not owned by current player");
-			return false;
-		}
 	}
 	
 	#endregion

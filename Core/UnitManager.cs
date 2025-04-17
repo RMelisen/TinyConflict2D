@@ -350,7 +350,7 @@ public partial class UnitManager : Node
 		{
 			// If cell cost is higher than a cost I've already recorded, I can skip it
 			if (costSoFar.ContainsKey(currentCell) && currentCost > costSoFar[currentCell])
-			    continue; // Already found a cheaper path to this cell
+				continue; // Already found a cheaper path to this cell
 
 			Vector2I[] neighbors = GetNeighbors(currentCell);
 

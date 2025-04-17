@@ -105,7 +105,7 @@ public class Config
 
     #region PATHS
 
-    public const string UIMANAGER_NODE_PATH = "Node2D/Core/UnitManagerCore";
+    public const string UIMANAGER_NODE_PATH = "Node2D/Core/UnitManager";
     public const string UNIT_SPRITES_PATH = "res://resources/TinyConflict/Tiles/Units/";
 
     #endregion

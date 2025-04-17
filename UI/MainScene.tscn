@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=4 uid="uid://jjnx386iyt3f"]
+[gd_scene load_steps=26 format=4 uid="uid://jjnx386iyt3f"]
 
 [ext_resource type="Texture2D" uid="uid://38qqb54syyeg" path="res://resources/TinyConflict/Tilemap/tilemap.png" id="1_3mqji"]
 [ext_resource type="Script" uid="uid://dxa523vi1cys" path="res://Core/UnitManager.cs" id="2_3owbp"]
 [ext_resource type="Script" uid="uid://dl6p8pjl7dfqh" path="res://Core/CursorController.cs" id="3_3owbp"]
 [ext_resource type="Texture2D" uid="uid://yfwko2t1ltvb" path="res://resources/TinyConflict/Tiles/tile_0061.png" id="3_uxrcv"]
 [ext_resource type="PackedScene" uid="uid://dnyg366dssf5y" path="res://UI/Menus/FactoryMenu.tscn" id="4_c5mi1"]
+[ext_resource type="Script" uid="uid://cwklj4nrsv0sx" path="res://Core/CoreManager.cs" id="4_wt235"]
 [ext_resource type="PackedScene" uid="uid://4pui8xwypook" path="res://UI/Menus/AirportMenu.tscn" id="5_ppjb3"]
 [ext_resource type="Script" uid="uid://dq44yhk03vby2" path="res://Core/Players/PlayerManager.cs" id="5_ut7ly"]
 [ext_resource type="PackedScene" uid="uid://bpwtidxqgfb2p" path="res://UI/Menus/PortMenu.tscn" id="6_o4i80"]
@@ -513,35 +514,45 @@ tile_set = SubResource("TileSet_rpqi1")
 [node name="UILayer" type="TileMapLayer" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer"]
 tile_set = SubResource("TileSet_rf2cd")
 
-[node name="Cursor" type="Sprite2D" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer" node_paths=PackedStringArray("TerrainLayer", "TerrainFeaturesLayer", "UnitManagerInstance", "PlayerManagerInstance", "MenuManagerInstance", "UIManagerInstance")]
+[node name="Cursor" type="Sprite2D" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer" node_paths=PackedStringArray("CoreManagerInstance", "TerrainLayer", "TerrainFeaturesLayer", "UnitManagerInstance", "PlayerManagerInstance", "MenuManagerInstance", "UIManagerInstance")]
 position = Vector2(192, 144)
 texture = ExtResource("3_uxrcv")
 centered = false
 script = ExtResource("3_3owbp")
+CoreManagerInstance = NodePath("../../../../../Core/CoreManager")
 TerrainLayer = NodePath("../../../..")
 TerrainFeaturesLayer = NodePath("../../..")
-UnitManagerInstance = NodePath("../../../../../Core/UnitManagerCore")
-PlayerManagerInstance = NodePath("../../../../../Core/PlayerManagerCore")
+UnitManagerInstance = NodePath("../../../../../Core/UnitManager")
+PlayerManagerInstance = NodePath("../../../../../Core/PlayerManager")
 MenuManagerInstance = NodePath("../../../../../Core/MenuManager")
 UIManagerInstance = NodePath("../../../../../Core/UIManager")
 
 [node name="Core" type="Node" parent="."]
 
-[node name="UnitManagerCore" type="Node" parent="Core" node_paths=PackedStringArray("UnitsLayer", "TerrainLayer", "TerrainFeaturesLayer", "PlayerManager")]
+[node name="CoreManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "TerrainFeaturesLayer", "UnitManagerInstance", "PlayerManagerInstance", "MenuManagerInstance", "UIManagerInstance")]
+script = ExtResource("4_wt235")
+TerrainLayer = NodePath("../../TerrainLayer")
+TerrainFeaturesLayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer")
+UnitManagerInstance = NodePath("../UnitManager")
+PlayerManagerInstance = NodePath("../PlayerManager")
+MenuManagerInstance = NodePath("../MenuManager")
+UIManagerInstance = NodePath("../UIManager")
+
+[node name="UnitManager" type="Node" parent="Core" node_paths=PackedStringArray("UnitsLayer", "TerrainLayer", "TerrainFeaturesLayer", "PlayerManager")]
 script = ExtResource("2_3owbp")
 UnitsLayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer/UnitsLayer")
 TerrainLayer = NodePath("../../TerrainLayer")
 TerrainFeaturesLayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer")
-PlayerManager = NodePath("../PlayerManagerCore")
+PlayerManager = NodePath("../PlayerManager")
 
-[node name="PlayerManagerCore" type="Node" parent="Core"]
+[node name="PlayerManager" type="Node" parent="Core"]
 script = ExtResource("5_ut7ly")
 
 [node name="MenuManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UnitManagerInstance", "PlayerManagerInstance")]
 script = ExtResource("9_o4i80")
 TerrainLayer = NodePath("../../TerrainLayer")
-UnitManagerInstance = NodePath("../UnitManagerCore")
-PlayerManagerInstance = NodePath("../PlayerManagerCore")
+UnitManagerInstance = NodePath("../UnitManager")
+PlayerManagerInstance = NodePath("../PlayerManager")
 FactoryMenuScene = ExtResource("4_c5mi1")
 AirportMenuScene = ExtResource("5_ppjb3")
 GameMenuScene = ExtResource("9_augcv")
@@ -556,4 +567,4 @@ ArrowHead = ExtResource("14_wt235")
 HighlightedTile = ExtResource("16_li6wg")
 TerrainLayer = NodePath("../../TerrainLayer")
 UILayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer")
-UnitManagerInstance = NodePath("../UnitManagerCore")
+UnitManagerInstance = NodePath("../UnitManager")

@@ -32,6 +32,12 @@ public partial class PlayerManager : Node
 		CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
 		GD.Print($"Player {CurrentPlayerIndex + 1} ({CurrentPlayer.PlayerColor}) turn");
 	}
+
+	private void GainMoney()
+	{
+		// Flat 1000 + 1000 per building
+		CurrentPlayer.Money += 1000;
+	}
 	
 	#endregion
 }
