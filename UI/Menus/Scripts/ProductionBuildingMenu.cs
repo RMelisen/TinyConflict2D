@@ -9,6 +9,9 @@ public partial class ProductionBuildingMenu : CanvasLayer
 {
 	[Signal]
 	public delegate void UnitSelectedEventHandler(string unitType);
+	
+	[Export] public Theme DisabledButtonTheme;
+	[Export] public Theme MainTheme;
 
 	#region Fields
 
@@ -21,7 +24,7 @@ public partial class ProductionBuildingMenu : CanvasLayer
 	#endregion
 	
 	#region Godot Methods
-	
+
 	public override void _Input(InputEvent @event)
 	{
 		if (Visible)
@@ -90,9 +93,15 @@ public partial class ProductionBuildingMenu : CanvasLayer
 		for (int i = 0; i < _buttons.Length; i++)
 		{
 			if (_unitPrices[i] > playerMoney)
+			{
 				_buttons[i].Disabled = true;
+				_buttons[i].Theme =  DisabledButtonTheme;
+			}
 			else
+			{
 				_buttons[i].Disabled = false;
+				_buttons[i].Theme =  MainTheme;
+			}
 		}
 	}
 

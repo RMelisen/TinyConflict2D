@@ -1,23 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpwtidxqgfb2p"]
+[gd_scene load_steps=8 format=3 uid="uid://bpwtidxqgfb2p"]
 
 [ext_resource type="Script" uid="uid://bya2b3bicy5j8" path="res://UI/Menus/Scripts/PortMenu.cs" id="1_4jjyo"]
 [ext_resource type="Texture2D" uid="uid://b86qoeh46nd0" path="res://resources/TinyConflict/Tiles/Units/BattleshipGray.png" id="2_4jjyo"]
+[ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="2_tefoa"]
+[ext_resource type="Theme" uid="uid://brhxixo2v6r7y" path="res://UI/Themes/DisabledButtonTheme.tres" id="2_wacng"]
 [ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="3_ol5iw"]
 [ext_resource type="Texture2D" uid="uid://3sehql1pha1q" path="res://resources/TinyConflict/Tiles/Units/LanderGray.png" id="4_tefoa"]
 [ext_resource type="Texture2D" uid="uid://c26dnp820tbxu" path="res://resources/TinyConflict/Tiles/Units/SubmarineGray.png" id="5_wacng"]
 
 [node name="PortMenu" type="CanvasLayer"]
 script = ExtResource("1_4jjyo")
+DisabledButtonTheme = ExtResource("2_wacng")
+MainTheme = ExtResource("2_tefoa")
 
 [node name="PortMenuPanel" type="Panel" parent="."]
 offset_right = 96.0
-offset_bottom = 72.0
+offset_bottom = 75.0
+theme = ExtResource("2_tefoa")
 
 [node name="BattleshipButton" type="Button" parent="PortMenuPanel"]
 layout_mode = 0
-offset_top = 48.0
+offset_top = 50.0
 offset_right = 96.0
-offset_bottom = 72.0
+offset_bottom = 74.0
 
 [node name="BattleshipContainer" type="HBoxContainer" parent="PortMenuPanel/BattleshipButton"]
 layout_mode = 0
@@ -78,9 +83,9 @@ vertical_alignment = 1
 
 [node name="SubmarineButton" type="Button" parent="PortMenuPanel"]
 layout_mode = 0
-offset_top = 24.0
+offset_top = 25.0
 offset_right = 96.0
-offset_bottom = 48.0
+offset_bottom = 49.0
 
 [node name="SubmarineContainer" type="HBoxContainer" parent="PortMenuPanel/SubmarineButton"]
 layout_mode = 0

@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnyg366dssf5y"]
+[gd_scene load_steps=12 format=3 uid="uid://dnyg366dssf5y"]
 
 [ext_resource type="Script" uid="uid://hlw24v5bghuj" path="res://UI/Menus/Scripts/FactoryMenu.cs" id="1_fq012"]
 [ext_resource type="Texture2D" uid="uid://xb1b46fusykw" path="res://resources/TinyConflict/Tiles/Units/InfantryGray.png" id="1_p54xo"]
+[ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="2_14b5k"]
 [ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="2_fq012"]
+[ext_resource type="Theme" uid="uid://brhxixo2v6r7y" path="res://UI/Themes/DisabledButtonTheme.tres" id="2_qw120"]
 [ext_resource type="Texture2D" uid="uid://bm620m7j7gjpg" path="res://resources/TinyConflict/Tiles/Units/AAGray.png" id="4_1ty6w"]
 [ext_resource type="Texture2D" uid="uid://cy4apq2vt1tvj" path="res://resources/TinyConflict/Tiles/Units/APCGray.png" id="4_rjc67"]
 [ext_resource type="Texture2D" uid="uid://422nujg00xhp" path="res://resources/TinyConflict/Tiles/Units/MechGray.png" id="6_14b5k"]
@@ -12,16 +14,19 @@
 
 [node name="FactoryMenu" type="CanvasLayer"]
 script = ExtResource("1_fq012")
+DisabledButtonTheme = ExtResource("2_qw120")
+MainTheme = ExtResource("2_14b5k")
 
 [node name="FactoryMenuPanel" type="Panel" parent="."]
 offset_right = 192.0
-offset_bottom = 96.0
+offset_bottom = 100.0
+theme = ExtResource("2_14b5k")
 
 [node name="AAButton" type="Button" parent="FactoryMenuPanel"]
 layout_mode = 0
-offset_top = 72.0
+offset_top = 75.0
 offset_right = 96.0
-offset_bottom = 96.0
+offset_bottom = 99.0
 
 [node name="AAContainer" type="HBoxContainer" parent="FactoryMenuPanel/AAButton"]
 layout_mode = 0
@@ -114,9 +119,9 @@ vertical_alignment = 1
 
 [node name="MechButton" type="Button" parent="FactoryMenuPanel"]
 layout_mode = 0
-offset_top = 24.0
+offset_top = 25.0
 offset_right = 96.0
-offset_bottom = 48.0
+offset_bottom = 49.0
 
 [node name="MechContainer" type="HBoxContainer" parent="FactoryMenuPanel/MechButton"]
 layout_mode = 0
@@ -146,9 +151,9 @@ vertical_alignment = 1
 
 [node name="ReconButton" type="Button" parent="FactoryMenuPanel"]
 layout_mode = 0
-offset_top = 48.0
+offset_top = 50.0
 offset_right = 96.0
-offset_bottom = 72.0
+offset_bottom = 74.0
 
 [node name="ReconContainer" type="HBoxContainer" parent="FactoryMenuPanel/ReconButton"]
 layout_mode = 0
@@ -179,9 +184,9 @@ vertical_alignment = 1
 [node name="SupplyButton" type="Button" parent="FactoryMenuPanel"]
 layout_mode = 0
 offset_left = 96.0
-offset_top = 24.0
+offset_top = 25.0
 offset_right = 192.0
-offset_bottom = 48.0
+offset_bottom = 49.0
 
 [node name="SupplyContainer" type="HBoxContainer" parent="FactoryMenuPanel/SupplyButton"]
 layout_mode = 0
@@ -212,9 +217,9 @@ vertical_alignment = 1
 [node name="TankButton" type="Button" parent="FactoryMenuPanel"]
 layout_mode = 0
 offset_left = 96.0
-offset_top = 48.0
+offset_top = 50.0
 offset_right = 192.0
-offset_bottom = 72.0
+offset_bottom = 74.0
 
 [node name="TankContainer" type="HBoxContainer" parent="FactoryMenuPanel/TankButton"]
 layout_mode = 0

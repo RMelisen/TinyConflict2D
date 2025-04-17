@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwisk1s03kd53"]
+[gd_scene load_steps=4 format=3 uid="uid://bwisk1s03kd53"]
 
 [ext_resource type="Script" uid="uid://827hpybscek" path="res://UI/Menus/Scripts/GameMenu.cs" id="1_xbn5j"]
+[ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="3_0v06v"]
 [ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="3_s2bjc"]
 
 [node name="GameMenu" type="CanvasLayer"]
@@ -8,7 +9,8 @@ script = ExtResource("1_xbn5j")
 
 [node name="GameMenuPanel" type="Panel" parent="."]
 offset_right = 96.0
-offset_bottom = 72.0
+offset_bottom = 75.0
+theme = ExtResource("3_0v06v")
 
 [node name="InformationButton" type="Button" parent="GameMenuPanel"]
 layout_mode = 0
@@ -34,9 +36,9 @@ vertical_alignment = 1
 
 [node name="SettingsButton" type="Button" parent="GameMenuPanel"]
 layout_mode = 0
-offset_top = 24.0
+offset_top = 25.0
 offset_right = 96.0
-offset_bottom = 48.0
+offset_bottom = 49.0
 
 [node name="SettingsContainer" type="HBoxContainer" parent="GameMenuPanel/SettingsButton"]
 layout_mode = 0
@@ -57,9 +59,9 @@ vertical_alignment = 1
 
 [node name="EndTurnButton" type="Button" parent="GameMenuPanel"]
 layout_mode = 0
-offset_top = 48.0
+offset_top = 50.0
 offset_right = 96.0
-offset_bottom = 72.0
+offset_bottom = 74.0
 
 [node name="EndTurnContainer" type="HBoxContainer" parent="GameMenuPanel/EndTurnButton"]
 layout_mode = 0
