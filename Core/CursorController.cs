@@ -8,17 +8,10 @@ public partial class CursorController : Sprite2D
 {
 	#region Properties
 	
-	[Export]
-	public CoreManager CoreManagerInstance;
-	
-	[Export]
-	public UnitManager UnitManagerInstance;
-	
-	[Export]
-	public MenuManager MenuManagerInstance;
-	
-	[Export]
-	public UIManager UIManagerInstance;
+	[Export] public CoreManager CoreManagerInstance; 
+	[Export] public UnitManager UnitManagerInstance;
+	[Export] public MenuManager MenuManagerInstance;
+	[Export] public UIManager UIManagerInstance;
 	
 	#endregion
 	

@@ -11,17 +11,10 @@ public partial class UnitManager : Node
 {
 	#region Properties
 	
-	[Export]
-	public TileMapLayer UnitsLayer;
-	
-	[Export]
-	public TileMapLayer TerrainLayer;
-	
-	[Export]
-	public TileMapLayer TerrainFeaturesLayer;
-	
-	[Export]
-	public Players.PlayerManager PlayerManager;
+	[Export] public TileMapLayer UnitsLayer;
+	[Export] public TileMapLayer TerrainLayer;
+	[Export] public TileMapLayer TerrainFeaturesLayer;
+	[Export] public Players.PlayerManager PlayerManager;
 	
 	#endregion
 	

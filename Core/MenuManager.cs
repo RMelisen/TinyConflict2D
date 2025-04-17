@@ -9,26 +9,13 @@ public partial class MenuManager : Node
 {
 	#region Properties
 	
-	[Export]
-	public TileMapLayer TerrainLayer;
-	
-	[Export]
-	public UnitManager UnitManagerInstance;
-	
-	[Export]
-	public PlayerManager PlayerManagerInstance;
-	
-	[Export]
-	public PackedScene FactoryMenuScene;
-	
-	[Export]
-	public PackedScene AirportMenuScene;
-	
-	[Export]
-	public PackedScene GameMenuScene;
-	
-	[Export]
-	public PackedScene PortMenuScene;
+	[Export] public CoreManager CoreManagerInstance;
+	[Export] public UnitManager UnitManagerInstance; 
+	[Export] public PlayerManager PlayerManagerInstance; 
+	[Export] public PackedScene FactoryMenuScene; 
+	[Export] public PackedScene AirportMenuScene; 
+	[Export] public PackedScene GameMenuScene; 
+	[Export] public PackedScene PortMenuScene;
 	
 	#endregion
 	
@@ -73,7 +60,7 @@ public partial class MenuManager : Node
 
 	public void ShowUnitCreationMenu(Vector2I tilePosition, string buildingType)
 	{
-		Vector2 mapCenter = GetMapCenter();
+		Vector2 mapCenter = CoreManagerInstance.GetMapCenter();
 		_tilePosition = tilePosition;
 
 		switch (buildingType)
@@ -101,7 +88,7 @@ public partial class MenuManager : Node
 	
 	public void ShowGameMenu()
 	{
-		Vector2 mapCenter = GetMapCenter();
+		Vector2 mapCenter = CoreManagerInstance.GetMapCenter();
 		_gameMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
 	}
 	
@@ -118,16 +105,6 @@ public partial class MenuManager : Node
 				PlayerManagerInstance.NextTurn();
 				break;
 		}
-	}
-	
-	#endregion
-	
-	#region Utils
-	
-	public Vector2 GetMapCenter()
-	{
-		Vector2 mapCenter = TerrainLayer.GetUsedRect().Size * TerrainLayer.TileSet.TileSize;
-		return mapCenter / 2;
 	}
 	
 	#endregion

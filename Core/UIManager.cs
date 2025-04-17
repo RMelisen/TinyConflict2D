@@ -1,6 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-using TinyConflict2D.Commons.Config;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
@@ -14,9 +13,9 @@ public partial class UIManager : Node
 	[Export] public PackedScene ArrowCurveRight; 
 	[Export] public PackedScene ArrowHead;
 	[Export] public PackedScene HighlightedTile;
-	[Export] public TileMapLayer TerrainLayer;
 	[Export] public TileMapLayer UILayer;
 	[Export] public UnitManager UnitManagerInstance;
+	[Export] public CoreManager CoreManagerInstance;
 	
 	#endregion
 	
@@ -50,13 +49,13 @@ public partial class UIManager : Node
 			Vector2I currentTile = path[i];
 			
 			// Convert tile coordinates to world positions
-			Vector2 currentMapPosition = TerrainLayer.MapToLocal(currentTile);
+			Vector2 currentMapPosition = CoreManagerInstance.MapToLocal(currentTile);
 
 
 			if (i < path.Count - 1)
 			{
 				Vector2I nextTile = path[i + 1];
-				Vector2 nextMapPosition = TerrainLayer.MapToLocal(nextTile);
+				Vector2 nextMapPosition = CoreManagerInstance.MapToLocal(nextTile);
 				Vector2 direction = (nextMapPosition - currentMapPosition);
 				float angle = Mathf.Atan2(direction.Y, direction.X);
 
@@ -65,7 +64,7 @@ public partial class UIManager : Node
 				if (i > 0)
 				{
 					previousTile = path[i - 1];
-					Vector2 previousMapPosition = TerrainLayer.MapToLocal(previousTile);
+					Vector2 previousMapPosition = CoreManagerInstance.MapToLocal(previousTile);
 					Vector2 previousDirection = (currentMapPosition - previousMapPosition);
 
 					float crossProduct = previousDirection.X * direction.Y - previousDirection.Y * direction.X;
@@ -93,7 +92,7 @@ public partial class UIManager : Node
 				{
 					previousTile = path[i - 1];
 					headInstance.Position = currentMapPosition;
-					Vector2 previousMapPosition = TerrainLayer.MapToLocal(previousTile);
+					Vector2 previousMapPosition = CoreManagerInstance.MapToLocal(previousTile);
 					Vector2 directionToTarget = (currentMapPosition - previousMapPosition);
 					headInstance.Rotation = Mathf.Atan2(directionToTarget.Y, directionToTarget.X);
 					UILayer.AddChild(headInstance);
@@ -121,7 +120,7 @@ public partial class UIManager : Node
 		HashSet<Vector2I> reachableTiles = UnitManagerInstance.GetReachableTiles(selectedUnit);
 		foreach (Vector2I tile in reachableTiles)
 		{
-			Vector2 tilePosition = TerrainLayer.MapToLocal(tile);
+			Vector2 tilePosition = CoreManagerInstance.MapToLocal(tile);
 			
 			PackedScene higlightedTileScene = HighlightedTile;
 			if (higlightedTileScene.Instantiate() is Node2D higlightedTileInstance)

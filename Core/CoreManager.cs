@@ -12,23 +12,12 @@ public partial class CoreManager : Node
 {
 	#region Properties
 	
-	[Export]
-	public TileMapLayer TerrainLayer;
-	
-	[Export]
-	public TileMapLayer TerrainFeaturesLayer;
-	
-	[Export]
-	public UnitManager UnitManagerInstance;
-	
-	[Export]
-	public Players.PlayerManager PlayerManagerInstance;
-	
-	[Export]
-	public MenuManager MenuManagerInstance;
-	
-	[Export]
-	public UIManager UIManagerInstance;
+	[Export] public TileMapLayer TerrainLayer;
+	[Export] public TileMapLayer TerrainFeaturesLayer;
+	[Export] public UnitManager UnitManagerInstance;
+	[Export] public Players.PlayerManager PlayerManagerInstance;
+	[Export] public MenuManager MenuManagerInstance;
+	[Export] public UIManager UIManagerInstance;
 	
 	public Unit SelectedUnit = null;
 	public bool IsUnitSelected = false;
@@ -130,6 +119,24 @@ public partial class CoreManager : Node
 	{
 		return position.X >= 0 && position.X < _mapSize.X && position.Y >= 0 && position.Y < _mapSize.Y;
 	}
+
+	public Vector2I LocalToMap(Vector2 position)
+	{
+		return TerrainLayer.LocalToMap(position);
+	}
+	
+	public Vector2 MapToLocal(Vector2I position)
+	{
+		return TerrainLayer.MapToLocal(position);
+	}
+	
+	public Vector2 GetMapCenter()
+	{
+		Vector2 mapCenter = TerrainLayer.GetUsedRect().Size * TerrainLayer.TileSet.TileSize;
+		return mapCenter / 2;
+	}
+	
+	#endregion
 	
 	public bool CheckIfIsOwner(Vector2I position)
 	{
@@ -144,14 +151,6 @@ public partial class CoreManager : Node
 		GD.Print("Property is not owned by current player");
 		return false;
 	}
-
-	public Vector2I LocalToMap(Vector2 position)
-	{
-		return TerrainLayer.LocalToMap(position);
-	}
-	
-	#endregion
-	
 	
 	#endregion
 }
