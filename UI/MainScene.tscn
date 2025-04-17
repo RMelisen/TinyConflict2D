@@ -542,8 +542,9 @@ TerrainLayer = NodePath("../../TerrainLayer")
 TerrainFeaturesLayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer")
 PlayerManager = NodePath("../PlayerManager")
 
-[node name="PlayerManager" type="Node" parent="Core"]
+[node name="PlayerManager" type="Node" parent="Core" node_paths=PackedStringArray("CoreManagerInstance")]
 script = ExtResource("5_ut7ly")
+CoreManagerInstance = NodePath("../CoreManager")
 
 [node name="MenuManager" type="Node" parent="Core" node_paths=PackedStringArray("CoreManagerInstance", "UnitManagerInstance", "PlayerManagerInstance")]
 script = ExtResource("9_o4i80")

@@ -28,9 +28,9 @@ public partial class AirportMenu : CanvasLayer
 		};
 		
 		// Set unit prices in the buttons labels
-		GetNode<Label>("AirportMenuPanel/BCopterButton/BCopterContainer/BCopterCost").Text = BCopterUnit.BasePrice.ToString();
-		GetNode<Label>("AirportMenuPanel/TCopterButton/TCopterContainer/TCopterCost").Text = TCopterUnit.BasePrice.ToString();
-		GetNode<Label>("AirportMenuPanel/BomberButton/BomberContainer/BomberCost").Text = BomberUnit.BasePrice.ToString();
+		GetNode<Label>("AirportMenuPanel/BCopterButton/BCopterContainer/BCopterCost").Text = BCopterUnit.BASE_PRICE.ToString();
+		GetNode<Label>("AirportMenuPanel/TCopterButton/TCopterContainer/TCopterCost").Text = TCopterUnit.BASE_PRICE.ToString();
+		GetNode<Label>("AirportMenuPanel/BomberButton/BomberContainer/BomberCost").Text = BomberUnit.BASE_PRICE.ToString();
 
 		_buttons[_currentButtonIndex].GrabFocus();
 	}

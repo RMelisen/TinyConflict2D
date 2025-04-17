@@ -23,6 +23,7 @@ public partial class Unit : CharacterBody2D
 	public Player UnitOwner { get; set; }
 	public Vector2I TilePosition { get; set; }
 	public string UnitType { get; set; }
+	public virtual int BasePrice { get; } = 0;
 
 	#endregion
 	

@@ -1,15 +1,18 @@
 using Godot;
 using System.Collections.Generic;
+using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.Core.Players;
 
 public partial class PlayerManager : Node
 {
 	#region Properties
-	
+
+	[Export] public CoreManager CoreManagerInstance;
 	public List<Player> Players { get; private set; } = new List<Player>();
 	public int CurrentPlayerIndex { get; private set; } = 0;
 	public Player CurrentPlayer => Players[CurrentPlayerIndex];
+	public int TurnNumber { get; private set; } = 1;
 	
 	#endregion
 
@@ -29,15 +32,22 @@ public partial class PlayerManager : Node
 	
 	public void NextTurn()
 	{
+		if (CurrentPlayerIndex == 0)
+			TurnNumber++;
+		
 		CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
-		GD.Print($"Player {CurrentPlayerIndex + 1} ({CurrentPlayer.PlayerColor}) turn");
+		GainMoney();
+		GD.Print($"Player {CurrentPlayerIndex + 1} ({CurrentPlayer.PlayerColor}) turn. Money = {CurrentPlayer.Money}");
 	}
 
 	private void GainMoney()
 	{
-		// Flat 1000 + 1000 per building
-		CurrentPlayer.Money += 1000;
+		if (TurnNumber != 1)
+		{
+			int ownedBuildings = CoreManagerInstance.GetNumberOfOwnedBuildings(CurrentPlayer);
+			CurrentPlayer.Money += Config.MONEY_PER_TURN + ownedBuildings * Config.MONEY_PER_BUILDING;
+		}
 	}
-	
+
 	#endregion
 }

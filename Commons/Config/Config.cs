@@ -82,6 +82,8 @@ public class Config
     #region Players
     
     public const int STARTING_MONEY = 5000;
+    public const int MONEY_PER_TURN = 1000;
+    public const int MONEY_PER_BUILDING = 1000;
     
     #endregion
     

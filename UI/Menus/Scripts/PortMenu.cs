@@ -28,9 +28,9 @@ public partial class PortMenu : CanvasLayer
 		};
 		
 		// Set unit prices in the buttons labels
-		GetNode<Label>("PortMenuPanel/LanderButton/LanderContainer/LanderCost").Text = LanderUnit.BasePrice.ToString();
-		GetNode<Label>("PortMenuPanel/SubmarineButton/SubmarineContainer/SubmarineCost").Text = SubmarineUnit.BasePrice.ToString();
-		GetNode<Label>("PortMenuPanel/BattleshipButton/BattleshipContainer/BattleshipCost").Text = BattleshipUnit.BasePrice.ToString();
+		GetNode<Label>("PortMenuPanel/LanderButton/LanderContainer/LanderCost").Text = LanderUnit.BASE_PRICE.ToString();
+		GetNode<Label>("PortMenuPanel/SubmarineButton/SubmarineContainer/SubmarineCost").Text = SubmarineUnit.BASE_PRICE.ToString();
+		GetNode<Label>("PortMenuPanel/BattleshipButton/BattleshipContainer/BattleshipCost").Text = BattleshipUnit.BASE_PRICE.ToString();
 
 		_buttons[_currentButtonIndex].GrabFocus();
 	}

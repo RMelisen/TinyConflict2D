@@ -4,7 +4,8 @@ namespace TinyConflict2D.Units.Scripts;
 
 public partial class LanderUnit : Unit
 {
-	public static int BasePrice = 12000;
+	public const int BASE_PRICE = 12000;
+	public override int BasePrice { get;  } = BASE_PRICE;
 
 	public LanderUnit()
 	{

@@ -4,7 +4,8 @@ namespace TinyConflict2D.Units.Scripts;
 
 public partial class TankUnit : Unit
 {
-	public static int BasePrice = 7000;
+	public const int BASE_PRICE = 7000;
+	public override int BasePrice { get;  } = BASE_PRICE;
 	
 	public TankUnit()
 	{

@@ -1,10 +1,7 @@
-using System;
 using Godot;
 using TinyConflict2D.Commons.Config;
+using TinyConflict2D.Core.Players;
 using TinyConflict2D.Units.Scripts;
-using System.Collections.Generic;
-using System.Linq;
-using TinyConflict2D.Commons.Enums;
 
 namespace TinyConflict2D.Core;
 
@@ -91,7 +88,6 @@ public partial class CoreManager : Node
 		if (terrainTileData != null && terrainTileData.HasCustomData(customData))
 		{
 			Variant variant = terrainTileData.GetCustomData(customData);
-			GD.Print($"Terrain Tile {customData} is : " + variant);
 			return variant;
 		}
 		return null;
@@ -103,7 +99,6 @@ public partial class CoreManager : Node
 		if (featureTileData != null && featureTileData.HasCustomData(customData))
 		{
 			Variant variant = featureTileData.GetCustomData(customData);
-			GD.Print($"Feature Tile {customData} is : " + variant);
 			return variant;
 		}
 		return null;
@@ -138,19 +133,54 @@ public partial class CoreManager : Node
 	
 	#endregion
 	
+	#region Buildings
+	
 	public bool CheckIfIsOwner(Vector2I position)
 	{
 		TileData featureTileData = TerrainFeaturesLayer.GetCellTileData(position);
 		Variant? ownerId = GetFeatureByCustomData(Config.PROPERTYOWNER_CUSTOMDATA, position);
 		if(featureTileData.HasCustomData(Config.PROPERTYOWNER_CUSTOMDATA) && ownerId.HasValue && ownerId.Value.AsInt32() == PlayerManagerInstance.CurrentPlayerIndex)
 		{
-			GD.Print("Property is owned by current player");
 			return true;
 		}
 	
-		GD.Print("Property is not owned by current player");
 		return false;
 	}
+
+	public int GetNumberOfOwnedBuildings(Player player)
+	{
+		int ownedBuildings = 0;
+		
+		for (int y = 0; y < _mapSize.Y; y++)
+		{
+			for (int x = 0; x < _mapSize.X; x++)
+			{
+				Vector2I cellPosition = new Vector2I(x, y);
+				Variant? featureTerrainType = GetFeatureByCustomData(Config.TERRAINTYPE_CUSTOMDATA, cellPosition);
+				
+				if (featureTerrainType.HasValue)
+				{
+					// Check feature type
+					switch (featureTerrainType.Value.ToString())
+					{
+						case Config.HEADQUARTERS_TERRAINTYPE:
+						case Config.CITY_TERRAINTYPE:
+						case Config.FACTORY_TERRAINTYPE:
+						case Config.PORT_TERRAINTYPE:
+						case Config.AIRPORT_TERRAINTYPE:
+						case Config.ANTENNA_TERRAINTYPE:
+							if (CheckIfIsOwner(cellPosition))
+								ownedBuildings++;
+							break;
+					}
+				}
+			}
+		}
+		
+		return ownedBuildings;
+	}
+	
+	#endregion
 	
 	#endregion
 }

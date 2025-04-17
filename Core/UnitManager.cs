@@ -118,6 +118,8 @@ public partial class UnitManager : Node
 					PlayerManager.CurrentPlayer.AddUnit(unit);
 					unitsList.Add(unit);
 					
+					PlayerManager.CurrentPlayer.Money -= unit.BasePrice;
+					
 					// Change the sprite of the unit according to its color
 					Sprite2D unitSprite = unitInstance.GetNode<Sprite2D>(unitType + "Sprite");
 					if (unitSprite != null)

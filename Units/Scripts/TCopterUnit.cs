@@ -4,7 +4,8 @@ namespace TinyConflict2D.Units.Scripts;
 
 public partial class TCopterUnit : Unit
 {
-	public static int BasePrice = 5000;
+	public const int BASE_PRICE = 5000;
+	public override int BasePrice { get;  } = BASE_PRICE;
 	
 	public TCopterUnit()
 	{
