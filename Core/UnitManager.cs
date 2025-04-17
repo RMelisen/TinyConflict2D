@@ -171,11 +171,12 @@ public partial class UnitManager : Node
 	public void UpdateTerrainWeightsByMovementType(UnitMovementType  movementType)
 	{
 		// Default values are : Plains 1, Forests 2, Mountains 999 (impassable)
-		int plainCost = 1;
-		int forestCost = 2;
-		int mountainCost = 999;
-		int roadCost = 1;
-		int waterCost = 999;
+		int plainCost = Config.DEFAULT_PLAIN_COST;
+		int forestCost = Config.DEFAULT_FOREST_COST;
+		int mountainCost = Config.DEFAULT_MOUNTAIN_COST;
+		int roadCost = Config.DEFAULT_ROAD_COST;
+		int waterCost = Config.DEFAULT_WATER_COST;
+		int enemyOccupiedCost = Config.DEFAULT_ENEMY_OCCUPIED_COST;
 
 		switch (movementType)
 		{
@@ -217,10 +218,10 @@ public partial class UnitManager : Node
 				break;
 		}
 
-		ApplyTerrainWeightsModifications(plainCost, forestCost, mountainCost, roadCost, waterCost);
+		ApplyTerrainWeightsModifications(plainCost, forestCost, mountainCost, roadCost, waterCost, enemyOccupiedCost);
 	}
 
-	public void ApplyTerrainWeightsModifications(int plainCost, int forestCost, int mountainCost, int roadCost, int waterCost)
+	public void ApplyTerrainWeightsModifications(int plainCost, int forestCost, int mountainCost, int roadCost, int waterCost, int enemyOccupiedCost)
 	{
 		Vector2I cellPosition;
 		TileData featureTileData;
@@ -231,8 +232,16 @@ public partial class UnitManager : Node
 			for (int x = 0; x < _mapSize.X; x++)
 			{
 				cellPosition = new Vector2I(x, y);
+				
+				// First check if the tile is occupied by an enemy
+				Unit unitFound = GetEnemyUnitAt(cellPosition);
+				if (unitFound != null)
+				{
+					ApplyCost(enemyOccupiedCost, cellPosition);	
+					continue;
+				}
+				
 				featureTileData = TerrainFeaturesLayer.GetCellTileData(cellPosition);
-
 				if (featureTileData != null && featureTileData.HasCustomData(Config.TERRAINTYPE_CUSTOMDATA))
 				{
 					string terrainType = (string)featureTileData.GetCustomData(Config.TERRAINTYPE_CUSTOMDATA);

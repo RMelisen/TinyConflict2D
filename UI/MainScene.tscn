@@ -514,16 +514,13 @@ tile_set = SubResource("TileSet_rpqi1")
 [node name="UILayer" type="TileMapLayer" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer"]
 tile_set = SubResource("TileSet_rf2cd")
 
-[node name="Cursor" type="Sprite2D" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer" node_paths=PackedStringArray("CoreManagerInstance", "TerrainLayer", "TerrainFeaturesLayer", "UnitManagerInstance", "PlayerManagerInstance", "MenuManagerInstance", "UIManagerInstance")]
+[node name="Cursor" type="Sprite2D" parent="TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer" node_paths=PackedStringArray("CoreManagerInstance", "UnitManagerInstance", "MenuManagerInstance", "UIManagerInstance")]
 position = Vector2(192, 144)
 texture = ExtResource("3_uxrcv")
 centered = false
 script = ExtResource("3_3owbp")
 CoreManagerInstance = NodePath("../../../../../Core/CoreManager")
-TerrainLayer = NodePath("../../../..")
-TerrainFeaturesLayer = NodePath("../../..")
 UnitManagerInstance = NodePath("../../../../../Core/UnitManager")
-PlayerManagerInstance = NodePath("../../../../../Core/PlayerManager")
 MenuManagerInstance = NodePath("../../../../../Core/MenuManager")
 UIManagerInstance = NodePath("../../../../../Core/UIManager")
 
@@ -548,9 +545,9 @@ PlayerManager = NodePath("../PlayerManager")
 [node name="PlayerManager" type="Node" parent="Core"]
 script = ExtResource("5_ut7ly")
 
-[node name="MenuManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UnitManagerInstance", "PlayerManagerInstance")]
+[node name="MenuManager" type="Node" parent="Core" node_paths=PackedStringArray("CoreManagerInstance", "UnitManagerInstance", "PlayerManagerInstance")]
 script = ExtResource("9_o4i80")
-TerrainLayer = NodePath("../../TerrainLayer")
+CoreManagerInstance = NodePath("../CoreManager")
 UnitManagerInstance = NodePath("../UnitManager")
 PlayerManagerInstance = NodePath("../PlayerManager")
 FactoryMenuScene = ExtResource("4_c5mi1")
@@ -558,13 +555,13 @@ AirportMenuScene = ExtResource("5_ppjb3")
 GameMenuScene = ExtResource("9_augcv")
 PortMenuScene = ExtResource("6_o4i80")
 
-[node name="UIManager" type="Node" parent="Core" node_paths=PackedStringArray("TerrainLayer", "UILayer", "UnitManagerInstance")]
+[node name="UIManager" type="Node" parent="Core" node_paths=PackedStringArray("UILayer", "UnitManagerInstance", "CoreManagerInstance")]
 script = ExtResource("10_k4ymp")
 ArrowBody = ExtResource("11_f764b")
 ArrowCurveLeft = ExtResource("12_augcv")
 ArrowCurveRight = ExtResource("13_li6wg")
 ArrowHead = ExtResource("14_wt235")
 HighlightedTile = ExtResource("16_li6wg")
-TerrainLayer = NodePath("../../TerrainLayer")
 UILayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer/UnitsLayer/UILayer")
 UnitManagerInstance = NodePath("../UnitManager")
+CoreManagerInstance = NodePath("../CoreManager")

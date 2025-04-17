@@ -40,6 +40,7 @@ public class Config
     public const int DEFAULT_MOUNTAIN_COST = 999;
     public const int DEFAULT_ROAD_COST = 1;
     public const int DEFAULT_WATER_COST = 999;
+    public const int DEFAULT_ENEMY_OCCUPIED_COST = 999;
     
     // Infantry
     public const int INFANTRY_FOREST_COST = 1;
