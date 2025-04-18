@@ -7,12 +7,6 @@ namespace TinyConflict2D.UI.Menus;
 
 public partial class PortMenu : ProductionBuildingMenu
 {
-	#region Properties
-	
-	public override string MenuPanelType { get; } = Config.PORT_MENU_PANEL;
-	
-	#endregion
-	
 	#region Godot Methods
 	
 	public override void _Ready()
@@ -20,9 +14,9 @@ public partial class PortMenu : ProductionBuildingMenu
 		// Store buttons
 		_buttons = new Button[]
 		{
-			GetNode<Button>("PortMenuPanel/LanderButton"),
-			GetNode<Button>("PortMenuPanel/SubmarineButton"),
-			GetNode<Button>("PortMenuPanel/BattleshipButton")
+			GetNode<Button>("VBoxContainer/LanderButton"),
+			GetNode<Button>("VBoxContainer/SubmarineButton"),
+			GetNode<Button>("VBoxContainer/BattleshipButton")
 		};
 		
 		// Store unit prices
@@ -34,9 +28,9 @@ public partial class PortMenu : ProductionBuildingMenu
 		};
 		
 		// Set unit prices in the buttons labels
-		GetNode<Label>("PortMenuPanel/LanderButton/LanderContainer/LanderCost").Text = LanderUnit.BASE_PRICE.ToString();
-		GetNode<Label>("PortMenuPanel/SubmarineButton/SubmarineContainer/SubmarineCost").Text = SubmarineUnit.BASE_PRICE.ToString();
-		GetNode<Label>("PortMenuPanel/BattleshipButton/BattleshipContainer/BattleshipCost").Text = BattleshipUnit.BASE_PRICE.ToString();
+		GetNode<Label>("VBoxContainer/LanderButton/LanderContainer/LanderCost").Text = LanderUnit.BASE_PRICE.ToString();
+		GetNode<Label>("VBoxContainer/SubmarineButton/SubmarineContainer/SubmarineCost").Text = SubmarineUnit.BASE_PRICE.ToString();
+		GetNode<Label>("VBoxContainer/BattleshipButton/BattleshipContainer/BattleshipCost").Text = BattleshipUnit.BASE_PRICE.ToString();
 
 		_buttons[_currentButtonIndex].GrabFocus();
 	}

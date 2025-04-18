@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b40kr14n35crp"]
+
+[ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="1_p4tte"]
+
+[node name="UnitActionMenu" type="CanvasLayer"]
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -68.0
+offset_right = 48.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_p4tte")
+alignment = 1
+
+[node name="WaitButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "Wait"
+
+[node name="AttackButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "Attack"
+
+[node name="SupplyButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "Supply"
+
+[node name="CaptureButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "Capture"

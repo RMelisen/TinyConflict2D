@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
@@ -390,6 +391,35 @@ public partial class UnitManager : Node
 	
 	#region Unit Combat
 
+	public void Attack(Unit attackerUnit, Unit defenderUnit)
+	{
+		// Damage calculation formula is : Damage = (B*Av/100 + L) * (HPa/10) * ((100 - (Dtr*HPd))/100)
+		// Where :
+		// B = Base damage against that unit (from CombatData)
+		// Av = 100 + 10 for each owned antenna
+		// L = Luck damage, a random number between 0 and 9
+		// HPa = HP of attacker divided by 10 (1 to 10)
+		// Dtr = Defending terrain level
+		// HPD = HP of defender (1 to 100)
+		
+		// Need to test this formula
+		
+		Random dice = new Random();
+
+		int numberOfAntenna = 0;
+		int luckDamage = dice.Next(0,9);
+		int terrainDefenseLevel = 0;
+		int baseDamage = CombatData.GetBaseDamagePercentage(attackerUnit.UnitType, defenderUnit.UnitType);
+
+		int damage = (baseDamage * (100 + numberOfAntenna) / 100 + luckDamage) * (attackerUnit.CurrentHealth / 10) * ((100 - terrainDefenseLevel * defenderUnit.CurrentHealth) / 100);
+		
+		defenderUnit.CurrentHealth -= damage;
+		if (defenderUnit.CurrentHealth <= 0)
+		{
+			defenderUnit.UnitOwner.RemoveUnit(defenderUnit);
+		}
+	}
+	
 	public List<Unit> GetInRangeUnits(Unit selectedUnit)
 	{
 		List<Unit> inRangeUnitList = new List<Unit>();

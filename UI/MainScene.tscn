@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://dxa523vi1cys" path="res://Core/UnitManager.cs" id="2_3owbp"]
 [ext_resource type="Script" uid="uid://dl6p8pjl7dfqh" path="res://Core/CursorController.cs" id="3_3owbp"]
 [ext_resource type="Texture2D" uid="uid://yfwko2t1ltvb" path="res://resources/TinyConflict/Tiles/tile_0061.png" id="3_uxrcv"]
-[ext_resource type="PackedScene" uid="uid://dnyg366dssf5y" path="res://UI/Menus/FactoryMenu.tscn" id="4_c5mi1"]
 [ext_resource type="Script" uid="uid://cwklj4nrsv0sx" path="res://Core/CoreManager.cs" id="4_wt235"]
 [ext_resource type="PackedScene" uid="uid://4pui8xwypook" path="res://UI/Menus/AirportMenu.tscn" id="5_ppjb3"]
 [ext_resource type="Script" uid="uid://dq44yhk03vby2" path="res://Core/Players/PlayerManager.cs" id="5_ut7ly"]
 [ext_resource type="PackedScene" uid="uid://bpwtidxqgfb2p" path="res://UI/Menus/PortMenu.tscn" id="6_o4i80"]
+[ext_resource type="PackedScene" uid="uid://tjesavaqoexi" path="res://UI/Menus/FactoryMenu.tscn" id="8_wt235"]
 [ext_resource type="PackedScene" uid="uid://bwisk1s03kd53" path="res://UI/Menus/GameMenu.tscn" id="9_augcv"]
 [ext_resource type="Script" uid="uid://oqtw1pwkrbqv" path="res://Core/MenuManager.cs" id="9_o4i80"]
 [ext_resource type="Script" uid="uid://drdculeyyo04j" path="res://Core/UIManager.cs" id="10_k4ymp"]
@@ -551,7 +551,7 @@ script = ExtResource("9_o4i80")
 CoreManagerInstance = NodePath("../CoreManager")
 UnitManagerInstance = NodePath("../UnitManager")
 PlayerManagerInstance = NodePath("../PlayerManager")
-FactoryMenuScene = ExtResource("4_c5mi1")
+FactoryMenuScene = ExtResource("8_wt235")
 AirportMenuScene = ExtResource("5_ppjb3")
 GameMenuScene = ExtResource("9_augcv")
 PortMenuScene = ExtResource("6_o4i80")

@@ -7,15 +7,25 @@
 [node name="GameMenu" type="CanvasLayer"]
 script = ExtResource("1_xbn5j")
 
-[node name="GameMenuPanel" type="Panel" parent="."]
-offset_right = 96.0
-offset_bottom = 75.0
+[node name="GameMenuPanel" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -40.0
+offset_right = 48.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("3_0v06v")
 
 [node name="InformationButton" type="Button" parent="GameMenuPanel"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="InformationContainer" type="HBoxContainer" parent="GameMenuPanel/InformationButton"]
 layout_mode = 0
@@ -35,10 +45,8 @@ label_settings = ExtResource("3_s2bjc")
 vertical_alignment = 1
 
 [node name="SettingsButton" type="Button" parent="GameMenuPanel"]
-layout_mode = 0
-offset_top = 25.0
-offset_right = 96.0
-offset_bottom = 49.0
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="SettingsContainer" type="HBoxContainer" parent="GameMenuPanel/SettingsButton"]
 layout_mode = 0
@@ -58,10 +66,8 @@ label_settings = ExtResource("3_s2bjc")
 vertical_alignment = 1
 
 [node name="EndTurnButton" type="Button" parent="GameMenuPanel"]
-layout_mode = 0
-offset_top = 50.0
-offset_right = 96.0
-offset_bottom = 74.0
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="EndTurnContainer" type="HBoxContainer" parent="GameMenuPanel/EndTurnButton"]
 layout_mode = 0

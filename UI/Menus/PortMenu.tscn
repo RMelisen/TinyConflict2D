@@ -12,100 +12,105 @@ script = ExtResource("1_4jjyo")
 DisabledButtonTheme = ExtResource("2_wacng")
 MainTheme = ExtResource("2_tefoa")
 
-[node name="PortMenuPanel" type="Panel" parent="."]
-offset_right = 96.0
-offset_bottom = 75.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -40.0
+offset_right = 48.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
 theme = ExtResource("2_tefoa")
 
-[node name="BattleshipButton" type="Button" parent="PortMenuPanel"]
-layout_mode = 0
-offset_top = 50.0
-offset_right = 96.0
-offset_bottom = 74.0
+[node name="LanderButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="BattleshipContainer" type="HBoxContainer" parent="PortMenuPanel/BattleshipButton"]
+[node name="LanderContainer" type="HBoxContainer" parent="VBoxContainer/LanderButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="BattleshipTexture" type="TextureRect" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("2_4jjyo")
-stretch_mode = 3
-
-[node name="BattleshipLabel" type="Label" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
-layout_mode = 2
-text = "Destr."
-vertical_alignment = 1
-
-[node name="BattleshipCost" type="Label" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "28000"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="LanderButton" type="Button" parent="PortMenuPanel"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
-
-[node name="LanderContainer" type="HBoxContainer" parent="PortMenuPanel/LanderButton"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
-
-[node name="LanderTexture" type="TextureRect" parent="PortMenuPanel/LanderButton/LanderContainer"]
+[node name="LanderTexture" type="TextureRect" parent="VBoxContainer/LanderButton/LanderContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("4_tefoa")
 stretch_mode = 3
 
-[node name="LanderLabel" type="Label" parent="PortMenuPanel/LanderButton/LanderContainer"]
+[node name="LanderLabel" type="Label" parent="VBoxContainer/LanderButton/LanderContainer"]
 layout_mode = 2
 text = "Lander"
 vertical_alignment = 1
 
-[node name="LanderCost" type="Label" parent="PortMenuPanel/LanderButton/LanderContainer"]
+[node name="LanderCost" type="Label" parent="VBoxContainer/LanderButton/LanderContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "12000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SubmarineButton" type="Button" parent="PortMenuPanel"]
-layout_mode = 0
-offset_top = 25.0
-offset_right = 96.0
-offset_bottom = 49.0
+[node name="SubmarineButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="SubmarineContainer" type="HBoxContainer" parent="PortMenuPanel/SubmarineButton"]
+[node name="SubmarineContainer" type="HBoxContainer" parent="VBoxContainer/SubmarineButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="SubmarineTexture" type="TextureRect" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
+[node name="SubmarineTexture" type="TextureRect" parent="VBoxContainer/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("5_wacng")
 stretch_mode = 3
 
-[node name="SubmarineLabel" type="Label" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
+[node name="SubmarineLabel" type="Label" parent="VBoxContainer/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 text = "Sub."
 vertical_alignment = 1
 
-[node name="SubmarineCost" type="Label" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
+[node name="SubmarineCost" type="Label" parent="VBoxContainer/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "20000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="pressed" from="PortMenuPanel/BattleshipButton" to="." method="OnUnitButtonPressed" binds= ["Battleship"]]
-[connection signal="pressed" from="PortMenuPanel/LanderButton" to="." method="OnUnitButtonPressed" binds= ["Lander"]]
-[connection signal="pressed" from="PortMenuPanel/SubmarineButton" to="." method="OnUnitButtonPressed" binds= ["Submarine"]]
+[node name="BattleshipButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BattleshipContainer" type="HBoxContainer" parent="VBoxContainer/BattleshipButton"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 24.0
+
+[node name="BattleshipTexture" type="TextureRect" parent="VBoxContainer/BattleshipButton/BattleshipContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_4jjyo")
+stretch_mode = 3
+
+[node name="BattleshipLabel" type="Label" parent="VBoxContainer/BattleshipButton/BattleshipContainer"]
+layout_mode = 2
+text = "Destr."
+vertical_alignment = 1
+
+[node name="BattleshipCost" type="Label" parent="VBoxContainer/BattleshipButton/BattleshipContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "28000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/LanderButton" to="." method="OnUnitButtonPressed" binds= ["Lander"]]
+[connection signal="pressed" from="VBoxContainer/SubmarineButton" to="." method="OnUnitButtonPressed" binds= ["Submarine"]]
+[connection signal="pressed" from="VBoxContainer/BattleshipButton" to="." method="OnUnitButtonPressed" binds= ["Battleship"]]

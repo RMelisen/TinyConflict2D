@@ -1,241 +1,275 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnyg366dssf5y"]
+[gd_scene load_steps=13 format=3 uid="uid://tjesavaqoexi"]
 
-[ext_resource type="Script" uid="uid://hlw24v5bghuj" path="res://UI/Menus/Scripts/FactoryMenu.cs" id="1_fq012"]
-[ext_resource type="Texture2D" uid="uid://xb1b46fusykw" path="res://resources/TinyConflict/Tiles/Units/InfantryGray.png" id="1_p54xo"]
-[ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="2_14b5k"]
-[ext_resource type="Theme" uid="uid://brhxixo2v6r7y" path="res://UI/Themes/DisabledButtonTheme.tres" id="2_qw120"]
-[ext_resource type="Texture2D" uid="uid://bm620m7j7gjpg" path="res://resources/TinyConflict/Tiles/Units/AAGray.png" id="4_1ty6w"]
-[ext_resource type="Texture2D" uid="uid://cy4apq2vt1tvj" path="res://resources/TinyConflict/Tiles/Units/APCGray.png" id="4_rjc67"]
-[ext_resource type="Texture2D" uid="uid://422nujg00xhp" path="res://resources/TinyConflict/Tiles/Units/MechGray.png" id="6_14b5k"]
-[ext_resource type="Texture2D" uid="uid://cporbswisffun" path="res://resources/TinyConflict/Tiles/Units/ReconGray.png" id="7_qw120"]
-[ext_resource type="Texture2D" uid="uid://dd24qtyspllof" path="res://resources/TinyConflict/Tiles/Units/SupplyGray.png" id="8_wtpfa"]
-[ext_resource type="Texture2D" uid="uid://hl6s1rorsqol" path="res://resources/TinyConflict/Tiles/Units/TankGray.png" id="9_e5vug"]
+[ext_resource type="Script" uid="uid://hlw24v5bghuj" path="res://UI/Menus/Scripts/FactoryMenu.cs" id="1_hqr3e"]
+[ext_resource type="Theme" uid="uid://brhxixo2v6r7y" path="res://UI/Themes/DisabledButtonTheme.tres" id="2_yl2s8"]
+[ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="3_5i4s3"]
+[ext_resource type="Texture2D" uid="uid://bm620m7j7gjpg" path="res://resources/TinyConflict/Tiles/Units/AAGray.png" id="4_ge6k6"]
+[ext_resource type="Texture2D" uid="uid://cy4apq2vt1tvj" path="res://resources/TinyConflict/Tiles/Units/APCGray.png" id="5_yoi5g"]
+[ext_resource type="Texture2D" uid="uid://xb1b46fusykw" path="res://resources/TinyConflict/Tiles/Units/InfantryGray.png" id="6_8qfd6"]
+[ext_resource type="Texture2D" uid="uid://422nujg00xhp" path="res://resources/TinyConflict/Tiles/Units/MechGray.png" id="7_kebwj"]
+[ext_resource type="Texture2D" uid="uid://cporbswisffun" path="res://resources/TinyConflict/Tiles/Units/ReconGray.png" id="8_ck3mn"]
+[ext_resource type="Texture2D" uid="uid://dd24qtyspllof" path="res://resources/TinyConflict/Tiles/Units/SupplyGray.png" id="9_75npg"]
+[ext_resource type="Texture2D" uid="uid://hl6s1rorsqol" path="res://resources/TinyConflict/Tiles/Units/TankGray.png" id="10_0bg6g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqr3e"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_yl2s8"]
+Button/styles/normal = SubResource("StyleBoxFlat_hqr3e")
 
 [node name="FactoryMenu" type="CanvasLayer"]
-script = ExtResource("1_fq012")
-DisabledButtonTheme = ExtResource("2_qw120")
-MainTheme = ExtResource("2_14b5k")
+script = ExtResource("1_hqr3e")
+DisabledButtonTheme = ExtResource("2_yl2s8")
+MainTheme = ExtResource("3_5i4s3")
 
-[node name="FactoryMenuPanel" type="Panel" parent="."]
-offset_right = 192.0
-offset_bottom = 100.0
-theme = ExtResource("2_14b5k")
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -54.0
+offset_right = 98.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_5i4s3")
 
-[node name="AAButton" type="Button" parent="FactoryMenuPanel"]
-layout_mode = 0
-offset_top = 75.0
-offset_right = 96.0
-offset_bottom = 99.0
-
-[node name="AAContainer" type="HBoxContainer" parent="FactoryMenuPanel/AAButton"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
-
-[node name="AATexture" type="TextureRect" parent="FactoryMenuPanel/AAButton/AAContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("4_1ty6w")
-stretch_mode = 3
-
-[node name="AALabel" type="Label" parent="FactoryMenuPanel/AAButton/AAContainer"]
-layout_mode = 2
-text = "Anti-Air"
-vertical_alignment = 1
-
-[node name="AACost" type="Label" parent="FactoryMenuPanel/AAButton/AAContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "12000"
-horizontal_alignment = 2
-vertical_alignment = 1
 
-[node name="APCButton" type="Button" parent="FactoryMenuPanel"]
-layout_mode = 0
-offset_left = 96.0
-offset_right = 192.0
-offset_bottom = 24.0
+[node name="InfantryButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="APCContainer" type="HBoxContainer" parent="FactoryMenuPanel/APCButton"]
+[node name="InfantryContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/InfantryButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="APCTexture" type="TextureRect" parent="FactoryMenuPanel/APCButton/APCContainer"]
+[node name="InfantryTexture" type="TextureRect" parent="HBoxContainer/VBoxContainer/InfantryButton/InfantryContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture = ExtResource("4_rjc67")
+texture = ExtResource("6_8qfd6")
 stretch_mode = 3
 
-[node name="APCLabel" type="Label" parent="FactoryMenuPanel/APCButton/APCContainer"]
-layout_mode = 2
-text = "APC"
-vertical_alignment = 1
-
-[node name="APCCost" type="Label" parent="FactoryMenuPanel/APCButton/APCContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "5000"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="InfantryButton" type="Button" parent="FactoryMenuPanel"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
-
-[node name="InfantryContainer" type="HBoxContainer" parent="FactoryMenuPanel/InfantryButton"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
-
-[node name="InfantryTexture" type="TextureRect" parent="FactoryMenuPanel/InfantryButton/InfantryContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("1_p54xo")
-stretch_mode = 3
-
-[node name="InfantryLabel" type="Label" parent="FactoryMenuPanel/InfantryButton/InfantryContainer"]
+[node name="InfantryLabel" type="Label" parent="HBoxContainer/VBoxContainer/InfantryButton/InfantryContainer"]
 layout_mode = 2
 text = "Infantry"
 vertical_alignment = 1
 
-[node name="InfantryCost" type="Label" parent="FactoryMenuPanel/InfantryButton/InfantryContainer"]
+[node name="InfantryCost" type="Label" parent="HBoxContainer/VBoxContainer/InfantryButton/InfantryContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "3000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MechButton" type="Button" parent="FactoryMenuPanel"]
-layout_mode = 0
-offset_top = 25.0
-offset_right = 96.0
-offset_bottom = 49.0
+[node name="MechButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="MechContainer" type="HBoxContainer" parent="FactoryMenuPanel/MechButton"]
+[node name="MechContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MechButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="MechTexture" type="TextureRect" parent="FactoryMenuPanel/MechButton/MechContainer"]
+[node name="MechTexture" type="TextureRect" parent="HBoxContainer/VBoxContainer/MechButton/MechContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture = ExtResource("6_14b5k")
+texture = ExtResource("7_kebwj")
 stretch_mode = 3
 
-[node name="MechLabel" type="Label" parent="FactoryMenuPanel/MechButton/MechContainer"]
+[node name="MechLabel" type="Label" parent="HBoxContainer/VBoxContainer/MechButton/MechContainer"]
 layout_mode = 2
 text = "Mech"
 vertical_alignment = 1
 
-[node name="MechCost" type="Label" parent="FactoryMenuPanel/MechButton/MechContainer"]
+[node name="MechCost" type="Label" parent="HBoxContainer/VBoxContainer/MechButton/MechContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ReconButton" type="Button" parent="FactoryMenuPanel"]
-layout_mode = 0
-offset_top = 50.0
-offset_right = 96.0
-offset_bottom = 74.0
+[node name="ReconButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="ReconContainer" type="HBoxContainer" parent="FactoryMenuPanel/ReconButton"]
+[node name="ReconContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ReconButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="ReconTexture" type="TextureRect" parent="FactoryMenuPanel/ReconButton/ReconContainer"]
+[node name="ReconTexture" type="TextureRect" parent="HBoxContainer/VBoxContainer/ReconButton/ReconContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture = ExtResource("7_qw120")
+texture = ExtResource("8_ck3mn")
 stretch_mode = 3
 
-[node name="ReconLabel" type="Label" parent="FactoryMenuPanel/ReconButton/ReconContainer"]
+[node name="ReconLabel" type="Label" parent="HBoxContainer/VBoxContainer/ReconButton/ReconContainer"]
 layout_mode = 2
 text = "Recon"
 vertical_alignment = 1
 
-[node name="ReconCost" type="Label" parent="FactoryMenuPanel/ReconButton/ReconContainer"]
+[node name="ReconCost" type="Label" parent="HBoxContainer/VBoxContainer/ReconButton/ReconContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "6000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="SupplyButton" type="Button" parent="FactoryMenuPanel"]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 25.0
-offset_right = 192.0
-offset_bottom = 49.0
+[node name="AAButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="SupplyContainer" type="HBoxContainer" parent="FactoryMenuPanel/SupplyButton"]
+[node name="AAContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/AAButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="SupplyTexture" type="TextureRect" parent="FactoryMenuPanel/SupplyButton/SupplyContainer"]
+[node name="AATexture" type="TextureRect" parent="HBoxContainer/VBoxContainer/AAButton/AAContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture = ExtResource("8_wtpfa")
+texture = ExtResource("4_ge6k6")
 stretch_mode = 3
 
-[node name="SupplyLabel" type="Label" parent="FactoryMenuPanel/SupplyButton/SupplyContainer"]
+[node name="AALabel" type="Label" parent="HBoxContainer/VBoxContainer/AAButton/AAContainer"]
 layout_mode = 2
-text = "Supply"
+text = "Anti-Air"
 vertical_alignment = 1
 
-[node name="SupplyCost" type="Label" parent="FactoryMenuPanel/SupplyButton/SupplyContainer"]
+[node name="AACost" type="Label" parent="HBoxContainer/VBoxContainer/AAButton/AAContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="APCButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="APCContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/APCButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="APCTexture" type="TextureRect" parent="HBoxContainer/VBoxContainer2/APCButton/APCContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("5_yoi5g")
+stretch_mode = 3
+
+[node name="APCLabel" type="Label" parent="HBoxContainer/VBoxContainer2/APCButton/APCContainer"]
+layout_mode = 2
+text = "APC"
+vertical_alignment = 1
+
+[node name="APCCost" type="Label" parent="HBoxContainer/VBoxContainer2/APCButton/APCContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TankButton" type="Button" parent="FactoryMenuPanel"]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 50.0
-offset_right = 192.0
-offset_bottom = 74.0
+[node name="SupplyButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TankContainer" type="HBoxContainer" parent="FactoryMenuPanel/TankButton"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
+[node name="SupplyContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/SupplyButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TankTexture" type="TextureRect" parent="FactoryMenuPanel/TankButton/TankContainer"]
+[node name="SupplyTexture" type="TextureRect" parent="HBoxContainer/VBoxContainer2/SupplyButton/SupplyContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture = ExtResource("9_e5vug")
+texture = ExtResource("9_75npg")
 stretch_mode = 3
 
-[node name="TankLabel" type="Label" parent="FactoryMenuPanel/TankButton/TankContainer"]
+[node name="SupplyLabel" type="Label" parent="HBoxContainer/VBoxContainer2/SupplyButton/SupplyContainer"]
+layout_mode = 2
+text = "Supply"
+vertical_alignment = 1
+
+[node name="SupplyCost" type="Label" parent="HBoxContainer/VBoxContainer2/SupplyButton/SupplyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TankButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TankContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/TankButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TankTexture" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TankButton/TankContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("10_0bg6g")
+stretch_mode = 3
+
+[node name="TankLabel" type="Label" parent="HBoxContainer/VBoxContainer2/TankButton/TankContainer"]
 layout_mode = 2
 text = "Tank"
 vertical_alignment = 1
 
-[node name="TankCost" type="Label" parent="FactoryMenuPanel/TankButton/TankContainer"]
+[node name="TankCost" type="Label" parent="HBoxContainer/VBoxContainer2/TankButton/TankContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "8000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="pressed" from="FactoryMenuPanel/AAButton" to="." method="OnUnitButtonPressed" binds= ["AA"]]
-[connection signal="pressed" from="FactoryMenuPanel/APCButton" to="." method="OnUnitButtonPressed" binds= ["APC"]]
-[connection signal="pressed" from="FactoryMenuPanel/InfantryButton" to="." method="OnUnitButtonPressed" binds= ["Infantry"]]
-[connection signal="pressed" from="FactoryMenuPanel/MechButton" to="." method="OnUnitButtonPressed" binds= ["Mech"]]
-[connection signal="pressed" from="FactoryMenuPanel/ReconButton" to="." method="OnUnitButtonPressed" binds= ["Recon"]]
-[connection signal="pressed" from="FactoryMenuPanel/SupplyButton" to="." method="OnUnitButtonPressed" binds= ["Supply"]]
-[connection signal="pressed" from="FactoryMenuPanel/TankButton" to="." method="OnUnitButtonPressed" binds= ["Tank"]]
+[node name="InvisibleButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_yl2s8")
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/InfantryButton" to="." method="OnUnitButtonPressed" binds= ["Infantry"]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MechButton" to="." method="OnUnitButtonPressed" binds= ["Mech"]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ReconButton" to="." method="OnUnitButtonPressed" binds= ["Recon"]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AAButton" to="." method="OnUnitButtonPressed" binds= ["AA"]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/APCButton" to="." method="OnUnitButtonPressed" binds= ["APC"]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/SupplyButton" to="." method="OnUnitButtonPressed" binds= ["Supply"]]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/TankButton" to="." method="OnUnitButtonPressed" binds= ["Tank"]]

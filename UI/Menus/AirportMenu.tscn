@@ -12,100 +12,106 @@ script = ExtResource("1_2ujxm")
 DisabledButtonTheme = ExtResource("2_aw3w8")
 MainTheme = ExtResource("2_oodc0")
 
-[node name="AirportMenuPanel" type="Panel" parent="."]
-offset_right = 96.0
-offset_bottom = 75.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -40.0
+offset_right = 48.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
 theme = ExtResource("2_oodc0")
+alignment = 1
 
-[node name="BCopterButton" type="Button" parent="AirportMenuPanel"]
+[node name="BCopterButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BCopterContainer" type="HBoxContainer" parent="VBoxContainer/BCopterButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="BCopterContainer" type="HBoxContainer" parent="AirportMenuPanel/BCopterButton"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
-
-[node name="BCopterTexture" type="TextureRect" parent="AirportMenuPanel/BCopterButton/BCopterContainer"]
+[node name="BCopterTexture" type="TextureRect" parent="VBoxContainer/BCopterButton/BCopterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("2_3u1ed")
 stretch_mode = 3
 
-[node name="BCopterLabel" type="Label" parent="AirportMenuPanel/BCopterButton/BCopterContainer"]
+[node name="BCopterLabel" type="Label" parent="VBoxContainer/BCopterButton/BCopterContainer"]
 layout_mode = 2
 text = "B. Copter"
 vertical_alignment = 1
 
-[node name="BCopterCost" type="Label" parent="AirportMenuPanel/BCopterButton/BCopterContainer"]
+[node name="BCopterCost" type="Label" parent="VBoxContainer/BCopterButton/BCopterContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "9000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BomberButton" type="Button" parent="AirportMenuPanel"]
-layout_mode = 0
-offset_top = 50.0
-offset_right = 96.0
-offset_bottom = 74.0
+[node name="TCopterButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="BomberContainer" type="HBoxContainer" parent="AirportMenuPanel/BomberButton"]
+[node name="TCopterContainer" type="HBoxContainer" parent="VBoxContainer/TCopterButton"]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 24.0
 
-[node name="BomberTexture" type="TextureRect" parent="AirportMenuPanel/BomberButton/BomberContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("4_oodc0")
-stretch_mode = 3
-
-[node name="BomberLabel" type="Label" parent="AirportMenuPanel/BomberButton/BomberContainer"]
-layout_mode = 2
-text = "Bomber"
-vertical_alignment = 1
-
-[node name="BomberCost" type="Label" parent="AirportMenuPanel/BomberButton/BomberContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "22000"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="TCopterButton" type="Button" parent="AirportMenuPanel"]
-layout_mode = 0
-offset_top = 25.0
-offset_right = 96.0
-offset_bottom = 49.0
-
-[node name="TCopterContainer" type="HBoxContainer" parent="AirportMenuPanel/TCopterButton"]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 24.0
-
-[node name="TCopterTexture" type="TextureRect" parent="AirportMenuPanel/TCopterButton/TCopterContainer"]
+[node name="TCopterTexture" type="TextureRect" parent="VBoxContainer/TCopterButton/TCopterContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("5_aw3w8")
 stretch_mode = 3
 
-[node name="TCopterLabel" type="Label" parent="AirportMenuPanel/TCopterButton/TCopterContainer"]
+[node name="TCopterLabel" type="Label" parent="VBoxContainer/TCopterButton/TCopterContainer"]
 layout_mode = 2
 text = "T. Copter"
 vertical_alignment = 1
 
-[node name="TCopterCost" type="Label" parent="AirportMenuPanel/TCopterButton/TCopterContainer"]
+[node name="TCopterCost" type="Label" parent="VBoxContainer/TCopterButton/TCopterContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="pressed" from="AirportMenuPanel/BCopterButton" to="." method="OnUnitButtonPressed" binds= ["BCopter"]]
-[connection signal="pressed" from="AirportMenuPanel/BomberButton" to="." method="OnUnitButtonPressed" binds= ["Bomber"]]
-[connection signal="pressed" from="AirportMenuPanel/TCopterButton" to="." method="OnUnitButtonPressed" binds= ["TCopter"]]
+[node name="BomberButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BomberContainer" type="HBoxContainer" parent="VBoxContainer/BomberButton"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 24.0
+
+[node name="BomberTexture" type="TextureRect" parent="VBoxContainer/BomberButton/BomberContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("4_oodc0")
+stretch_mode = 3
+
+[node name="BomberLabel" type="Label" parent="VBoxContainer/BomberButton/BomberContainer"]
+layout_mode = 2
+text = "Bomber"
+vertical_alignment = 1
+
+[node name="BomberCost" type="Label" parent="VBoxContainer/BomberButton/BomberContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "22000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/BCopterButton" to="." method="OnUnitButtonPressed" binds= ["BCopter"]]
+[connection signal="pressed" from="VBoxContainer/TCopterButton" to="." method="OnUnitButtonPressed" binds= ["TCopter"]]
+[connection signal="pressed" from="VBoxContainer/BomberButton" to="." method="OnUnitButtonPressed" binds= ["Bomber"]]

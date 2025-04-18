@@ -19,8 +19,6 @@ public partial class ProductionBuildingMenu : CanvasLayer
 	internal int[] _unitPrices;
 	internal int _currentButtonIndex = 0;
 
-	public virtual string MenuPanelType { get; } = "";
-
 	#endregion
 	
 	#region Godot Methods
@@ -83,12 +81,10 @@ public partial class ProductionBuildingMenu : CanvasLayer
 	
 	#region Visibility
 	
-	public void ShowMenu(Vector2 position, int playerMoney)
+	public void ShowMenu(int playerMoney)
 	{
 		Visible = true;
-		_currentButtonIndex = 0;
-		_buttons[_currentButtonIndex].GrabFocus();
-		GetNode<Control>(MenuPanelType).Position = position;
+		_currentButtonIndex = 0;		
 
 		for (int i = 0; i < _buttons.Length; i++)
 		{
@@ -103,6 +99,8 @@ public partial class ProductionBuildingMenu : CanvasLayer
 				_buttons[i].Theme =  MainTheme;
 			}
 		}
+		
+		_buttons[_currentButtonIndex].GrabFocus();
 	}
 
 	public void HideMenu()

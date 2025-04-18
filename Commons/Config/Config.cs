@@ -32,14 +32,6 @@ public class Config
     
     #endregion
     
-    #region Production Building Menus
-    
-    public const string FACTORY_MENU_PANEL = "FactoryMenuPanel";
-    public const string PORT_MENU_PANEL = "PortMenuPanel";
-    public const string AIRPORT_MENU_PANEL = "AirportMenuPanel";
-    
-    #endregion
-    
     #region Terrain Costs
     
     // Defaults
