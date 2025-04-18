@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://4pui8xwypook"]
+[gd_scene load_steps=7 format=3 uid="uid://4pui8xwypook"]
 
 [ext_resource type="Script" uid="uid://bqm4vlc2j4v41" path="res://UI/Menus/Scripts/AirportMenu.cs" id="1_2ujxm"]
 [ext_resource type="Texture2D" uid="uid://bbtr6kfecsupf" path="res://resources/TinyConflict/Tiles/Units/BCopterGray.png" id="2_3u1ed"]
 [ext_resource type="Theme" uid="uid://brhxixo2v6r7y" path="res://UI/Themes/DisabledButtonTheme.tres" id="2_aw3w8"]
 [ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="2_oodc0"]
-[ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="3_5o8tw"]
 [ext_resource type="Texture2D" uid="uid://diq8dcbw8t1mu" path="res://resources/TinyConflict/Tiles/Units/BomberGray.png" id="4_oodc0"]
 [ext_resource type="Texture2D" uid="uid://15510780ovsw" path="res://resources/TinyConflict/Tiles/Units/TCopterGray.png" id="5_aw3w8"]
 
@@ -38,14 +37,12 @@ stretch_mode = 3
 [node name="BCopterLabel" type="Label" parent="AirportMenuPanel/BCopterButton/BCopterContainer"]
 layout_mode = 2
 text = "B. Copter"
-label_settings = ExtResource("3_5o8tw")
 vertical_alignment = 1
 
 [node name="BCopterCost" type="Label" parent="AirportMenuPanel/BCopterButton/BCopterContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "9000"
-label_settings = ExtResource("3_5o8tw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -70,14 +67,12 @@ stretch_mode = 3
 [node name="BomberLabel" type="Label" parent="AirportMenuPanel/BomberButton/BomberContainer"]
 layout_mode = 2
 text = "Bomber"
-label_settings = ExtResource("3_5o8tw")
 vertical_alignment = 1
 
 [node name="BomberCost" type="Label" parent="AirportMenuPanel/BomberButton/BomberContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "22000"
-label_settings = ExtResource("3_5o8tw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -102,14 +97,12 @@ stretch_mode = 3
 [node name="TCopterLabel" type="Label" parent="AirportMenuPanel/TCopterButton/TCopterContainer"]
 layout_mode = 2
 text = "T. Copter"
-label_settings = ExtResource("3_5o8tw")
 vertical_alignment = 1
 
 [node name="TCopterCost" type="Label" parent="AirportMenuPanel/TCopterButton/TCopterContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5000"
-label_settings = ExtResource("3_5o8tw")
 horizontal_alignment = 2
 vertical_alignment = 1
 

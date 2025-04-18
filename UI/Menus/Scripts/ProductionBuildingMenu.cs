@@ -94,8 +94,8 @@ public partial class ProductionBuildingMenu : CanvasLayer
 		{
 			if (_unitPrices[i] > playerMoney)
 			{
+				_buttons[i].Theme = DisabledButtonTheme;
 				_buttons[i].Disabled = true;
-				_buttons[i].Theme =  DisabledButtonTheme;
 			}
 			else
 			{

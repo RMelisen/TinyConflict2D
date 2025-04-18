@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpwtidxqgfb2p"]
+[gd_scene load_steps=7 format=3 uid="uid://bpwtidxqgfb2p"]
 
 [ext_resource type="Script" uid="uid://bya2b3bicy5j8" path="res://UI/Menus/Scripts/PortMenu.cs" id="1_4jjyo"]
 [ext_resource type="Texture2D" uid="uid://b86qoeh46nd0" path="res://resources/TinyConflict/Tiles/Units/BattleshipGray.png" id="2_4jjyo"]
 [ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="2_tefoa"]
 [ext_resource type="Theme" uid="uid://brhxixo2v6r7y" path="res://UI/Themes/DisabledButtonTheme.tres" id="2_wacng"]
-[ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="3_ol5iw"]
 [ext_resource type="Texture2D" uid="uid://3sehql1pha1q" path="res://resources/TinyConflict/Tiles/Units/LanderGray.png" id="4_tefoa"]
 [ext_resource type="Texture2D" uid="uid://c26dnp820tbxu" path="res://resources/TinyConflict/Tiles/Units/SubmarineGray.png" id="5_wacng"]
 
@@ -39,14 +38,12 @@ stretch_mode = 3
 [node name="BattleshipLabel" type="Label" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
 layout_mode = 2
 text = "Destr."
-label_settings = ExtResource("3_ol5iw")
 vertical_alignment = 1
 
 [node name="BattleshipCost" type="Label" parent="PortMenuPanel/BattleshipButton/BattleshipContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "28000"
-label_settings = ExtResource("3_ol5iw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -70,14 +67,12 @@ stretch_mode = 3
 [node name="LanderLabel" type="Label" parent="PortMenuPanel/LanderButton/LanderContainer"]
 layout_mode = 2
 text = "Lander"
-label_settings = ExtResource("3_ol5iw")
 vertical_alignment = 1
 
 [node name="LanderCost" type="Label" parent="PortMenuPanel/LanderButton/LanderContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "12000"
-label_settings = ExtResource("3_ol5iw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -102,14 +97,12 @@ stretch_mode = 3
 [node name="SubmarineLabel" type="Label" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 text = "Sub."
-label_settings = ExtResource("3_ol5iw")
 vertical_alignment = 1
 
 [node name="SubmarineCost" type="Label" parent="PortMenuPanel/SubmarineButton/SubmarineContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "20000"
-label_settings = ExtResource("3_ol5iw")
 horizontal_alignment = 2
 vertical_alignment = 1
 

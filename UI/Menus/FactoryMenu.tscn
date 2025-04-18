@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnyg366dssf5y"]
+[gd_scene load_steps=11 format=3 uid="uid://dnyg366dssf5y"]
 
 [ext_resource type="Script" uid="uid://hlw24v5bghuj" path="res://UI/Menus/Scripts/FactoryMenu.cs" id="1_fq012"]
 [ext_resource type="Texture2D" uid="uid://xb1b46fusykw" path="res://resources/TinyConflict/Tiles/Units/InfantryGray.png" id="1_p54xo"]
 [ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="2_14b5k"]
-[ext_resource type="LabelSettings" uid="uid://cbeiaoryle03y" path="res://UI/LabelsSettings/UnitCreationLabelSettings.tres" id="2_fq012"]
 [ext_resource type="Theme" uid="uid://brhxixo2v6r7y" path="res://UI/Themes/DisabledButtonTheme.tres" id="2_qw120"]
 [ext_resource type="Texture2D" uid="uid://bm620m7j7gjpg" path="res://resources/TinyConflict/Tiles/Units/AAGray.png" id="4_1ty6w"]
 [ext_resource type="Texture2D" uid="uid://cy4apq2vt1tvj" path="res://resources/TinyConflict/Tiles/Units/APCGray.png" id="4_rjc67"]
@@ -43,14 +42,12 @@ stretch_mode = 3
 [node name="AALabel" type="Label" parent="FactoryMenuPanel/AAButton/AAContainer"]
 layout_mode = 2
 text = "Anti-Air"
-label_settings = ExtResource("2_fq012")
 vertical_alignment = 1
 
 [node name="AACost" type="Label" parent="FactoryMenuPanel/AAButton/AAContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "12000"
-label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -75,14 +72,12 @@ stretch_mode = 3
 [node name="APCLabel" type="Label" parent="FactoryMenuPanel/APCButton/APCContainer"]
 layout_mode = 2
 text = "APC"
-label_settings = ExtResource("2_fq012")
 vertical_alignment = 1
 
 [node name="APCCost" type="Label" parent="FactoryMenuPanel/APCButton/APCContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5000"
-label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -106,14 +101,12 @@ stretch_mode = 3
 [node name="InfantryLabel" type="Label" parent="FactoryMenuPanel/InfantryButton/InfantryContainer"]
 layout_mode = 2
 text = "Infantry"
-label_settings = ExtResource("2_fq012")
 vertical_alignment = 1
 
 [node name="InfantryCost" type="Label" parent="FactoryMenuPanel/InfantryButton/InfantryContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "3000"
-label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -138,14 +131,12 @@ stretch_mode = 3
 [node name="MechLabel" type="Label" parent="FactoryMenuPanel/MechButton/MechContainer"]
 layout_mode = 2
 text = "Mech"
-label_settings = ExtResource("2_fq012")
 vertical_alignment = 1
 
 [node name="MechCost" type="Label" parent="FactoryMenuPanel/MechButton/MechContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5000"
-label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -170,14 +161,12 @@ stretch_mode = 3
 [node name="ReconLabel" type="Label" parent="FactoryMenuPanel/ReconButton/ReconContainer"]
 layout_mode = 2
 text = "Recon"
-label_settings = ExtResource("2_fq012")
 vertical_alignment = 1
 
 [node name="ReconCost" type="Label" parent="FactoryMenuPanel/ReconButton/ReconContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "6000"
-label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -203,14 +192,12 @@ stretch_mode = 3
 [node name="SupplyLabel" type="Label" parent="FactoryMenuPanel/SupplyButton/SupplyContainer"]
 layout_mode = 2
 text = "Supply"
-label_settings = ExtResource("2_fq012")
 vertical_alignment = 1
 
 [node name="SupplyCost" type="Label" parent="FactoryMenuPanel/SupplyButton/SupplyContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5000"
-label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -236,14 +223,12 @@ stretch_mode = 3
 [node name="TankLabel" type="Label" parent="FactoryMenuPanel/TankButton/TankContainer"]
 layout_mode = 2
 text = "Tank"
-label_settings = ExtResource("2_fq012")
 vertical_alignment = 1
 
 [node name="TankCost" type="Label" parent="FactoryMenuPanel/TankButton/TankContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "8000"
-label_settings = ExtResource("2_fq012")
 horizontal_alignment = 2
 vertical_alignment = 1
 
