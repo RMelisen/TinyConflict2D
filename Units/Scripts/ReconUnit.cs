@@ -11,7 +11,7 @@ public partial class ReconUnit : Unit
 	{
 		MovementType = UnitMovementType.TireA;
 		MovementRange = 8;
-		UnitType = "Recon";
+		UnitType = UnitType.Recon;
 	}
 
 	public override string ToString()

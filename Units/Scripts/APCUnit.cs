@@ -11,7 +11,7 @@ public partial class APCUnit : Unit
 	{
 		MovementType = UnitMovementType.Treads;
 		MovementRange = 6;
-		UnitType = "APC";
+		UnitType = UnitType.APC;
 	}
 
 	public override string ToString()

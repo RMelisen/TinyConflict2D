@@ -11,7 +11,7 @@ public partial class MechUnit : Unit
 	{
 		MovementType = UnitMovementType.Mech;
 		MovementRange = 2;
-		UnitType = "Mech";
+		UnitType = UnitType.Mech;
 	}
 
 	public override string ToString()

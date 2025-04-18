@@ -15,14 +15,15 @@ public partial class Unit : CharacterBody2D
 	[Export] 
 	public float Speed = 150.0f; // Speed in units per second
 	
-	public int Health { get; set; } = 100;
+	public int MaxHealth { get; set; } = 100;
+	public int CurrentHealth;
 	public int MovementRange { get; set; } = 3;
 	public int MovementPointsLeft { get; set; }
 	public UnitMovementType MovementType { get; set; }
 	public Color PlayerColor { get; set; } = Colors.Gray;
 	public Player UnitOwner { get; set; }
 	public Vector2I TilePosition { get; set; }
-	public string UnitType { get; set; }
+	public UnitType UnitType { get; set; } = UnitType.None;
 	public virtual int BasePrice { get; } = 0;
 
 	#endregion
@@ -39,6 +40,7 @@ public partial class Unit : CharacterBody2D
 	public override void _Ready()
 	{
 		MovementPointsLeft = MovementRange;
+		CurrentHealth = MaxHealth;
 	}
 	
 	public override void _Process(double delta)

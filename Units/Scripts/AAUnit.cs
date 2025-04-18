@@ -12,7 +12,7 @@ public partial class AAUnit : Unit
 	{
 		MovementType = UnitMovementType.Treads;
 		MovementRange = 6;
-		UnitType = "AA";
+		UnitType = UnitType.AA;
 	}
 
 	public override string ToString()

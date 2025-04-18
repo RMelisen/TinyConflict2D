@@ -11,7 +11,7 @@ public partial class TCopterUnit : Unit
 	{
 		MovementType = UnitMovementType.Airborne;
 		MovementRange = 6;
-		UnitType = "TCopter";
+		UnitType = UnitType.TCopter;
 	}
 
 	public override string ToString()

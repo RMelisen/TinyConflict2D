@@ -11,7 +11,7 @@ public partial class TankUnit : Unit
 	{
 		MovementType = UnitMovementType.Treads;
 		MovementRange = 6;
-		UnitType = "Tank";
+		UnitType = UnitType.Tank;
 	}
 
 	public override string ToString()
