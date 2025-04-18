@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b40kr14n35crp"]
+[gd_scene load_steps=3 format=3 uid="uid://b40kr14n35crp"]
 
+[ext_resource type="Script" uid="uid://c5q14ikdmvb51" path="res://UI/Menus/Scripts/UnitActionMenu.cs" id="1_mxxdu"]
 [ext_resource type="Theme" uid="uid://v67atetudlau" path="res://UI/Themes/MainTheme.tres" id="1_p4tte"]
 
 [node name="UnitActionMenu" type="CanvasLayer"]
+script = ExtResource("1_mxxdu")
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8
@@ -35,3 +37,7 @@ text = "Supply"
 [node name="CaptureButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
 text = "Capture"
+
+[connection signal="pressed" from="ButtonsContainer/WaitButton" to="." method="OnButtonPressed" binds= ["wait"]]
+[connection signal="pressed" from="ButtonsContainer/AttackButton" to="." method="OnButtonPressed" binds= ["attack"]]
+[connection signal="pressed" from="ButtonsContainer/SupplyButton" to="." method="OnButtonPressed" binds= ["supply"]]

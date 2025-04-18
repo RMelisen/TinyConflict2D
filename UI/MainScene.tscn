@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://jjnx386iyt3f"]
+[gd_scene load_steps=27 format=4 uid="uid://jjnx386iyt3f"]
 
 [ext_resource type="Texture2D" uid="uid://38qqb54syyeg" path="res://resources/TinyConflict/Tilemap/tilemap.png" id="1_3mqji"]
 [ext_resource type="Script" uid="uid://dxa523vi1cys" path="res://Core/UnitManager.cs" id="2_3owbp"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://drdculeyyo04j" path="res://Core/UIManager.cs" id="10_k4ymp"]
 [ext_resource type="PackedScene" uid="uid://8bp7t0p1fe4r" path="res://UI/Movements/ArrowBodyStraight.tscn" id="11_f764b"]
 [ext_resource type="PackedScene" uid="uid://ctwhjxrr6i6k" path="res://UI/Movements/ArrowBodyCurvedLeft.tscn" id="12_augcv"]
+[ext_resource type="PackedScene" uid="uid://b40kr14n35crp" path="res://UI/Menus/UnitActionMenu.tscn" id="12_y6w06"]
 [ext_resource type="PackedScene" uid="uid://dj62ncgf4650c" path="res://UI/Movements/ArrowBodyCurvedRight.tscn" id="13_li6wg"]
 [ext_resource type="PackedScene" uid="uid://cjpot8mtdhe03" path="res://UI/Movements/ArrowHead.tscn" id="14_wt235"]
 [ext_resource type="PackedScene" uid="uid://b6vwitgm7ova0" path="res://UI/Movements/HighlightedTile.tscn" id="16_li6wg"]
@@ -555,6 +556,7 @@ FactoryMenuScene = ExtResource("8_wt235")
 AirportMenuScene = ExtResource("5_ppjb3")
 GameMenuScene = ExtResource("9_augcv")
 PortMenuScene = ExtResource("6_o4i80")
+UnitActionMenuScene = ExtResource("12_y6w06")
 
 [node name="UIManager" type="Node" parent="Core" node_paths=PackedStringArray("UILayer", "UnitManagerInstance", "CoreManagerInstance")]
 script = ExtResource("10_k4ymp")

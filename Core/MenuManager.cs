@@ -16,6 +16,7 @@ public partial class MenuManager : Node
 	[Export] public PackedScene AirportMenuScene; 
 	[Export] public PackedScene GameMenuScene; 
 	[Export] public PackedScene PortMenuScene;
+	[Export] public PackedScene UnitActionMenuScene; 
 	
 	#endregion
 	
@@ -25,6 +26,7 @@ public partial class MenuManager : Node
 	private AirportMenu _airportMenuInstance;
 	private PortMenu _portMenuInstance;
 	private GameMenu _gameMenuInstance;
+	private UnitActionMenu _unitActionMenuInstance;
 	private Vector2I _tilePosition;
 	
 	#endregion
@@ -52,6 +54,11 @@ public partial class MenuManager : Node
 		AddChild(_gameMenuInstance);
 		_gameMenuInstance.HideMenu();
 		_gameMenuInstance.ButtonSelected += OnGameButtonSelected;
+		
+		_unitActionMenuInstance = UnitActionMenuScene.Instantiate<UnitActionMenu>();
+		AddChild(_unitActionMenuInstance);
+		_unitActionMenuInstance.HideMenu();
+		_unitActionMenuInstance.ButtonSelected += OnUnitActionButtonSelected;
 	}
 	
 	#endregion
@@ -60,7 +67,6 @@ public partial class MenuManager : Node
 
 	public void ShowUnitCreationMenu(Vector2I tilePosition, string buildingType)
 	{
-		Vector2 mapCenter = CoreManagerInstance.GetMapCenter();
 		_tilePosition = tilePosition;
 
 		switch (buildingType)
@@ -88,8 +94,7 @@ public partial class MenuManager : Node
 	
 	public void ShowGameMenu()
 	{
-		Vector2 mapCenter = CoreManagerInstance.GetMapCenter();
-		_gameMenuInstance.ShowMenu(new Vector2(mapCenter.X - 48, mapCenter.Y - 36));
+		_gameMenuInstance.ShowMenu();
 	}
 	
 	private void OnGameButtonSelected(string selectedGameMenuButton)
@@ -103,6 +108,30 @@ public partial class MenuManager : Node
 			case Config.GAMEMENU_ENDTURN:
 				UnitManagerInstance.NextTurn();
 				PlayerManagerInstance.NextTurn();
+				break;
+		}
+	}
+	
+	#endregion
+	
+	#region Unit Action Menu
+	
+	public void ShowUnitActionMenu()
+	{
+		_unitActionMenuInstance.ShowMenu();
+	}
+	
+	private void OnUnitActionButtonSelected(string selectedUnitAction)
+	{
+		switch (selectedUnitAction)
+		{
+			case Config.UNITACTION_WAIT:
+				break;
+			case Config.UNITACTION_ATTACK:
+				break;
+			case Config.UNITACTION_SUPPLY:
+				break;
+			case Config.UNITACTION_CAPTURE:
 				break;
 		}
 	}

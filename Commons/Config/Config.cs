@@ -32,6 +32,15 @@ public class Config
     
     #endregion
     
+    #region Unit Action Menu Buttons
+    
+    public const string UNITACTION_WAIT = "wait";
+    public const string UNITACTION_ATTACK = "attack";
+    public const string UNITACTION_SUPPLY = "supply";
+    public const string UNITACTION_CAPTURE = "capture";
+    
+    #endregion
+    
     #region Terrain Costs
     
     // Defaults

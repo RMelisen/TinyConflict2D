@@ -3,7 +3,7 @@ using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.UI.Menus;
 
-public partial class GameMenu : CanvasLayer
+public partial class UnitActionMenu : CanvasLayer
 {
 	[Signal]
 	public delegate void ButtonSelectedEventHandler(string unitType);
@@ -22,12 +22,11 @@ public partial class GameMenu : CanvasLayer
 		// Store buttons
 		_buttons = new Control[]
 		{
-			GetNode<Button>("GameMenuPanel/InformationButton"),
-			GetNode<Button>("GameMenuPanel/SettingsButton"),
-			GetNode<Button>("GameMenuPanel/EndTurnButton")
+			GetNode<Button>("ButtonContainer/WaitButton"),
+			GetNode<Button>("ButtonContainer/AttackButton"),
+			GetNode<Button>("ButtonContainer/SupplyButton"),
+			GetNode<Button>("ButtonContainer/CaptureButton")
 		};
-		
-		_buttons[_currentButtonIndex].GrabFocus();
 	}
 
 	public override void _Input(InputEvent @event)
@@ -60,10 +59,10 @@ public partial class GameMenu : CanvasLayer
 	
 	#region Button Events
 	
-	public void OnButtonPressed(string selectedGameMenuButton)
+	public void OnButtonPressed(string selectedUnitActionButton)
 	{
-		GD.Print($"{selectedGameMenuButton} button pressed");
-		EmitSignal(nameof(ButtonSelected), selectedGameMenuButton);
+		GD.Print($"{selectedUnitActionButton} button pressed");
+		EmitSignal(nameof(ButtonSelected), selectedUnitActionButton);
 		HideMenu();
 	}
 	
