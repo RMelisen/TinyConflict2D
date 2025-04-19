@@ -116,7 +116,7 @@ public partial class CursorController : Sprite2D
 			if (_gridPosition == CoreManagerInstance.SelectedUnit.TilePosition)
 			{
 				// If selected unit is selected again
-				CoreManagerInstance.DeselectUnit();
+				MenuManagerInstance.ShowUnitActionMenu();	
 			}
 			else
 			{
@@ -130,8 +130,10 @@ public partial class CursorController : Sprite2D
 				
 				// If no other unit on target tile, move selected unit 
 				CoreManagerInstance.SelectedUnit.Move(UnitManagerInstance.GetPathBetween(CoreManagerInstance.SelectedUnit.TilePosition, _gridPosition, CoreManagerInstance.SelectedUnit.MovementPointsLeft));
-				CoreManagerInstance.DeselectUnit();
-			}
+                UIManagerInstance.ClearHighlighting();
+                UIManagerInstance.ClearArrowPath();
+                MenuManagerInstance.ShowUnitActionMenu();
+            }
 			return;
 		}
 

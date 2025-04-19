@@ -59,10 +59,8 @@ public partial class CoreManager : Node
 
 	public void DeselectUnit()
 	{
-		UIManagerInstance.ClearArrowPath();
 		IsUnitSelected = false;
 		ApplySelectionEffects();
-		UIManagerInstance.ClearHighlighting();
 		SelectedUnit = null;
 	}
 	

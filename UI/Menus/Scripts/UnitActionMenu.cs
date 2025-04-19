@@ -1,5 +1,5 @@
 using Godot;
-using TinyConflict2D.Units.Scripts;
+using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.UI.Menus;
 
@@ -22,10 +22,10 @@ public partial class UnitActionMenu : CanvasLayer
 		// Store buttons
 		_buttons = new Control[]
 		{
-			GetNode<Button>("ButtonContainer/WaitButton"),
-			GetNode<Button>("ButtonContainer/AttackButton"),
-			GetNode<Button>("ButtonContainer/SupplyButton"),
-			GetNode<Button>("ButtonContainer/CaptureButton")
+			GetNode<Button>("ButtonsContainer/WaitButton"),
+			GetNode<Button>("ButtonsContainer/AttackButton"),
+			GetNode<Button>("ButtonsContainer/SupplyButton"),
+			GetNode<Button>("ButtonsContainer/CaptureButton")
 		};
 	}
 
@@ -34,8 +34,9 @@ public partial class UnitActionMenu : CanvasLayer
 		if (Visible)
 		{
 			if (@event.IsActionPressed("ui_cancel"))
-			{
-				HideMenu();
+            {
+                EmitSignal(nameof(ButtonSelected), Config.UNITACTION_WAIT);
+                HideMenu();
 			}
 			else if (@event.IsActionPressed("ui_down"))
 			{
@@ -78,9 +79,9 @@ public partial class UnitActionMenu : CanvasLayer
 	}
 
 	public void HideMenu()
-	{
-		Visible = false;
+    {
+        Visible = false;
 	}
-	
-	#endregion
+
+    #endregion
 }

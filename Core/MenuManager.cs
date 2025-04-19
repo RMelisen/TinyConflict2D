@@ -134,7 +134,9 @@ public partial class MenuManager : Node
 			case Config.UNITACTION_CAPTURE:
 				break;
 		}
-	}
+
+        CoreManagerInstance.DeselectUnit();
+    }
 	
 	#endregion
 }
