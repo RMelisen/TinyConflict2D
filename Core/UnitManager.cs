@@ -431,10 +431,7 @@ public partial class UnitManager : Node
 				inRangeUnitList.Add(unitFound);
 		}
 
-		if (inRangeUnitList.Count > 0)
-			return inRangeUnitList;
-		
-		return null;
+		return inRangeUnitList;
 	}
 	
 	#endregion

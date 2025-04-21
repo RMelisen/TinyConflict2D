@@ -1,4 +1,6 @@
 using Godot;
+using System.Collections.Generic;
+using System.Linq;
 using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.UI.Menus;
@@ -10,7 +12,7 @@ public partial class UnitActionMenu : CanvasLayer
 
 	#region Fields
 	
-	private Control[] _buttons;
+	private Button[] _buttons;
 	private int _currentButtonIndex = 0;
 	
 	#endregion
@@ -20,10 +22,10 @@ public partial class UnitActionMenu : CanvasLayer
 	public override void _Ready()
 	{
 		// Store buttons
-		_buttons = new Control[]
+		_buttons = new Button[]
 		{
-			GetNode<Button>("ButtonsContainer/WaitButton"),
 			GetNode<Button>("ButtonsContainer/AttackButton"),
+			GetNode<Button>("ButtonsContainer/WaitButton"),
 			GetNode<Button>("ButtonsContainer/SupplyButton"),
 			GetNode<Button>("ButtonsContainer/CaptureButton")
 		};
@@ -71,10 +73,15 @@ public partial class UnitActionMenu : CanvasLayer
 	
 	#region Visibility
 	
-	public void ShowMenu()
+	public void ShowMenu(bool enableAttackButton, bool enableSupplybutton, bool enableCaptureButton)
 	{
 		Visible = true;
-		_currentButtonIndex = 0;
+
+		_buttons[0].Disabled = !enableAttackButton;
+        _buttons[2].Disabled = !enableSupplybutton;
+        _buttons[3].Disabled = !enableCaptureButton;
+
+        _currentButtonIndex = 0;
 		_buttons[_currentButtonIndex].GrabFocus();
 	}
 

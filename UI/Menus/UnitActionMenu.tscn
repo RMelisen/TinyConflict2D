@@ -7,7 +7,7 @@
 script = ExtResource("1_mxxdu")
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="."]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -22,15 +22,15 @@ size_flags_horizontal = 3
 theme = ExtResource("1_p4tte")
 alignment = 1
 
-[node name="WaitButton" type="Button" parent="ButtonsContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Wait"
-
 [node name="AttackButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Attack"
+
+[node name="WaitButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Wait"
 
 [node name="SupplyButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
@@ -42,6 +42,7 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Capture"
 
-[connection signal="pressed" from="ButtonsContainer/WaitButton" to="." method="OnButtonPressed" binds= ["wait"]]
 [connection signal="pressed" from="ButtonsContainer/AttackButton" to="." method="OnButtonPressed" binds= ["attack"]]
+[connection signal="pressed" from="ButtonsContainer/WaitButton" to="." method="OnButtonPressed" binds= ["wait"]]
 [connection signal="pressed" from="ButtonsContainer/SupplyButton" to="." method="OnButtonPressed" binds= ["supply"]]
+[connection signal="pressed" from="ButtonsContainer/CaptureButton" to="." method="OnButtonPressed" binds= ["capture"]]

@@ -2,6 +2,8 @@ using Godot;
 using TinyConflict2D.UI.Menus;
 using TinyConflict2D.Commons.Config;
 using TinyConflict2D.Core.Players;
+using System.Collections.Generic;
+using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
 
@@ -118,7 +120,13 @@ public partial class MenuManager : Node
 	
 	public void ShowUnitActionMenu()
 	{
-		_unitActionMenuInstance.ShowMenu();
+		List<Unit> units = UnitManagerInstance.GetInRangeUnits(CoreManagerInstance.SelectedUnit);		
+		bool enableAttackButton = units.Count != 0;
+
+        bool enableSupplyButton = CoreManagerInstance.SelectedUnit is APCUnit;
+        bool enableCaptureButton = CoreManagerInstance.SelectedUnit is InfantryUnit || CoreManagerInstance.SelectedUnit is MechUnit;
+
+        _unitActionMenuInstance.ShowMenu(enableAttackButton, enableSupplyButton, enableCaptureButton);
 	}
 	
 	private void OnUnitActionButtonSelected(string selectedUnitAction)
