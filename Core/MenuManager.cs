@@ -30,12 +30,14 @@ public partial class MenuManager : Node
 	private GameMenu _gameMenuInstance;
 	private UnitActionMenu _unitActionMenuInstance;
 	private Vector2I _tilePosition;
-	
-	#endregion
-	
-	#region Godot Methods
+	private List<Unit> _inRangeEnemyUnits;
+    private List<Unit> _inRangeAllyUnits;
 
-	public override void _Ready()
+    #endregion
+
+    #region Godot Methods
+
+    public override void _Ready()
 	{
 		_factoryMenuInstance = FactoryMenuScene.Instantiate<FactoryMenu>();
 		AddChild(_factoryMenuInstance);
@@ -120,15 +122,15 @@ public partial class MenuManager : Node
 	
 	public void ShowUnitActionMenu(Vector2I tilePosition)
 	{
-		List<Unit> enemyUnits = UnitManagerInstance.GetInRangeEnemyUnits(CoreManagerInstance.SelectedUnit);		
-		bool enableAttackButton = enemyUnits.Count != 0;
+		_inRangeEnemyUnits = UnitManagerInstance.GetInRangeEnemyUnits(CoreManagerInstance.SelectedUnit);		
+		bool enableAttackButton = _inRangeEnemyUnits.Count != 0;
 		bool enableSupplyButton = false;
         bool enableCaptureButton = false;
 
         if (CoreManagerInstance.SelectedUnit is APCUnit)
 		{
-            List<Unit> playerUnits = UnitManagerInstance.GetInRangeAllyUnits(CoreManagerInstance.SelectedUnit);
-            enableSupplyButton = playerUnits.Count != 0;
+            _inRangeAllyUnits = UnitManagerInstance.GetInRangeAllyUnits(CoreManagerInstance.SelectedUnit);
+            enableSupplyButton = _inRangeAllyUnits.Count != 0;
 		}
 
         if (CoreManagerInstance.SelectedUnit is InfantryUnit || CoreManagerInstance.SelectedUnit is MechUnit)

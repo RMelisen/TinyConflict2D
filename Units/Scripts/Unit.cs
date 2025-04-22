@@ -16,14 +16,22 @@ public partial class Unit : CharacterBody2D
 	public float Speed = 150.0f; // Speed in units per second
 	
 	public int MaxHealth { get; set; } = 100;
-	public int CurrentHealth;
+	public int CurrentHealth { get; set; }
+
 	public int MovementRange { get; set; } = 3;
 	public int MovementPointsLeft { get; set; }
 	public UnitMovementType MovementType { get; set; }
-	public Color PlayerColor { get; set; } = Colors.Gray;
+    public Vector2I TilePosition { get; set; }
+
+    public Color PlayerColor { get; set; } = Colors.Gray;
 	public Player UnitOwner { get; set; }
-	public Vector2I TilePosition { get; set; }
-	public UnitType UnitType { get; set; } = UnitType.None;
+
+    public virtual int MaxAmmo { get; set; } = 0;
+    public int CurrentAmmo { get; set; } = 0;
+    public virtual int MaxFuel { get; set; } = 0;
+    public int CurrentFuel { get; set; } = 0;
+
+    public UnitType UnitType { get; set; } = UnitType.None;
 	public virtual int BasePrice { get; } = 0;
 
 	#endregion
@@ -88,6 +96,12 @@ public partial class Unit : CharacterBody2D
 			_path = newPath;
 			_pathIndex = 1;		// Start at 1 to skip starting tile at index 0 
 		}
+	}
+
+	public void Resupply()
+	{
+		CurrentAmmo = MaxAmmo;
+		CurrentFuel = MaxFuel;
 	}
 	
 	#endregion

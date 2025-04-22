@@ -6,13 +6,17 @@ public partial class TankUnit : Unit
 {
 	public const int BASE_PRICE = 7000;
 	public override int BasePrice { get;  } = BASE_PRICE;
-	
-	public TankUnit()
+    public override int MaxAmmo { get; set; } = 9;
+    public override int MaxFuel { get; set; } = 70;
+
+    public TankUnit()
 	{
 		MovementType = UnitMovementType.Treads;
 		MovementRange = 6;
 		UnitType = UnitType.Tank;
-	}
+        CurrentAmmo = MaxAmmo;
+        CurrentFuel = MaxFuel;
+    }
 
 	public override string ToString()
 	{
