@@ -102,7 +102,7 @@ public partial class CursorController : Sprite2D
 		if (!CoreManagerInstance.IsUnitSelected)
 		{
 			// Check if a unit is found first
-			Unit unitFound = UnitManagerInstance.GetUnitAt(_gridPosition);
+			Unit unitFound = UnitManagerInstance.GetAllyUnitAt(_gridPosition);
 			if (unitFound != null)
 			{
 				// Unit found
@@ -121,7 +121,7 @@ public partial class CursorController : Sprite2D
 			else
 			{
 				// Check if a unit is found first
-				Unit unitFound = UnitManagerInstance.GetUnitAt(_gridPosition);
+				Unit unitFound = UnitManagerInstance.GetAllyUnitAt(_gridPosition);
 				if (unitFound != null)
 				{
 					// TODO: Manage unit transportation (eg. land units in lander, infantry in TCopter/APC, etc...

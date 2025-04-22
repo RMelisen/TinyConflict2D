@@ -118,13 +118,41 @@ public partial class MenuManager : Node
 	
 	#region Unit Action Menu
 	
-	public void ShowUnitActionMenu()
+	public void ShowUnitActionMenu(Vector2I tilePosition)
 	{
-		List<Unit> units = UnitManagerInstance.GetInRangeUnits(CoreManagerInstance.SelectedUnit);		
-		bool enableAttackButton = units.Count != 0;
+		List<Unit> enemyUnits = UnitManagerInstance.GetInRangeEnemyUnits(CoreManagerInstance.SelectedUnit);		
+		bool enableAttackButton = enemyUnits.Count != 0;
+		bool enableSupplyButton = false;
+        bool enableCaptureButton = false;
 
-        bool enableSupplyButton = CoreManagerInstance.SelectedUnit is APCUnit;
-        bool enableCaptureButton = CoreManagerInstance.SelectedUnit is InfantryUnit || CoreManagerInstance.SelectedUnit is MechUnit;
+        if (CoreManagerInstance.SelectedUnit is APCUnit)
+		{
+            List<Unit> playerUnits = UnitManagerInstance.GetInRangeAllyUnits(CoreManagerInstance.SelectedUnit);
+            enableSupplyButton = playerUnits.Count != 0;
+		}
+
+        if (CoreManagerInstance.SelectedUnit is InfantryUnit || CoreManagerInstance.SelectedUnit is MechUnit)
+		{
+			// If infantry, check if there is a building, and if so, check ownership
+			_tilePosition = tilePosition;
+			Variant? featureTerrainType = CoreManagerInstance.GetFeatureByCustomData(Config.TERRAINTYPE_CUSTOMDATA, tilePosition);
+			if (featureTerrainType.HasValue)
+			{
+				// Check feature type
+				switch (featureTerrainType.Value.ToString())
+                {
+                    case Config.CITY_TERRAINTYPE:
+                    case Config.FACTORY_TERRAINTYPE:
+					case Config.PORT_TERRAINTYPE:
+					case Config.AIRPORT_TERRAINTYPE:
+                    case Config.ANTENNA_TERRAINTYPE:
+                    case Config.SILO_TERRAINTYPE:
+                    case Config.HEADQUARTERS_TERRAINTYPE:
+						enableCaptureButton = !CoreManagerInstance.CheckIfIsOwner(tilePosition);
+						break;
+                }
+			} 
+		}        
 
         _unitActionMenuInstance.ShowMenu(enableAttackButton, enableSupplyButton, enableCaptureButton);
 	}

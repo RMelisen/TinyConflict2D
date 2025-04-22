@@ -148,7 +148,7 @@ public partial class UnitManager : Node
 	
 	#region Unit Selection
 	
-	public Unit GetUnitAt(Vector2I tilePosition)
+	public Unit GetAllyUnitAt(Vector2I tilePosition)
 	{
 		return PlayerManager.CurrentPlayer.Units.Find(u => u.TilePosition == tilePosition);
 	}
@@ -420,25 +420,39 @@ public partial class UnitManager : Node
 		}
 	}
 	
-	public List<Unit> GetInRangeUnits(Unit selectedUnit)
+	public List<Unit> GetInRangeAllyUnits(Unit selectedUnit)
 	{
 		List<Unit> inRangeUnitList = new List<Unit>();
 		Vector2I[] neighbors = GetNeighbors(selectedUnit.TilePosition);
 		foreach (Vector2I neighbor in neighbors)
 		{
-			Unit unitFound = GetUnitAt(neighbor);
+			Unit unitFound = GetAllyUnitAt(neighbor);
 			if  (unitFound != null)
 				inRangeUnitList.Add(unitFound);
 		}
 
 		return inRangeUnitList;
 	}
-	
-	#endregion
-	
-	#region Turn Management
-	
-	public void NextTurn()
+
+    public List<Unit> GetInRangeEnemyUnits(Unit selectedUnit)
+    {
+        List<Unit> inRangeUnitList = new List<Unit>();
+        Vector2I[] neighbors = GetNeighbors(selectedUnit.TilePosition);
+        foreach (Vector2I neighbor in neighbors)
+        {
+            Unit unitFound = GetEnemyUnitAt(neighbor);
+            if (unitFound != null)
+                inRangeUnitList.Add(unitFound);
+        }
+
+        return inRangeUnitList;
+    }
+
+    #endregion
+
+    #region Turn Management
+
+    public void NextTurn()
 	{
 		foreach (Unit playerUnit in PlayerManager.CurrentPlayer.Units)
 		{
