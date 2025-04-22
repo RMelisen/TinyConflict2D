@@ -32,7 +32,7 @@ Tiny Conflict 2D is a clone from the GameBoy Advance 2001 turn-based game "Advan
 - [ ] Local multiplayer
 - [ ] AI opponent
 - [ ] Online multiplayer 
-- [ ] V2 - Better resources, animations, vision management, more maps, etc...
+- [ ] V2 - Better resources, animations, vision management, more maps, ranged units, etc...
 
 ## Installation
 
