@@ -127,7 +127,7 @@ public partial class MenuManager : Node
 		bool enableSupplyButton = false;
         bool enableCaptureButton = false;
 
-        if (CoreManagerInstance.SelectedUnit is APCUnit)
+        if (CoreManagerInstance.SelectedUnit is APCUnit || CoreManagerInstance.SelectedUnit is SupplyUnit)
 		{
             _inRangeAllyUnits = UnitManagerInstance.GetInRangeAllyUnits(CoreManagerInstance.SelectedUnit);
             enableSupplyButton = _inRangeAllyUnits.Count != 0;
