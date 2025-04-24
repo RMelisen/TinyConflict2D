@@ -40,8 +40,18 @@ Tiny Conflict 2D is a clone from the GameBoy Advance 2001 turn-based game "Advan
 ```bash
 git clone https://github.com/RMelisen/TinyConflict2D.git
 ```
+
+### With Godot Engine
 2. Open the project in Godot engine.
 3. Run the project.
+
+### With Visual Studio
+2. Open the project in Visual Studio.
+3. Go to debug properties.
+4. Create a new executable launch profile.
+5. Executable: Browse to the path of your Godot executable (the Mono version).
+6. Command line arguments: Add "--path" and "--verbose" arguments.
+7. Working directory: Set this to your Godot project's root directory
 
 ## Notes
 
