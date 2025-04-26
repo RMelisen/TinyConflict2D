@@ -115,8 +115,10 @@ public partial class CursorController : Sprite2D
 		{
 			if (_gridPosition == CoreManagerInstance.SelectedUnit.TilePosition)
 			{
-				// If selected unit is selected again
-				MenuManagerInstance.ShowUnitActionMenu(_gridPosition);	
+                // If selected unit is selected again
+				UIManagerInstance.ClearHighlighting();
+                UIManagerInstance.ClearArrowPath();
+                MenuManagerInstance.ShowUnitActionMenu(_gridPosition);	
 			}
 			else
 			{

@@ -62,7 +62,7 @@ public partial class CoreManager : Node
 		IsUnitSelected = false;
 		ApplySelectionEffects();
 		SelectedUnit = null;
-	}
+    }
 	
 	private void ApplySelectionEffects()
 	{
