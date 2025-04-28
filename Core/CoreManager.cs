@@ -52,29 +52,17 @@ public partial class CoreManager : Node
 			SelectedUnit = unit;
 			IsUnitSelected = true;
 			UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
-			ApplySelectionEffects();
-			UIManagerInstance.HighlightReachableTiles(SelectedUnit);
+            SelectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
+            UIManagerInstance.HighlightReachableTiles(SelectedUnit);
 		}
 	}
 
 	public void DeselectUnit()
 	{
 		IsUnitSelected = false;
-		ApplySelectionEffects();
-		SelectedUnit = null;
+        SelectedUnit.Scale = Vector2.One;
+        SelectedUnit = null;
     }
-	
-	private void ApplySelectionEffects()
-	{
-		if (IsUnitSelected)
-		{
-			SelectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
-		}
-		else
-		{
-			SelectedUnit.Scale = Vector2.One;
-		}
-	}
 	
 	#endregion
 	
