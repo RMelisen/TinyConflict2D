@@ -12,7 +12,7 @@ public partial class CoreManager : Node
 	[Export] public TileMapLayer TerrainLayer;
 	[Export] public TileMapLayer TerrainFeaturesLayer;
 	[Export] public UnitManager UnitManagerInstance;
-	[Export] public Players.PlayerManager PlayerManagerInstance;
+	[Export] public PlayerManager PlayerManagerInstance;
 	[Export] public MenuManager MenuManagerInstance;
 	[Export] public UIManager UIManagerInstance;
 	
