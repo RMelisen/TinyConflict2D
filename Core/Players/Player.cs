@@ -15,6 +15,8 @@ public partial class Player : Node
 	public List<Unit> Units { get; private set; } = new List<Unit>();
 	public int Money { get; set; } = Config.STARTING_MONEY;
 	public int NumberOfBuildings { get; set; }
+
+	public bool HasLost = false;
 	
 	#endregion
 	
