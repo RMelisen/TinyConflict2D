@@ -7,10 +7,10 @@ public partial class AAUnit : Unit
 {
 	public const int BASE_PRICE = 12000;
 	public override int BasePrice { get;  } = BASE_PRICE;
-    public override int MaxAmmo { get; set; } = 9;
-    public override int MaxFuel { get; set;  } = 60;
+	public override int MaxAmmo { get; set; } = 9;
+	public override int MaxFuel { get; set;  } = 60;
 
-    public AAUnit()
+	public AAUnit()
 	{
 		MovementType = UnitMovementType.Treads;
 		MovementRange = 6;

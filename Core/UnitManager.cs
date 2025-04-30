@@ -2,8 +2,10 @@ using System;
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TinyConflict2D.Commons.Enums;
 using TinyConflict2D.Commons.Config;
+using TinyConflict2D.Commons.Interfaces;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
@@ -12,6 +14,7 @@ public partial class UnitManager : Node
 {
 	#region Properties
 	
+	[Export] public CoreManager CoreManagerInstance;
 	[Export] public TileMapLayer UnitsLayer;
 	[Export] public TileMapLayer TerrainLayer;
 	[Export] public TileMapLayer TerrainFeaturesLayer;
@@ -434,25 +437,39 @@ public partial class UnitManager : Node
 		return inRangeUnitList;
 	}
 
-    public List<Unit> GetInRangeEnemyUnits(Unit selectedUnit)
-    {
-        List<Unit> inRangeUnitList = new List<Unit>();
-        Vector2I[] neighbors = GetNeighbors(selectedUnit.TilePosition);
-        foreach (Vector2I neighbor in neighbors)
-        {
-            Unit unitFound = GetEnemyUnitAt(neighbor);
-            if (unitFound != null)
-                inRangeUnitList.Add(unitFound);
-        }
+	public List<Unit> GetInRangeEnemyUnits(Unit selectedUnit)
+	{
+		List<Unit> inRangeUnitList = new List<Unit>();
+		Vector2I[] neighbors = GetNeighbors(selectedUnit.TilePosition);
+		foreach (Vector2I neighbor in neighbors)
+		{
+			Unit unitFound = GetEnemyUnitAt(neighbor);
+			if (unitFound != null)
+				inRangeUnitList.Add(unitFound);
+		}
 
-        return inRangeUnitList;
-    }
+		return inRangeUnitList;
+	}
 
-    #endregion
+	#endregion
+	
+	#region Capture
 
-    #region Turn Management
+	public void CaptureProcess(ICanCapture capturingUnit, Vector2I tilePosition)
+	{
+		capturingUnit.CaptureBuilding();
+		if (capturingUnit.GetCaptureProgress() >= Config.BUILDING_CAPTURE_TRESHOLD)
+		{
+			CoreManagerInstance.TerrainFeatureLayerSetCell(tilePosition, GetCorrespondingAtlasCoord(tilePosition));
+			capturingUnit.CancelCapture();
+		}
+	}
+	
+	#endregion
 
-    public void NextTurn()
+	#region Turn Management
+
+	public void NextTurn()
 	{
 		foreach (Unit playerUnit in PlayerManager.CurrentPlayer.Units)
 		{
@@ -508,6 +525,65 @@ public partial class UnitManager : Node
 	private bool IsWithinBounds(Vector2I position)
 	{
 		return position.X >= 0 && position.X < _mapSize.X && position.Y >= 0 && position.Y < _mapSize.Y;
+	}
+
+	private Vector2I GetCorrespondingAtlasCoord(Vector2I tilePosition)
+	{
+		int xCoord = 5;	// Depends on building type
+		int yCoord = 1;	// Depends on player Color
+
+		switch (PlayerManager.CurrentPlayer.PlayerNumber)
+		{
+			case Config.RED_PLAYER_NUMBER:
+				yCoord = 3;
+				break;
+			case Config.BLUE_PLAYER_NUMBER:
+				yCoord = 2;
+				break;
+			case Config.GREEN_PLAYER_NUMBER:
+				yCoord = 1;
+				break;
+			case Config.ORANGE_PLAYER_NUMBER:
+				yCoord = 4;
+				break;
+		}
+		
+		Variant? featureTerrainType = CoreManagerInstance.GetFeatureByCustomData(Config.TERRAINTYPE_CUSTOMDATA, tilePosition);
+		if (featureTerrainType.HasValue)
+		{
+			switch (featureTerrainType.Value.ToString())
+			{
+				case Config.CITY_TERRAINTYPE:
+					xCoord = 8;
+					break;
+				case Config.FACTORY_TERRAINTYPE:
+					xCoord = 11;
+					break;
+				case Config.PORT_TERRAINTYPE:
+					xCoord = 12;
+					break;
+				case Config.AIRPORT_TERRAINTYPE:
+					xCoord = 15;
+					break;
+				case Config.ANTENNA_TERRAINTYPE:
+					xCoord = 13;
+					break;
+				case Config.SILO_TERRAINTYPE:
+					xCoord = 14;
+					break;
+				case Config.HEADQUARTERS_TERRAINTYPE:
+					xCoord = 10;
+					break;
+			}
+		}
+		else
+		{
+			// Default value if nothing was found (error)
+			xCoord = 5;
+			yCoord = 1;
+		}
+
+		return new Vector2I(xCoord, yCoord);
 	}
 	
 	#endregion

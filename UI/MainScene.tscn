@@ -536,8 +536,9 @@ PlayerManagerInstance = NodePath("../PlayerManager")
 MenuManagerInstance = NodePath("../MenuManager")
 UIManagerInstance = NodePath("../UIManager")
 
-[node name="UnitManager" type="Node" parent="Core" node_paths=PackedStringArray("UnitsLayer", "TerrainLayer", "TerrainFeaturesLayer", "PlayerManager")]
+[node name="UnitManager" type="Node" parent="Core" node_paths=PackedStringArray("CoreManagerInstance", "UnitsLayer", "TerrainLayer", "TerrainFeaturesLayer", "PlayerManager")]
 script = ExtResource("2_3owbp")
+CoreManagerInstance = NodePath("../CoreManager")
 UnitsLayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer/UnitsLayer")
 TerrainLayer = NodePath("../../TerrainLayer")
 TerrainFeaturesLayer = NodePath("../../TerrainLayer/TerrainFeaturesLayer")

@@ -93,6 +93,10 @@ public class Config
     public const int STARTING_MONEY = 5000;
     public const int MONEY_PER_TURN = 1000;
     public const int MONEY_PER_BUILDING = 1000;
+    public const int RED_PLAYER_NUMBER = 0;
+    public const int BLUE_PLAYER_NUMBER = 1;
+    public const int GREEN_PLAYER_NUMBER = 2;
+    public const int ORANGE_PLAYER_NUMBER = 3;
     
     #endregion
     

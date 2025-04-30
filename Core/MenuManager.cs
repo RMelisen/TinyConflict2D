@@ -32,13 +32,13 @@ public partial class MenuManager : Node
 	private UnitActionMenu _unitActionMenuInstance;
 	private Vector2I _tilePosition;
 	private List<Unit> _inRangeEnemyUnits;
-    private List<Unit> _inRangeAllyUnits;
+	private List<Unit> _inRangeAllyUnits;
 
-    #endregion
+	#endregion
 
-    #region Godot Methods
+	#region Godot Methods
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		_factoryMenuInstance = FactoryMenuScene.Instantiate<FactoryMenu>();
 		AddChild(_factoryMenuInstance);
@@ -126,15 +126,15 @@ public partial class MenuManager : Node
 		_inRangeEnemyUnits = UnitManagerInstance.GetInRangeEnemyUnits(CoreManagerInstance.SelectedUnit);		
 		bool enableAttackButton = _inRangeEnemyUnits.Count != 0;
 		bool enableSupplyButton = false;
-        bool enableCaptureButton = false;
+		bool enableCaptureButton = false;
 
-        if (CoreManagerInstance.SelectedUnit is APCUnit || CoreManagerInstance.SelectedUnit is SupplyUnit)
+		if (CoreManagerInstance.SelectedUnit is APCUnit || CoreManagerInstance.SelectedUnit is SupplyUnit)
 		{
-            _inRangeAllyUnits = UnitManagerInstance.GetInRangeAllyUnits(CoreManagerInstance.SelectedUnit);
-            enableSupplyButton = _inRangeAllyUnits.Count != 0;
+			_inRangeAllyUnits = UnitManagerInstance.GetInRangeAllyUnits(CoreManagerInstance.SelectedUnit);
+			enableSupplyButton = _inRangeAllyUnits.Count != 0;
 		}
 
-        if (CoreManagerInstance.SelectedUnit is ICanCapture)
+		if (CoreManagerInstance.SelectedUnit is ICanCapture)
 		{
 			// If unit can capture, check if there is a building, and if so, check ownership
 			_tilePosition = tilePosition;
@@ -143,21 +143,21 @@ public partial class MenuManager : Node
 			{
 				// Check feature type
 				switch (featureTerrainType.Value.ToString())
-                {
-                    case Config.CITY_TERRAINTYPE:
-                    case Config.FACTORY_TERRAINTYPE:
+				{
+					case Config.CITY_TERRAINTYPE:
+					case Config.FACTORY_TERRAINTYPE:
 					case Config.PORT_TERRAINTYPE:
 					case Config.AIRPORT_TERRAINTYPE:
-                    case Config.ANTENNA_TERRAINTYPE:
-                    case Config.SILO_TERRAINTYPE:
-                    case Config.HEADQUARTERS_TERRAINTYPE:
+					case Config.ANTENNA_TERRAINTYPE:
+					case Config.SILO_TERRAINTYPE:
+					case Config.HEADQUARTERS_TERRAINTYPE:
 						enableCaptureButton = !CoreManagerInstance.CheckIfIsOwner(tilePosition);
 						break;
-                }
+				}
 			} 
 		}        
 
-        _unitActionMenuInstance.ShowMenu(enableAttackButton, enableSupplyButton, enableCaptureButton);
+		_unitActionMenuInstance.ShowMenu(enableAttackButton, enableSupplyButton, enableCaptureButton);
 	}
 	
 	private void OnUnitActionButtonSelected(string selectedUnitAction)
@@ -171,11 +171,15 @@ public partial class MenuManager : Node
 			case Config.UNITACTION_SUPPLY:
 				break;
 			case Config.UNITACTION_CAPTURE:
+				if (CoreManagerInstance.SelectedUnit is ICanCapture capturingUnit)
+				{
+					UnitManagerInstance.CaptureProcess(capturingUnit, _tilePosition);
+				}
 				break;
 		}
 
-        CoreManagerInstance.DeselectUnit();
-    }
+		CoreManagerInstance.DeselectUnit();
+	}
 	
 	#endregion
 }

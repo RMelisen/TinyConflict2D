@@ -52,17 +52,17 @@ public partial class CoreManager : Node
 			SelectedUnit = unit;
 			IsUnitSelected = true;
 			UnitManagerInstance.UpdateTerrainWeightsByMovementType(unit.MovementType);
-            SelectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
-            UIManagerInstance.HighlightReachableTiles(SelectedUnit);
+			SelectedUnit.Scale = Vector2.One * 1.15f; // Grow selected unit by 15% to show selection
+			UIManagerInstance.HighlightReachableTiles(SelectedUnit);
 		}
 	}
 
 	public void DeselectUnit()
 	{
 		IsUnitSelected = false;
-        SelectedUnit.Scale = Vector2.One;
-        SelectedUnit = null;
-    }
+		SelectedUnit.Scale = Vector2.One;
+		SelectedUnit = null;
+	}
 	
 	#endregion
 	
@@ -88,6 +88,11 @@ public partial class CoreManager : Node
 			return variant;
 		}
 		return null;
+	}
+
+	public void TerrainFeatureLayerSetCell(Vector2I tilePosition, Vector2I atlasCoord)
+	{
+		TerrainFeaturesLayer.SetCell(tilePosition, 1, atlasCoord);
 	}
 	
 	#endregion

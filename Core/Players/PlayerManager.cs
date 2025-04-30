@@ -20,10 +20,10 @@ public partial class PlayerManager : Node
 	
 	public override void _Ready()
 	{
-		Players.Add(new Player(0, Colors.Red));
-		Players.Add(new Player(1, Colors.Blue));
-		//Players.Add(new Player(2, Colors.Green));
-		//Players.Add(new Player(3, Colors.Orange));
+		Players.Add(new Player(Config.RED_PLAYER_NUMBER, Colors.Red));
+		Players.Add(new Player(Config.BLUE_PLAYER_NUMBER, Colors.Blue));
+		// Players.Add(new Player(Config.GREEN_PLAYER_NUMBER, Colors.Green));
+		// Players.Add(new Player(Config.ORANGE_PLAYER_NUMBER, Colors.Orange));
 	}
 	
 	#endregion

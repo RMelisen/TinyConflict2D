@@ -36,9 +36,9 @@ public partial class UnitActionMenu : CanvasLayer
 		if (Visible)
 		{
 			if (@event.IsActionPressed("ui_cancel"))
-            {
-                EmitSignal(nameof(ButtonSelected), Config.UNITACTION_WAIT);
-                HideMenu();
+			{
+				EmitSignal(nameof(ButtonSelected), Config.UNITACTION_WAIT);
+				HideMenu();
 			}
 			else if (@event.IsActionPressed("ui_down"))
 			{
@@ -78,17 +78,17 @@ public partial class UnitActionMenu : CanvasLayer
 		Visible = true;
 
 		_buttons[0].Disabled = !enableAttackButton;
-        _buttons[2].Disabled = !enableSupplybutton;
-        _buttons[3].Disabled = !enableCaptureButton;
+		_buttons[2].Disabled = !enableSupplybutton;
+		_buttons[3].Disabled = !enableCaptureButton;
 
-        _currentButtonIndex = 0;
+		_currentButtonIndex = 0;
 		_buttons[_currentButtonIndex].GrabFocus();
 	}
 
 	public void HideMenu()
-    {
-        Visible = false;
+	{
+		Visible = false;
 	}
 
-    #endregion
+	#endregion
 }

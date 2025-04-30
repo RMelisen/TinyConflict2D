@@ -4,6 +4,7 @@ using System.Linq;
 using TinyConflict2D.Core.Players;
 using TinyConflict2D.Commons.Enums;
 using TinyConflict2D.Commons.Config;
+using TinyConflict2D.Commons.Interfaces;
 using TinyConflict2D.Core;
 
 namespace TinyConflict2D.Units.Scripts;
@@ -19,25 +20,39 @@ public partial class Unit : CharacterBody2D
 	public int CurrentHealth { get; set; }
 
 	public int MovementRange { get; set; } = 3;
-	public int MovementPointsLeft { get; set; }
-	public UnitMovementType MovementType { get; set; }
-    public Vector2I TilePosition { get; set; }
 
-    public Color PlayerColor { get; set; } = Colors.Gray;
+	public int MovementPointsLeft
+	{
+		get
+		{
+			return _movementPointsLeft;
+		}
+		set
+		{
+			_movementPointsLeft = value;
+			if (value == 0) 
+				Modulate = new Color(0.5f, 0.5f, 0.5f, 1f);	// Gray to make sprite dimmer.
+		}
+	}
+	public UnitMovementType MovementType { get; set; }
+	public Vector2I TilePosition { get; set; }
+
+	public Color PlayerColor { get; set; } = Colors.Gray;
 	public Player UnitOwner { get; set; }
 
-    public virtual int MaxAmmo { get; set; } = 0;
-    public int CurrentAmmo { get; set; } = 0;
-    public virtual int MaxFuel { get; set; } = 0;
-    public int CurrentFuel { get; set; } = 0;
+	public virtual int MaxAmmo { get; set; } = 0;
+	public int CurrentAmmo { get; set; } = 0;
+	public virtual int MaxFuel { get; set; } = 0;
+	public int CurrentFuel { get; set; } = 0;
 
-    public UnitType UnitType { get; set; } = UnitType.None;
+	public UnitType UnitType { get; set; } = UnitType.None;
 	public virtual int BasePrice { get; } = 0;
 
 	#endregion
 	
 	#region Fields
-	
+
+	private int _movementPointsLeft;
 	private List<Vector2I> _path;
 	private int _pathIndex = 1;
  
@@ -68,9 +83,6 @@ public partial class Unit : CharacterBody2D
 				_pathIndex++;
 				if (_pathIndex >= _path.Count)
 				{
-					if(MovementPointsLeft == 0)
-						Modulate = new Color(0.5f, 0.5f, 0.5f, 1f);	// Gray to make sprite dimmer.
-						
 					TilePosition = _path.Last();
 					_path = null;
 					_pathIndex = 1;
@@ -86,7 +98,8 @@ public partial class Unit : CharacterBody2D
 	
 	public void Attack(Unit target)
 	{
-		
+		if (this is ICanCapture capturingUnit)
+			capturingUnit.CancelCapture();
 	}
 
 	public void Move(List<Vector2I> newPath)
@@ -94,7 +107,10 @@ public partial class Unit : CharacterBody2D
 		if (newPath != null && newPath.Count > 0 && MovementPointsLeft > 0)
 		{
 			_path = newPath;
-			_pathIndex = 1;		// Start at 1 to skip starting tile at index 0 
+			_pathIndex = 1;		// Start at 1 to skip starting tile at index 0
+			
+			if (this is ICanCapture capturingUnit)
+				capturingUnit.CancelCapture();
 		}
 	}
 
