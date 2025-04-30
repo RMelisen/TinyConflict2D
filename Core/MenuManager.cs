@@ -3,6 +3,7 @@ using TinyConflict2D.UI.Menus;
 using TinyConflict2D.Commons.Config;
 using TinyConflict2D.Core.Players;
 using System.Collections.Generic;
+using TinyConflict2D.Commons.Interfaces;
 using TinyConflict2D.Units.Scripts;
 
 namespace TinyConflict2D.Core;
@@ -133,9 +134,9 @@ public partial class MenuManager : Node
             enableSupplyButton = _inRangeAllyUnits.Count != 0;
 		}
 
-        if (CoreManagerInstance.SelectedUnit is InfantryUnit || CoreManagerInstance.SelectedUnit is MechUnit)
+        if (CoreManagerInstance.SelectedUnit is ICanCapture)
 		{
-			// If infantry, check if there is a building, and if so, check ownership
+			// If unit can capture, check if there is a building, and if so, check ownership
 			_tilePosition = tilePosition;
 			Variant? featureTerrainType = CoreManagerInstance.GetFeatureByCustomData(Config.TERRAINTYPE_CUSTOMDATA, tilePosition);
 			if (featureTerrainType.HasValue)
