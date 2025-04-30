@@ -187,25 +187,27 @@ public partial class Unit : CharacterBody2D
 	
 	public void ShowIcon(string path, string name)
 	{
-		Sprite2D icon = new Sprite2D();
+		// TODO : Add the icons directly in the Unit Scene and show/hide it dynamically would be better than create/destroy nodes
 		
-		Texture2D texture = GD.Load<Texture2D>(path);
-		if (texture != null)
-		{
-			icon.Texture = texture;
-		}
-		else
-		{
-			GD.PrintErr($"Error while trying to load texture at : {path}");
-			return;
-		}
-		
-		icon.Position = new Vector2(8, 8);	// A little down/right of the unit
-		icon.Scale = Vector2.One * 0.7f;	// A bit smaller
-		
-		icon.Name = $"{name}Icon";
-
-		AddChild(icon);
+		// Sprite2D icon = new Sprite2D();
+		//
+		// Texture2D texture = GD.Load<Texture2D>(path);
+		// if (texture != null)
+		// {
+		// 	icon.Texture = texture;
+		// }
+		// else
+		// {
+		// 	GD.PrintErr($"Error while trying to load texture at : {path}");
+		// 	return;
+		// }
+		//
+		// icon.Position = new Vector2(8, 8);	// A little down/right of the unit
+		// icon.Scale = Vector2.One * 0.7f;	// A bit smaller
+		//
+		// icon.Name = $"{name}Icon";
+		//
+		// AddChild(icon);
 	}
 	
 	#endregion
