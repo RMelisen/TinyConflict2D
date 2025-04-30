@@ -113,6 +113,12 @@ public class Config
 
     #endregion
 
+    #region Buildings
+    
+    public const int BUILDING_CAPTURE_TRESHOLD = 200;
+    
+    #endregion
+    
     #endregion
 
     #region PATHS
