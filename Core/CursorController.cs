@@ -52,6 +52,8 @@ public partial class CursorController : Sprite2D
 				{
 					if (CoreManagerInstance.IsUnitSelected)
 					{
+						UIManagerInstance.ClearHighlighting();
+						UIManagerInstance.ClearArrowPath();
 						CoreManagerInstance.DeselectUnit();
 					}
 				}
