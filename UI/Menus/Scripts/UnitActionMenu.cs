@@ -1,6 +1,4 @@
 using Godot;
-using System.Collections.Generic;
-using System.Linq;
 using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.UI.Menus;
