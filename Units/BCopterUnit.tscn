@@ -1,10 +1,78 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmju1x2mnbxfv"]
+[gd_scene load_steps=14 format=3 uid="uid://dmju1x2mnbxfv"]
 
 [ext_resource type="Script" uid="uid://birbnm3fwhdm3" path="res://Units/Scripts/BCopterUnit.cs" id="1_kqiqp"]
 [ext_resource type="Texture2D" uid="uid://bbtr6kfecsupf" path="res://resources/TinyConflict/Tiles/Units/BCopterGray.png" id="2_kqiqp"]
+[ext_resource type="Texture2D" uid="uid://rdicrhuyg1rv" path="res://resources/TinyConflict/Tiles/UI/IconAmmo.png" id="3_rx6os"]
+[ext_resource type="Texture2D" uid="uid://s1gj1ap6hf5f" path="res://resources/TinyConflict/Tiles/UI/IconFuel.png" id="4_cjux5"]
+[ext_resource type="Texture2D" uid="uid://coeho21f78mux" path="res://resources/TinyConflict/Tiles/UI/IconHealth1.png" id="5_pax45"]
+[ext_resource type="Texture2D" uid="uid://dxbnn7fjf3xjc" path="res://resources/TinyConflict/Tiles/UI/IconHealth2.png" id="6_qv3i2"]
+[ext_resource type="Texture2D" uid="uid://3icxdchwconp" path="res://resources/TinyConflict/Tiles/UI/IconHealth3.png" id="7_tqf8u"]
+[ext_resource type="Texture2D" uid="uid://bef4l8winxajv" path="res://resources/TinyConflict/Tiles/UI/IconHealth4.png" id="8_5jt88"]
+[ext_resource type="Texture2D" uid="uid://crn1eowr28nr4" path="res://resources/TinyConflict/Tiles/UI/IconHealth5.png" id="9_lnnmm"]
+[ext_resource type="Texture2D" uid="uid://dpb5w68lkp22p" path="res://resources/TinyConflict/Tiles/UI/IconHealth6.png" id="10_v7m0x"]
+[ext_resource type="Texture2D" uid="uid://cbc283wbe5bct" path="res://resources/TinyConflict/Tiles/UI/IconHealth7.png" id="11_mng6w"]
+[ext_resource type="Texture2D" uid="uid://ce0j7cp7ya2hm" path="res://resources/TinyConflict/Tiles/UI/IconHealth8.png" id="12_74b0t"]
+[ext_resource type="Texture2D" uid="uid://co4wcippbs01p" path="res://resources/TinyConflict/Tiles/UI/IconHealth9.png" id="13_oh3m6"]
 
 [node name="BCopterUnit" type="CharacterBody2D"]
 script = ExtResource("1_kqiqp")
 
 [node name="BCopterSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_kqiqp")
+
+[node name="Icons" type="Node" parent="."]
+
+[node name="AmmoIcon" type="Sprite2D" parent="Icons"]
+position = Vector2(3, 3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_rx6os")
+
+[node name="FuelIcon" type="Sprite2D" parent="Icons"]
+position = Vector2(3, 3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_cjux5")
+
+[node name="HealthIcon1" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_pax45")
+
+[node name="HealthIcon2" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_qv3i2")
+
+[node name="HealthIcon3" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_tqf8u")
+
+[node name="HealthIcon4" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_5jt88")
+
+[node name="HealthIcon5" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_lnnmm")
+
+[node name="HealthIcon6" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("10_v7m0x")
+
+[node name="HealthIcon7" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_mng6w")
+
+[node name="HealthIcon8" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("12_74b0t")
+
+[node name="HealthIcon9" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_oh3m6")

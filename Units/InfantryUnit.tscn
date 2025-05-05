@@ -1,10 +1,84 @@
-[gd_scene load_steps=3 format=3 uid="uid://djq7hura25rqv"]
+[gd_scene load_steps=15 format=3 uid="uid://djq7hura25rqv"]
 
 [ext_resource type="Script" uid="uid://cw110ytbpf0ag" path="res://Units/Scripts/InfantryUnit.cs" id="1_t0jbx"]
 [ext_resource type="Texture2D" uid="uid://xb1b46fusykw" path="res://resources/TinyConflict/Tiles/Units/InfantryGray.png" id="2_t0jbx"]
+[ext_resource type="Texture2D" uid="uid://rdicrhuyg1rv" path="res://resources/TinyConflict/Tiles/UI/IconAmmo.png" id="3_qurfk"]
+[ext_resource type="Texture2D" uid="uid://s1gj1ap6hf5f" path="res://resources/TinyConflict/Tiles/UI/IconFuel.png" id="4_8edpk"]
+[ext_resource type="Texture2D" uid="uid://coeho21f78mux" path="res://resources/TinyConflict/Tiles/UI/IconHealth1.png" id="5_e4ysx"]
+[ext_resource type="Texture2D" uid="uid://dxbnn7fjf3xjc" path="res://resources/TinyConflict/Tiles/UI/IconHealth2.png" id="6_b2pq3"]
+[ext_resource type="Texture2D" uid="uid://3icxdchwconp" path="res://resources/TinyConflict/Tiles/UI/IconHealth3.png" id="7_1ldjv"]
+[ext_resource type="Texture2D" uid="uid://bef4l8winxajv" path="res://resources/TinyConflict/Tiles/UI/IconHealth4.png" id="8_danoq"]
+[ext_resource type="Texture2D" uid="uid://crn1eowr28nr4" path="res://resources/TinyConflict/Tiles/UI/IconHealth5.png" id="9_6i2nu"]
+[ext_resource type="Texture2D" uid="uid://dpb5w68lkp22p" path="res://resources/TinyConflict/Tiles/UI/IconHealth6.png" id="10_t2k2x"]
+[ext_resource type="Texture2D" uid="uid://cbc283wbe5bct" path="res://resources/TinyConflict/Tiles/UI/IconHealth7.png" id="11_3qp23"]
+[ext_resource type="Texture2D" uid="uid://ce0j7cp7ya2hm" path="res://resources/TinyConflict/Tiles/UI/IconHealth8.png" id="12_e1ltw"]
+[ext_resource type="Texture2D" uid="uid://co4wcippbs01p" path="res://resources/TinyConflict/Tiles/UI/IconHealth9.png" id="13_286ti"]
+[ext_resource type="Texture2D" uid="uid://cn26laaqwnjal" path="res://resources/TinyConflict/Tiles/UI/IconCapture.png" id="14_8edpk"]
 
 [node name="InfantryUnit" type="CharacterBody2D"]
 script = ExtResource("1_t0jbx")
 
 [node name="InfantrySprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_t0jbx")
+
+[node name="Icons" type="Node" parent="."]
+
+[node name="AmmoIcon" type="Sprite2D" parent="Icons"]
+position = Vector2(3, 3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_qurfk")
+
+[node name="FuelIcon" type="Sprite2D" parent="Icons"]
+position = Vector2(3, 3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_8edpk")
+
+[node name="HealthIcon1" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_e4ysx")
+
+[node name="HealthIcon2" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_b2pq3")
+
+[node name="HealthIcon3" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_1ldjv")
+
+[node name="HealthIcon4" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_danoq")
+
+[node name="HealthIcon5" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_6i2nu")
+
+[node name="HealthIcon6" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("10_t2k2x")
+
+[node name="HealthIcon7" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_3qp23")
+
+[node name="HealthIcon8" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("12_e1ltw")
+
+[node name="HealthIcon9" type="Sprite2D" parent="Icons"]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_286ti")
+
+[node name="CaptureIcon" type="Sprite2D" parent="Icons"]
+position = Vector2(3, 3)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_8edpk")
