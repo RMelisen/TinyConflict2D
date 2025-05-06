@@ -123,12 +123,20 @@ public class Config
     
     #endregion
     
-    #region Icon Types
+    #region Icon Name
     
-    public const string ICON_CAPTURE_NAME = "Capture";
-    public const string ICON_AMMO_NAME = "Ammo";
-    public const string ICON_FUEL_NAME = "Fuel";
-    public const string ICON_HEALTH_NAME = "Health";
+    public const string AMMO_ICON_NAME = "AmmoIcon";
+    public const string FUEL_ICON_NAME = "FuelIcon";
+    public const string HEALTH1_ICON_NAME = "HealthIcon1";
+    public const string HEALTH2_ICON_NAME = "HealthIcon2";
+    public const string HEALTH3_ICON_NAME = "HealthIcon3";
+    public const string HEALTH4_ICON_NAME = "HealthIcon4";
+    public const string HEALTH5_ICON_NAME = "HealthIcon5";
+    public const string HEALTH6_ICON_NAME = "HealthIcon6";
+    public const string HEALTH7_ICON_NAME = "HealthIcon7";
+    public const string HEALTH8_ICON_NAME = "HealthIcon8";
+    public const string HEALTH9_ICON_NAME = "HealthIcon9";
+    public const string CAPTURE_ICON_NAME = "CaptureIcon";
     
     #endregion
     
@@ -144,16 +152,16 @@ public class Config
     public const string ICON_CAPTURE_PATH = "res://resources/TinyConflict/Tiles/UI/IconCapture.png";
     public const string ICON_AMMO_PATH = "res://resources/TinyConflict/Tiles/UI/IconAmmo.png";
     public const string ICON_FUEL_PATH = "res://resources/TinyConflict/Tiles/UI/IconFuel.png";
-    public const string ICON_HEALTH_0 = "res://resources/TinyConflict/Tiles/UI/IconHealth0.png";
-    public const string ICON_HEALTH_1 = "res://resources/TinyConflict/Tiles/UI/IconHealth1.png";
-    public const string ICON_HEALTH_2 = "res://resources/TinyConflict/Tiles/UI/IconHealth2.png";
-    public const string ICON_HEALTH_3 = "res://resources/TinyConflict/Tiles/UI/IconHealth3.png";
-    public const string ICON_HEALTH_4 = "res://resources/TinyConflict/Tiles/UI/IconHealth4.png";
-    public const string ICON_HEALTH_5 = "res://resources/TinyConflict/Tiles/UI/IconHealth5.png";
-    public const string ICON_HEALTH_6 = "res://resources/TinyConflict/Tiles/UI/IconHealth6.png";
-    public const string ICON_HEALTH_7 = "res://resources/TinyConflict/Tiles/UI/IconHealth7.png";
-    public const string ICON_HEALTH_8 = "res://resources/TinyConflict/Tiles/UI/IconHealth8.png";
-    public const string ICON_HEALTH_9 = "res://resources/TinyConflict/Tiles/UI/IconHealth9.png";
+    public const string ICON_HEALTH_0_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth0.png";
+    public const string ICON_HEALTH_1_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth1.png";
+    public const string ICON_HEALTH_2_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth2.png";
+    public const string ICON_HEALTH_3_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth3.png";
+    public const string ICON_HEALTH_4_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth4.png";
+    public const string ICON_HEALTH_5_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth5.png";
+    public const string ICON_HEALTH_6_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth6.png";
+    public const string ICON_HEALTH_7_PATH= "res://resources/TinyConflict/Tiles/UI/IconHealth7.png";
+    public const string ICON_HEALTH_8_PATH = "res://resources/TinyConflict/Tiles/UI/IconHealth8.png";
+    public const string ICON_HEALTH_9_PATH= "res://resources/TinyConflict/Tiles/UI/IconHealth9.png";
 
     #endregion
 

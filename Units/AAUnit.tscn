@@ -14,8 +14,19 @@
 [ext_resource type="Texture2D" uid="uid://ce0j7cp7ya2hm" path="res://resources/TinyConflict/Tiles/UI/IconHealth8.png" id="12_i1k62"]
 [ext_resource type="Texture2D" uid="uid://co4wcippbs01p" path="res://resources/TinyConflict/Tiles/UI/IconHealth9.png" id="13_yw4xh"]
 
-[node name="AAUnit" type="CharacterBody2D"]
+[node name="AAUnit" type="CharacterBody2D" node_paths=PackedStringArray("AmmoIcon", "FuelIcon", "HealthIcon1", "HealthIcon2", "HealthIcon3", "HealthIcon4", "HealthIcon5", "HealthIcon6", "HealthIcon7", "HealthIcon8", "HealthIcon9")]
 script = ExtResource("1_48atq")
+AmmoIcon = NodePath("Icons/AmmoIcon")
+FuelIcon = NodePath("Icons/FuelIcon")
+HealthIcon1 = NodePath("Icons/HealthIcon1")
+HealthIcon2 = NodePath("Icons/HealthIcon2")
+HealthIcon3 = NodePath("Icons/HealthIcon3")
+HealthIcon4 = NodePath("Icons/HealthIcon4")
+HealthIcon5 = NodePath("Icons/HealthIcon5")
+HealthIcon6 = NodePath("Icons/HealthIcon6")
+HealthIcon7 = NodePath("Icons/HealthIcon7")
+HealthIcon8 = NodePath("Icons/HealthIcon8")
+HealthIcon9 = NodePath("Icons/HealthIcon9")
 
 [node name="AASprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_48atq")

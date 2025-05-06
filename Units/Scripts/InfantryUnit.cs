@@ -1,5 +1,7 @@
 using TinyConflict2D.Commons.Enums;
 using TinyConflict2D.Commons.Interfaces;
+using Godot;
+using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.Units.Scripts;
 
@@ -17,6 +19,7 @@ public partial class InfantryUnit : Unit, ICanCapture
 	#region Fields
 	
 	private int _captureProgress = 0;
+	private Sprite2D _captureIcon;
 	
 	#endregion
 	
@@ -27,6 +30,7 @@ public partial class InfantryUnit : Unit, ICanCapture
 		UnitType = UnitType.Infantry;
 		CurrentAmmo = MaxAmmo;
 		CurrentFuel = MaxFuel;
+		_captureIcon = GetNode<Sprite2D>(Config.AMMO_ICON_NAME);
 	}
 
 	public override string ToString()
@@ -50,6 +54,22 @@ public partial class InfantryUnit : Unit, ICanCapture
 	public int GetCaptureProgress()
 	{
 		return  _captureProgress;
+	}
+	
+	public void ShowCaptureIcon()
+	{
+		ShowIcon(_captureIcon);
+	}
+	
+	public void HideCaptureIcon()
+	{
+		
+	}
+
+	public override void HideAllIcons()
+	{
+		base.HideAllIcons();
+		HideCaptureIcon();
 	}
 	
 	#endregion

@@ -1,11 +1,16 @@
 using TinyConflict2D.Commons.Enums;
 using TinyConflict2D.Commons.Interfaces;
+using Godot;
+using TinyConflict2D.Commons.Config;
 
 namespace TinyConflict2D.Units.Scripts;
 
 public partial class MechUnit : Unit, ICanCapture
 {
 	#region Properties
+	
+	[Export] 
+	public Sprite2D CaptureIcon;
 	
 	public const int BASE_PRICE = 3000;
 	public override int BasePrice { get;  } = BASE_PRICE;
@@ -17,6 +22,7 @@ public partial class MechUnit : Unit, ICanCapture
 	#region Fields
 	
 	private int _captureProgress = 0;
+	private Sprite2D _captureIcon;
 	
 	#endregion
 	
@@ -27,6 +33,7 @@ public partial class MechUnit : Unit, ICanCapture
 		UnitType = UnitType.Mech;
 		CurrentAmmo = MaxAmmo;
 		CurrentFuel = MaxFuel;
+		_captureIcon = GetNode<Sprite2D>(Config.AMMO_ICON_NAME);
 	}
 
 	public override string ToString()
@@ -50,6 +57,22 @@ public partial class MechUnit : Unit, ICanCapture
 	public int GetCaptureProgress()
 	{
 		return  _captureProgress;
+	}
+
+	public void ShowCaptureIcon()
+	{
+		ShowIcon(_captureIcon);
+	}
+	
+	public void HideCaptureIcon()
+	{
+		
+	}
+
+	public override void HideAllIcons()
+	{
+		base.HideAllIcons();
+		HideCaptureIcon();
 	}
 	
 	#endregion

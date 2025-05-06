@@ -55,6 +55,18 @@ public partial class Unit : CharacterBody2D
 	private int _movementPointsLeft;
 	private List<Vector2I> _path;
 	private int _pathIndex = 1;
+	
+	private Sprite2D _ammoIcon;
+	private Sprite2D _fuelIcon;
+	private Sprite2D _healthIcon1;
+	private Sprite2D _healthIcon2;
+	private Sprite2D _healthIcon3;
+	private Sprite2D _healthIcon4;
+	private Sprite2D _healthIcon5;
+	private Sprite2D _healthIcon6;
+	private Sprite2D _healthIcon7;
+	private Sprite2D _healthIcon8;
+	private Sprite2D _healthIcon9;
  
 	#endregion
 
@@ -64,6 +76,22 @@ public partial class Unit : CharacterBody2D
 	{
 		MovementPointsLeft = MovementRange;
 		CurrentHealth = MaxHealth;
+		
+		#region Icon Variable Initialization
+		
+		_ammoIcon = GetNode<Sprite2D>(Config.AMMO_ICON_NAME);
+		_fuelIcon = GetNode<Sprite2D>(Config.FUEL_ICON_NAME);
+		_healthIcon1 = GetNode<Sprite2D>(Config.HEALTH1_ICON_NAME);
+		_healthIcon2 = GetNode<Sprite2D>(Config.HEALTH2_ICON_NAME);
+		_healthIcon3 = GetNode<Sprite2D>(Config.HEALTH3_ICON_NAME);
+		_healthIcon4 = GetNode<Sprite2D>(Config.HEALTH4_ICON_NAME);
+		_healthIcon5 = GetNode<Sprite2D>(Config.HEALTH5_ICON_NAME);
+		_healthIcon6 = GetNode<Sprite2D>(Config.HEALTH6_ICON_NAME);
+		_healthIcon7 = GetNode<Sprite2D>(Config.HEALTH7_ICON_NAME);
+		_healthIcon8 = GetNode<Sprite2D>(Config.HEALTH8_ICON_NAME);
+		_healthIcon9 = GetNode<Sprite2D>(Config.HEALTH9_ICON_NAME);
+		
+		#endregion
 	}
 	
 	public override void _Process(double delta)
@@ -156,7 +184,7 @@ public partial class Unit : CharacterBody2D
 	
 	public void ShowAmmoIcon()
 	{
-		ShowIcon(Config.ICON_AMMO_PATH, Config.ICON_AMMO_NAME);
+		ShowIcon(_ammoIcon);
 	}
 	
 	public void HideAmmoIcon()
@@ -166,26 +194,15 @@ public partial class Unit : CharacterBody2D
 	
 	public void ShowFuelIcon()
 	{
-		ShowIcon(Config.ICON_FUEL_PATH, Config.ICON_FUEL_NAME);
+		ShowIcon(_fuelIcon);
 	}
 	
 	public void HideFuelIcon()
 	{
 		
 	}
-
-	public void ShowCaptureIcon()
-	{
-		ShowIcon(Config.ICON_CAPTURE_PATH, Config.ICON_CAPTURE_NAME);
-	}
 	
-	public void HideCaptureIcon()
-	{
-		
-	}
-	
-	
-	public void ShowIcon(string path, string name)
+	public void ShowIcon(Sprite2D icon)
 	{
 		// TODO : Add the icons directly in the Unit Scene and show/hide it dynamically would be better than create/destroy nodes
 		
@@ -208,6 +225,13 @@ public partial class Unit : CharacterBody2D
 		// icon.Name = $"{name}Icon";
 		//
 		// AddChild(icon);
+	}
+
+	public virtual void HideAllIcons()
+	{
+		HideHealthIcon();
+		HideAmmoIcon();
+		HideFuelIcon();
 	}
 	
 	#endregion
