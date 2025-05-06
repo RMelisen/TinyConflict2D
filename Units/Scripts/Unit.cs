@@ -91,6 +91,8 @@ public partial class Unit : CharacterBody2D
 		_healthIcon8 = GetNode<Sprite2D>(Config.HEALTH8_ICON_NAME);
 		_healthIcon9 = GetNode<Sprite2D>(Config.HEALTH9_ICON_NAME);
 		
+		HideAllIcons();
+		
 		#endregion
 	}
 	
@@ -177,9 +179,17 @@ public partial class Unit : CharacterBody2D
 		
 	}
 	
-	public void HideHealthIcon()
+	public void HideHealthIcons()
 	{
-		
+		HideIcon(_healthIcon1);
+		HideIcon(_healthIcon2);
+		HideIcon(_healthIcon3);
+		HideIcon(_healthIcon4);
+		HideIcon(_healthIcon5);
+		HideIcon(_healthIcon6);
+		HideIcon(_healthIcon7);
+		HideIcon(_healthIcon8);
+		HideIcon(_healthIcon9);
 	}
 	
 	public void ShowAmmoIcon()
@@ -189,7 +199,7 @@ public partial class Unit : CharacterBody2D
 	
 	public void HideAmmoIcon()
 	{
-		
+		HideIcon(_ammoIcon);
 	}
 	
 	public void ShowFuelIcon()
@@ -199,37 +209,22 @@ public partial class Unit : CharacterBody2D
 	
 	public void HideFuelIcon()
 	{
-		
+		HideIcon(_fuelIcon);
 	}
 	
 	public void ShowIcon(Sprite2D icon)
 	{
-		// TODO : Add the icons directly in the Unit Scene and show/hide it dynamically would be better than create/destroy nodes
-		
-		// Sprite2D icon = new Sprite2D();
-		//
-		// Texture2D texture = GD.Load<Texture2D>(path);
-		// if (texture != null)
-		// {
-		// 	icon.Texture = texture;
-		// }
-		// else
-		// {
-		// 	GD.PrintErr($"Error while trying to load texture at : {path}");
-		// 	return;
-		// }
-		//
-		// icon.Position = new Vector2(8, 8);	// A little down/right of the unit
-		// icon.Scale = Vector2.One * 0.7f;	// A bit smaller
-		//
-		// icon.Name = $"{name}Icon";
-		//
-		// AddChild(icon);
+		icon.Visible = true;
+	}
+	
+	public void HideIcon(Sprite2D icon)
+	{
+		icon.Visible = false;
 	}
 
 	public virtual void HideAllIcons()
 	{
-		HideHealthIcon();
+		HideHealthIcons();
 		HideAmmoIcon();
 		HideFuelIcon();
 	}

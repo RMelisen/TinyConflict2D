@@ -30,7 +30,9 @@ public partial class InfantryUnit : Unit, ICanCapture
 		UnitType = UnitType.Infantry;
 		CurrentAmmo = MaxAmmo;
 		CurrentFuel = MaxFuel;
+		
 		_captureIcon = GetNode<Sprite2D>(Config.AMMO_ICON_NAME);
+		HideAllIcons();
 	}
 
 	public override string ToString()
@@ -63,7 +65,7 @@ public partial class InfantryUnit : Unit, ICanCapture
 	
 	public void HideCaptureIcon()
 	{
-		
+		HideIcon(_captureIcon);
 	}
 
 	public override void HideAllIcons()
